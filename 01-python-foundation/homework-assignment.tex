@@ -1,0 +1,376 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{enumitem}
+\geometry{margin=1in}
+
+% Python code style
+\definecolor{codegray}{rgb}{0.95,0.95,0.95}
+\definecolor{keyword}{rgb}{0.0,0.0,0.6}
+\definecolor{comment}{rgb}{0.0,0.5,0.0}
+\definecolor{string}{rgb}{0.64,0.08,0.08}
+
+\lstdefinestyle{codeStyle}{
+    language=Python,
+    backgroundcolor=\color{codegray},
+    commentstyle=\color{comment}\itshape,
+    keywordstyle=\color{keyword}\bfseries,
+    stringstyle=\color{string},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    showstringspaces=false,
+    tabsize=4,
+    morekeywords={self, True, False, None, with, as, match, case}
+}
+
+\title{Python Programming: Comprehensive Homework Assignment}
+\author{AI-Driven Development Training}
+\date{February 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Instructions}
+\begin{itemize}
+    \item Complete all problems in a single Python file named \texttt{homework\_solutions.py}
+    \item Use comments to separate each problem (e.g., \texttt{\# Problem 1})
+    \item Include docstrings for all functions
+    \item Test your code before submission
+    \item Total Points: 100
+    \item Estimated Time: 3-4 hours
+\end{itemize}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+% ============================================
+% PART 1: BASICS (25 points)
+% ============================================
+\section{Part 1: Python Basics (25 points)}
+
+\subsection*{Problem 1: Student Information System (5 points)}
+Create a program that:
+\begin{enumerate}[label=\alph*)]
+    \item Prompts the user for their name, age, and GPA (as float)
+    \item Stores these in appropriate variables
+    \item Prints a formatted message: ``Student [name], age [age], has a GPA of [GPA]''
+    \item Determines and prints their academic standing:
+    \begin{itemize}
+        \item GPA $\geq$ 3.5: ``Dean's List''
+        \item GPA $\geq$ 2.0: ``Good Standing''
+        \item GPA $<$ 2.0: ``Academic Probation''
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Problem 2: Shopping Cart Calculator (5 points)}
+Write a program that calculates the total cost of items in a shopping cart:
+\begin{enumerate}[label=\alph*)]
+    \item Define a list of tuples: \texttt{cart = [("Apple", 3, 1.50), ("Bread", 2, 2.99), ("Milk", 1, 4.50)]}
+    \item Each tuple contains: (item\_name, quantity, price\_per\_unit)
+    \item Calculate the subtotal for each item
+    \item Apply a 10\% discount if the total exceeds \$15
+    \item Add 8\% sales tax to the final amount
+    \item Print an itemized receipt with the final total
+\end{enumerate}
+
+\subsection*{Problem 3: Text Analyzer (5 points)}
+Create a function \texttt{analyze\_text(text)} that takes a string and returns a dictionary with:
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{"char\_count"}: Total characters (excluding spaces)
+    \item \texttt{"word\_count"}: Total words
+    \item \texttt{"sentence\_count"}: Total sentences (count periods, !, ?)
+    \item \texttt{"avg\_word\_length"}: Average word length
+    \item \texttt{"longest\_word"}: The longest word in the text
+\end{enumerate}
+
+Test with: \texttt{"Python is amazing! It is easy to learn. What do you think?"}
+
+\subsection*{Problem 4: Number Guessing Game (5 points)}
+Create a number guessing game:
+\begin{enumerate}[label=\alph*)]
+    \item Generate a random number between 1 and 100
+    \item Allow the user up to 7 guesses
+    \item After each guess, print ``Too high'' or ``Too low''
+    \item If they guess correctly, print ``Congratulations!'' and how many attempts it took
+    \item If they run out of guesses, reveal the number
+    \item Handle invalid input gracefully using try/except
+\end{enumerate}
+
+\subsection*{Problem 5: Temperature Statistics (5 points)}
+Given a week of temperature readings:
+\begin{lstlisting}[style=codeStyle]
+temperatures = [72, 68, 75, 80, 82, 78, 71]  # Fahrenheit
+\end{lstlisting}
+
+Write functions to:
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{convert\_all\_to\_celsius(temps)}: Convert all to Celsius
+    \item \texttt{get\_statistics(temps)}: Return dict with min, max, average
+    \item \texttt{categorize\_temps(temps)}: Return list of categories (``Cold'' $<$ 70, ``Comfortable'' 70-80, ``Hot'' $>$ 80)
+\end{enumerate}
+
+% ============================================
+% PART 2: COLLECTIONS (25 points)
+% ============================================
+\section{Part 2: Collections \& Data Structures (25 points)}
+
+\subsection*{Problem 6: Inventory Management (5 points)}
+Create an inventory system using dictionaries:
+\begin{lstlisting}[style=codeStyle]
+inventory = {
+    "laptop": {"price": 999.99, "quantity": 15, "category": "electronics"},
+    "shirt": {"price": 29.99, "quantity": 50, "category": "clothing"},
+    "book": {"price": 15.99, "quantity": 100, "category": "media"},
+    "headphones": {"price": 149.99, "quantity": 30, "category": "electronics"}
+}
+\end{lstlisting}
+
+Implement:
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{get\_total\_value()}: Calculate total inventory value (price $\times$ quantity for all items)
+    \item \texttt{get\_items\_by\_category(category)}: Return list of items in a category
+    \item \texttt{update\_quantity(item, change)}: Update quantity (positive to add, negative to remove)
+    \item \texttt{low\_stock\_alert(threshold)}: Return items with quantity below threshold
+\end{enumerate}
+
+\subsection*{Problem 7: Student Gradebook (5 points)}
+Create a gradebook system:
+\begin{lstlisting}[style=codeStyle]
+gradebook = {
+    "Alice": {"math": 85, "science": 92, "english": 88},
+    "Bob": {"math": 78, "science": 85, "english": 90},
+    "Charlie": {"math": 92, "science": 88, "english": 85},
+    "Diana": {"math": 95, "science": 98, "english": 92}
+}
+\end{lstlisting}
+
+Implement:
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{calculate\_gpa(student)}: Calculate average grade for a student
+    \item \texttt{class\_average(subject)}: Calculate class average for a subject
+    \item \texttt{honor\_roll()}: Return students with GPA $\geq$ 90
+    \item \texttt{subject\_rankings(subject)}: Return students sorted by grade in that subject (highest first)
+\end{enumerate}
+
+\subsection*{Problem 8: List Operations Challenge (5 points)}
+Given two lists:
+\begin{lstlisting}[style=codeStyle]
+list_a = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+list_b = [5, 10, 15, 20, 25]
+\end{lstlisting}
+
+Using list comprehensions and set operations:
+\begin{enumerate}[label=\alph*)]
+    \item Create a list of squares of even numbers from list\_a
+    \item Find elements common to both lists
+    \item Find elements in list\_a but not in list\_b
+    \item Create a list of tuples: (number, square, cube) for numbers 1-10
+    \item Flatten a nested list: \texttt{[[1,2], [3,4], [5,6]]} into \texttt{[1,2,3,4,5,6]}
+\end{enumerate}
+
+\subsection*{Problem 9: Word Frequency Counter (5 points)}
+Create a program that analyzes text and finds word frequencies:
+\begin{lstlisting}[style=codeStyle]
+text = """Python is a popular programming language. Python is easy to learn.
+Programming in Python is fun. Many developers love Python programming."""
+\end{lstlisting}
+
+Implement:
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{word\_frequency(text)}: Return dict of word counts (case-insensitive)
+    \item \texttt{top\_n\_words(freq\_dict, n)}: Return top n most frequent words
+    \item \texttt{unique\_words(text)}: Return set of unique words
+    \item Remove common stop words: ``is'', ``a'', ``to'', ``in'', ``the''
+\end{enumerate}
+
+\subsection*{Problem 10: Tuple Operations (5 points)}
+Work with a list of student records (tuples):
+\begin{lstlisting}[style=codeStyle]
+students = [
+    ("Alice", 22, "CS", 3.8),
+    ("Bob", 20, "Math", 3.5),
+    ("Charlie", 21, "CS", 3.9),
+    ("Diana", 23, "Physics", 3.7),
+    ("Eve", 20, "Math", 3.6)
+]
+# Format: (name, age, major, gpa)
+\end{lstlisting}
+
+Implement using lambda and sorted/filter:
+\begin{enumerate}[label=\alph*)]
+    \item Sort students by GPA (highest first)
+    \item Filter students in ``CS'' major
+    \item Find the youngest student
+    \item Group students by major (return dict)
+    \item Calculate average GPA per major
+\end{enumerate}
+
+% ============================================
+% PART 3: FILE HANDLING & DATA (25 points)
+% ============================================
+\section{Part 3: File Handling \& Data Processing (25 points)}
+
+\subsection*{Problem 11: Log File Processor (5 points)}
+Create a log file processor that:
+\begin{enumerate}[label=\alph*)]
+    \item Creates a sample log file with 20 entries mixing INFO, WARNING, ERROR levels
+    \item Reads the log file and categorizes entries by level
+    \item Counts occurrences of each log level
+    \item Writes only ERROR entries to a separate file ``errors.txt''
+    \item Prints a summary report
+\end{enumerate}
+
+Sample log format: \texttt{[LEVEL] 2026-02-11 10:30:00 - Message here}
+
+\subsection*{Problem 12: CSV Data Handler (5 points)}
+Create functions to work with CSV-like data (without using the csv module):
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{create\_csv(filename, headers, data)}: Create a CSV file with headers and data
+    \item \texttt{read\_csv(filename)}: Read CSV and return list of dictionaries
+    \item \texttt{filter\_csv(data, column, value)}: Filter rows where column equals value
+    \item \texttt{add\_row(filename, row\_data)}: Append a new row to existing CSV
+\end{enumerate}
+
+Test with employee data: Name, Department, Salary, Years
+
+\subsection*{Problem 13: JSON Configuration Manager (5 points)}
+Create a configuration manager using JSON:
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{create\_config(filename)}: Create default config with app settings
+    \item \texttt{load\_config(filename)}: Load config from file
+    \item \texttt{update\_config(filename, key, value)}: Update a specific setting
+    \item \texttt{validate\_config(config)}: Check all required keys exist
+\end{enumerate}
+
+Required settings: ``app\_name'', ``version'', ``debug\_mode'', ``max\_users'', ``database\_url''
+
+\subsection*{Problem 14: Data Validation with Regex (5 points)}
+Create validation functions using regex:
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{validate\_email(email)}: Check valid email format
+    \item \texttt{validate\_phone(phone)}: Check format: (XXX) XXX-XXXX or XXX-XXX-XXXX
+    \item \texttt{validate\_password(password)}: At least 8 chars, 1 uppercase, 1 lowercase, 1 digit
+    \item \texttt{extract\_dates(text)}: Find all dates in format MM/DD/YYYY or YYYY-MM-DD
+    \item \texttt{sanitize\_input(text)}: Remove special characters except letters, numbers, spaces
+\end{enumerate}
+
+\subsection*{Problem 15: Error Handling System (5 points)}
+Create a robust data processor with comprehensive error handling:
+\begin{enumerate}[label=\alph*)]
+    \item \texttt{safe\_divide(a, b)}: Handle ZeroDivisionError, TypeError
+    \item \texttt{safe\_file\_read(filename)}: Handle FileNotFoundError, PermissionError
+    \item \texttt{safe\_json\_parse(json\_string)}: Handle JSONDecodeError
+    \item \texttt{safe\_list\_access(lst, index)}: Handle IndexError
+    \item Create a decorator \texttt{@log\_errors} that logs any exception to ``error\_log.txt''
+\end{enumerate}
+
+% ============================================
+% PART 4: NUMPY & PANDAS (25 points)
+% ============================================
+\section{Part 4: NumPy \& Pandas (25 points)}
+
+\subsection*{Problem 16: NumPy Array Operations (5 points)}
+Using NumPy, perform the following operations:
+\begin{enumerate}[label=\alph*)]
+    \item Create a 5x5 matrix with random integers between 1 and 100
+    \item Calculate the sum, mean, and standard deviation of each row
+    \item Find the maximum value and its position in the matrix
+    \item Replace all values greater than 50 with 50 (capping)
+    \item Transpose the matrix and multiply it with the original
+\end{enumerate}
+
+\subsection*{Problem 17: NumPy Statistical Analysis (5 points)}
+Given sales data as a NumPy array:
+\begin{lstlisting}[style=codeStyle]
+# Monthly sales for 4 products over 12 months
+sales = np.random.randint(100, 1000, size=(4, 12))
+\end{lstlisting}
+
+Calculate:
+\begin{enumerate}[label=\alph*)]
+    \item Total sales per product (row sums)
+    \item Total sales per month (column sums)
+    \item Best performing product and month
+    \item Products with above-average total sales
+    \item Month-over-month percentage change for each product
+\end{enumerate}
+
+\subsection*{Problem 18: Pandas DataFrame Creation (5 points)}
+Create a comprehensive employee DataFrame:
+\begin{enumerate}[label=\alph*)]
+    \item Create DataFrame with: ID, Name, Department, Salary, Hire\_Date, Performance\_Score
+    \item Add at least 10 employees with realistic data
+    \item Set the ID column as the index
+    \item Add a new column ``Years\_Employed'' calculated from Hire\_Date
+    \item Add a ``Bonus'' column: 15\% of salary for score $\geq$ 8, 10\% for score $\geq$ 6, else 5\%
+\end{enumerate}
+
+\subsection*{Problem 19: Pandas Data Analysis (5 points)}
+Using the employee DataFrame from Problem 18:
+\begin{enumerate}[label=\alph*)]
+    \item Find the average salary by department
+    \item Find the top 3 highest-paid employees
+    \item Count employees per department
+    \item Find employees hired in the last 2 years
+    \item Calculate the correlation between Years\_Employed and Performance\_Score
+\end{enumerate}
+
+\subsection*{Problem 20: Pandas Advanced Operations (5 points)}
+Create a sales analysis system:
+\begin{lstlisting}[style=codeStyle]
+# Create sales DataFrame
+sales_data = {
+    'Date': pd.date_range('2025-01-01', periods=100),
+    'Product': np.random.choice(['A', 'B', 'C', 'D'], 100),
+    'Region': np.random.choice(['North', 'South', 'East', 'West'], 100),
+    'Quantity': np.random.randint(1, 50, 100),
+    'Unit_Price': np.random.uniform(10, 100, 100).round(2)
+}
+\end{lstlisting}
+
+Implement:
+\begin{enumerate}[label=\alph*)]
+    \item Add ``Revenue'' column (Quantity $\times$ Unit\_Price)
+    \item Create pivot table: Products vs Regions with Revenue
+    \item Group by month and calculate monthly totals
+    \item Find the best-selling product in each region
+    \item Export results to ``sales\_summary.csv''
+\end{enumerate}
+
+% ============================================
+% SUBMISSION GUIDELINES
+% ============================================
+\section*{Submission Guidelines}
+
+\begin{enumerate}
+    \item Submit a single Python file: \texttt{homework\_solutions.py}
+    \item Include all required imports at the top
+    \item Use comments to clearly label each problem
+    \item Include docstrings for all functions
+    \item Test all functions before submission
+    \item Include sample output as comments where appropriate
+\end{enumerate}
+
+\subsection*{Grading Rubric}
+\begin{itemize}
+    \item \textbf{Correctness (60\%)}: Code produces correct output
+    \item \textbf{Code Quality (20\%)}: Clean, readable, well-organized code
+    \item \textbf{Documentation (10\%)}: Clear comments and docstrings
+    \item \textbf{Error Handling (10\%)}: Appropriate use of try/except
+\end{itemize}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{Due Date:} One week from assignment date\\
+\textbf{Late Policy:} 10\% deduction per day late\\
+\textbf{Questions:} Contact instructor via email or office hours
+
+\end{document}

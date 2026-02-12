@@ -1,0 +1,1281 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{longtable}
+\geometry{margin=0.75in}
+
+% Python code style
+\definecolor{codegray}{rgb}{0.95,0.95,0.95}
+\definecolor{keyword}{rgb}{0.0,0.0,0.6}
+\definecolor{comment}{rgb}{0.0,0.5,0.0}
+\definecolor{string}{rgb}{0.64,0.08,0.08}
+\definecolor{correct}{rgb}{0.0,0.5,0.0}
+
+\lstdefinestyle{codeStyle}{
+    language=Python,
+    backgroundcolor=\color{codegray},
+    commentstyle=\color{comment}\itshape,
+    keywordstyle=\color{keyword}\bfseries,
+    stringstyle=\color{string},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    showstringspaces=false,
+    tabsize=4,
+    morekeywords={self, True, False, None, with, as, match, case}
+}
+
+\title{Python Programming: 50 Quiz Questions\\with Answers and Rationales}
+\author{AI-Driven Development Training}
+\date{February 2026}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% ============================================
+% SECTION 1: VARIABLES & DATA TYPES (Q1-Q5)
+% ============================================
+\section{Variables \& Data Types (Questions 1-5)}
+
+\subsection*{Question 1}
+What is the output of the following code?
+\begin{lstlisting}[style=codeStyle]
+x = 5
+y = "5"
+print(type(x) == type(y))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item True
+    \item False
+    \item Error
+    \item None
+\end{enumerate}
+
+\textbf{Answer: B) False}
+
+\textbf{Rationale:} \texttt{x} is an integer (\texttt{int}) while \texttt{y} is a string (\texttt{str}). The \texttt{type()} function returns the data type, and comparing \texttt{<class 'int'>} with \texttt{<class 'str'>} returns \texttt{False}.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 2}
+What will be the value of \texttt{result}?
+\begin{lstlisting}[style=codeStyle]
+a, b, c = 1, 2, 3
+result = a, b = b, a
+print(b)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 1
+    \item 2
+    \item (2, 1)
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: A) 1}
+
+\textbf{Rationale:} The statement \texttt{a, b = b, a} performs tuple unpacking and swaps the values. After execution, \texttt{a = 2} and \texttt{b = 1}. The \texttt{result} variable holds the tuple \texttt{(2, 1)}.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 3}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+x = None
+print(bool(x), bool(0), bool(""), bool([]))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item True True True True
+    \item False False False False
+    \item None 0 "" []
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) False False False False}
+
+\textbf{Rationale:} In Python, \texttt{None}, \texttt{0}, empty strings \texttt{""}, and empty lists \texttt{[]} are all ``falsy'' values. When converted to boolean using \texttt{bool()}, they all return \texttt{False}.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 4}
+What is the result of \texttt{int(3.9) + int(-3.9)}?
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 0
+    \item 1
+    \item -1
+    \item 7
+\end{enumerate}
+
+\textbf{Answer: A) 0}
+
+\textbf{Rationale:} \texttt{int()} truncates towards zero. \texttt{int(3.9) = 3} and \texttt{int(-3.9) = -3}. Therefore, \texttt{3 + (-3) = 0}.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 5}
+Which statement correctly creates a multi-line string?
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{s = "Hello\textbackslash nWorld"}
+    \item \texttt{s = '''Hello World'''}
+    \item \texttt{s = """Hello\textbackslash nWorld"""}
+    \item All of the above
+\end{enumerate}
+
+\textbf{Answer: D) All of the above}
+
+\textbf{Rationale:} Multi-line strings can be created using: escape character \texttt{\textbackslash n}, triple single quotes \texttt{'''}, or triple double quotes \texttt{"""}. All methods are valid.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 2: OPERATORS (Q6-Q10)
+% ============================================
+\section{Operators (Questions 6-10)}
+
+\subsection*{Question 6}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+print(17 // 5, 17 % 5, 17 / 5)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 3 2 3.4
+    \item 3.4 2 3
+    \item 3 2 3.0
+    \item 3.0 2.0 3.4
+\end{enumerate}
+
+\textbf{Answer: A) 3 2 3.4}
+
+\textbf{Rationale:} \texttt{//} is floor division (returns integer quotient), \texttt{\%} is modulo (remainder), and \texttt{/} is true division (returns float). 17//5=3, 17\%5=2, 17/5=3.4.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 7}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+x = 10
+print(x > 5 and x < 15 or x == 20)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item True
+    \item False
+    \item 10
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: A) True}
+
+\textbf{Rationale:} \texttt{and} has higher precedence than \texttt{or}. First, \texttt{x > 5 and x < 15} evaluates to \texttt{True and True = True}. Then \texttt{True or False = True}.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 8}
+What is the value of \texttt{2 ** 3 ** 2}?
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 64
+    \item 512
+    \item 256
+    \item 81
+\end{enumerate}
+
+\textbf{Answer: B) 512}
+
+\textbf{Rationale:} The \texttt{**} operator is right-associative. So \texttt{2 ** 3 ** 2} = \texttt{2 ** (3 ** 2)} = \texttt{2 ** 9} = 512.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 9}
+What does \texttt{not not True} evaluate to?
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item True
+    \item False
+    \item None
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: A) True}
+
+\textbf{Rationale:} \texttt{not True = False}, then \texttt{not False = True}. Double negation returns the original value.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 10}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+a = [1, 2, 3]
+b = [1, 2, 3]
+print(a == b, a is b)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item True True
+    \item True False
+    \item False True
+    \item False False
+\end{enumerate}
+
+\textbf{Answer: B) True False}
+
+\textbf{Rationale:} \texttt{==} compares values (both lists have same elements), \texttt{is} compares identity (they are different objects in memory). Same content, different objects.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 3: STRINGS (Q11-Q15)
+% ============================================
+\section{Strings (Questions 11-15)}
+
+\subsection*{Question 11}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+s = "Python"
+print(s[1:4], s[-3:], s[::2])
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item yth hon Pto
+    \item yth hon Pto
+    \item Pyt hon Pto
+    \item yth tho Pto
+\end{enumerate}
+
+\textbf{Answer: A) yth hon Pto}
+
+\textbf{Rationale:} \texttt{s[1:4]} = characters at index 1,2,3 = ``yth''. \texttt{s[-3:]} = last 3 characters = ``hon''. \texttt{s[::2]} = every 2nd character = ``Pto''.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 12}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+print("Hello" * 2 + "World")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item HelloHelloWorld
+    \item Hello2World
+    \item HelloWorldWorld
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: A) HelloHelloWorld}
+
+\textbf{Rationale:} String multiplication \texttt{* 2} repeats the string twice, then \texttt{+} concatenates with ``World''.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 13}
+What method removes whitespace from both ends of a string?
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{trim()}
+    \item \texttt{strip()}
+    \item \texttt{clean()}
+    \item \texttt{remove()}
+\end{enumerate}
+
+\textbf{Answer: B) strip()}
+
+\textbf{Rationale:} \texttt{strip()} removes leading and trailing whitespace. \texttt{lstrip()} removes left only, \texttt{rstrip()} removes right only. Python doesn't have \texttt{trim()}.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 14}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+s = "a,b,c,d"
+print(s.split(",")[2])
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item a
+    \item b
+    \item c
+    \item d
+\end{enumerate}
+
+\textbf{Answer: C) c}
+
+\textbf{Rationale:} \texttt{split(",")} creates list \texttt{['a', 'b', 'c', 'd']}. Index 2 is the third element, which is ``c''.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 15}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+name = "Alice"
+age = 25
+print(f"{name} is {age} years old")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item \{name\} is \{age\} years old
+    \item Alice is 25 years old
+    \item name is age years old
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) Alice is 25 years old}
+
+\textbf{Rationale:} f-strings (formatted string literals) replace expressions inside \texttt{\{\}} with their values. \texttt{\{name\}} becomes ``Alice'' and \texttt{\{age\}} becomes 25.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 4: CONDITIONALS (Q16-Q20)
+% ============================================
+\section{Conditionals (Questions 16-20)}
+
+\subsection*{Question 16}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+x = 5
+if x > 3:
+    if x > 7:
+        print("A")
+    else:
+        print("B")
+else:
+    print("C")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item A
+    \item B
+    \item C
+    \item No output
+\end{enumerate}
+
+\textbf{Answer: B) B}
+
+\textbf{Rationale:} \texttt{x=5 > 3} is True, so we enter first if. Then \texttt{5 > 7} is False, so we go to else and print ``B''.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 17}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+score = 75
+grade = "A" if score >= 90 else "B" if score >= 80 else "C"
+print(grade)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item A
+    \item B
+    \item C
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: C) C}
+
+\textbf{Rationale:} This is a chained ternary operator. 75 >= 90 is False, 75 >= 80 is False, so grade = ``C''.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 18}
+Which value is NOT considered ``falsy'' in Python?
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 0
+    \item ""
+    \item []
+    \item "False"
+\end{enumerate}
+
+\textbf{Answer: D) "False"}
+
+\textbf{Rationale:} The string \texttt{"False"} is a non-empty string, which is truthy. Only empty strings are falsy. The word ``False'' inside doesn't make it boolean False.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 19}
+What is the output? (Python 3.10+)
+\begin{lstlisting}[style=codeStyle]
+status = 404
+match status:
+    case 200:
+        print("OK")
+    case 404:
+        print("Not Found")
+    case _:
+        print("Unknown")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item OK
+    \item Not Found
+    \item Unknown
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) Not Found}
+
+\textbf{Rationale:} The \texttt{match-case} statement matches \texttt{status=404} with \texttt{case 404}, printing ``Not Found''. The underscore \texttt{\_} is the wildcard/default case.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 20}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+x = 10
+y = 20
+print("Equal" if x == y else "X > Y" if x > y else "X < Y")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item Equal
+    \item X > Y
+    \item X < Y
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: C) X < Y}
+
+\textbf{Rationale:} \texttt{x == y} (10==20) is False. \texttt{x > y} (10>20) is False. So the final else returns ``X < Y''.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 5: LOOPS (Q21-Q25)
+% ============================================
+\section{Loops (Questions 21-25)}
+
+\subsection*{Question 21}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+for i in range(3):
+    print(i, end=" ")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 1 2 3
+    \item 0 1 2
+    \item 0 1 2 3
+    \item 1 2
+\end{enumerate}
+
+\textbf{Answer: B) 0 1 2}
+
+\textbf{Rationale:} \texttt{range(3)} generates 0, 1, 2 (not including 3). The \texttt{end=" "} keeps output on same line with spaces.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 22}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+for i in range(5):
+    if i == 3:
+        continue
+    print(i, end=" ")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 0 1 2 3 4
+    \item 0 1 2 4
+    \item 0 1 2
+    \item 3
+\end{enumerate}
+
+\textbf{Answer: B) 0 1 2 4}
+
+\textbf{Rationale:} \texttt{continue} skips the current iteration when \texttt{i == 3}, so 3 is not printed. All other values (0, 1, 2, 4) are printed.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 23}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+i = 0
+while i < 5:
+    i += 1
+    if i == 3:
+        break
+print(i)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 2
+    \item 3
+    \item 4
+    \item 5
+\end{enumerate}
+
+\textbf{Answer: B) 3}
+
+\textbf{Rationale:} The loop increments \texttt{i} first, then checks if \texttt{i == 3}. When \texttt{i} becomes 3, \texttt{break} exits the loop, and \texttt{i} remains 3.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 24}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+for i in range(3):
+    for j in range(2):
+        print(f"{i},{j}", end=" ")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 0,0 0,1 1,0 1,1 2,0 2,1
+    \item 0,0 1,1 2,2
+    \item 0,0 0,1 0,2 1,0 1,1 1,2
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: A) 0,0 0,1 1,0 1,1 2,0 2,1}
+
+\textbf{Rationale:} Nested loops: outer loop runs 3 times (i=0,1,2), inner loop runs 2 times for each outer iteration (j=0,1). Total 6 combinations.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 25}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+for i in range(5):
+    pass
+else:
+    print("Done")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item Nothing
+    \item Done
+    \item Error
+    \item 0 1 2 3 4 Done
+\end{enumerate}
+
+\textbf{Answer: B) Done}
+
+\textbf{Rationale:} The \texttt{else} clause of a \texttt{for} loop executes when the loop completes normally (not broken). \texttt{pass} does nothing, loop finishes normally, ``Done'' prints.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 6: FUNCTIONS (Q26-Q30)
+% ============================================
+\section{Functions (Questions 26-30)}
+
+\subsection*{Question 26}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+def greet(name="World"):
+    return f"Hello, {name}!"
+
+print(greet())
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item Hello, !
+    \item Hello, World!
+    \item Error
+    \item None
+\end{enumerate}
+
+\textbf{Answer: B) Hello, World!}
+
+\textbf{Rationale:} When no argument is passed, the default value ``World'' is used for the \texttt{name} parameter.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 27}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+def add(*args):
+    return sum(args)
+
+print(add(1, 2, 3, 4, 5))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item (1, 2, 3, 4, 5)
+    \item 15
+    \item [1, 2, 3, 4, 5]
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) 15}
+
+\textbf{Rationale:} \texttt{*args} collects all positional arguments into a tuple. \texttt{sum((1,2,3,4,5))} = 15.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 28}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+def info(**kwargs):
+    return len(kwargs)
+
+print(info(name="Alice", age=25, city="NYC"))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 3
+    \item \{name: Alice, age: 25, city: NYC\}
+    \item Error
+    \item None
+\end{enumerate}
+
+\textbf{Answer: A) 3}
+
+\textbf{Rationale:} \texttt{**kwargs} collects keyword arguments into a dictionary. Three key-value pairs are passed, so \texttt{len(kwargs) = 3}.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 29}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+def outer():
+    x = 10
+    def inner():
+        return x * 2
+    return inner
+
+f = outer()
+print(f())
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 10
+    \item 20
+    \item Error
+    \item None
+\end{enumerate}
+
+\textbf{Answer: B) 20}
+
+\textbf{Rationale:} This demonstrates closure. \texttt{outer()} returns \texttt{inner} function which remembers \texttt{x=10} from enclosing scope. Calling \texttt{f()} returns \texttt{10 * 2 = 20}.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 30}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+def func(a, b=2, *args, **kwargs):
+    return a + b + sum(args) + len(kwargs)
+
+print(func(1, 3, 4, 5, x=10, y=20))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 15
+    \item 13
+    \item 43
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: A) 15}
+
+\textbf{Rationale:} \texttt{a=1}, \texttt{b=3}, \texttt{args=(4,5)}, \texttt{kwargs=\{x:10, y:20\}}. Result: \texttt{1 + 3 + (4+5) + 2 = 15}.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 7: ERROR HANDLING (Q31-Q33)
+% ============================================
+\section{Error Handling (Questions 31-33)}
+
+\subsection*{Question 31}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+try:
+    x = 10 / 0
+except ZeroDivisionError:
+    print("A")
+except:
+    print("B")
+else:
+    print("C")
+finally:
+    print("D")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item A D
+    \item B D
+    \item A C D
+    \item C D
+\end{enumerate}
+
+\textbf{Answer: A) A D}
+
+\textbf{Rationale:} Division by zero raises \texttt{ZeroDivisionError}, caught by first except (prints ``A''). \texttt{else} runs only if no exception. \texttt{finally} always runs (prints ``D'').
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 32}
+Which exception is raised when accessing a non-existent dictionary key?
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item IndexError
+    \item KeyError
+    \item ValueError
+    \item AttributeError
+\end{enumerate}
+
+\textbf{Answer: B) KeyError}
+
+\textbf{Rationale:} \texttt{KeyError} is raised when a dictionary key is not found. \texttt{IndexError} is for list indices, \texttt{ValueError} for invalid values, \texttt{AttributeError} for missing attributes.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 33}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+def risky():
+    try:
+        return 1
+    finally:
+        return 2
+
+print(risky())
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 1
+    \item 2
+    \item 1 2
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) 2}
+
+\textbf{Rationale:} The \texttt{finally} block always executes, even after a return. The return in \texttt{finally} overrides the return in \texttt{try}, so 2 is returned.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 8: LISTS (Q34-Q38)
+% ============================================
+\section{Lists (Questions 34-38)}
+
+\subsection*{Question 34}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+lst = [1, 2, 3, 4, 5]
+print(lst[1:4])
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item [1, 2, 3, 4]
+    \item [2, 3, 4]
+    \item [2, 3, 4, 5]
+    \item [1, 2, 3]
+\end{enumerate}
+
+\textbf{Answer: B) [2, 3, 4]}
+
+\textbf{Rationale:} Slicing \texttt{[1:4]} returns elements at indices 1, 2, 3 (end index is exclusive). Values are 2, 3, 4.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 35}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+lst = [1, 2, 3]
+lst.append([4, 5])
+print(len(lst))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 3
+    \item 4
+    \item 5
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) 4}
+
+\textbf{Rationale:} \texttt{append()} adds the entire \texttt{[4, 5]} list as a single element. Result: \texttt{[1, 2, 3, [4, 5]]}. Length is 4.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 36}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+lst = [1, 2, 3]
+lst.extend([4, 5])
+print(lst)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item [1, 2, 3, [4, 5]]
+    \item [1, 2, 3, 4, 5]
+    \item [[1, 2, 3], [4, 5]]
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) [1, 2, 3, 4, 5]}
+
+\textbf{Rationale:} \texttt{extend()} adds each element of the iterable individually to the list, unlike \texttt{append()} which adds the whole object.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 37}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+lst = [3, 1, 4, 1, 5, 9, 2, 6]
+print(lst.count(1), lst.index(5))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 2 4
+    \item 2 5
+    \item 1 4
+    \item 1 5
+\end{enumerate}
+
+\textbf{Answer: A) 2 4}
+
+\textbf{Rationale:} \texttt{count(1)} returns how many times 1 appears (twice). \texttt{index(5)} returns the first index where 5 is found (index 4).
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 38}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+lst = [[1, 2], [3, 4], [5, 6]]
+print([x for row in lst for x in row if x % 2 == 0])
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item [2, 4, 6]
+    \item [[2], [4], [6]]
+    \item [1, 3, 5]
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: A) [2, 4, 6]}
+
+\textbf{Rationale:} This nested list comprehension flattens the list and filters even numbers. Iteration order: for each row, for each x in row, keep if x is even.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 9: TUPLES & SETS (Q39-Q41)
+% ============================================
+\section{Tuples \& Sets (Questions 39-41)}
+
+\subsection*{Question 39}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+t = (1, 2, 3)
+t[0] = 10
+print(t)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item (10, 2, 3)
+    \item (1, 2, 3)
+    \item TypeError
+    \item [10, 2, 3]
+\end{enumerate}
+
+\textbf{Answer: C) TypeError}
+
+\textbf{Rationale:} Tuples are immutable. Attempting to modify an element raises \texttt{TypeError: 'tuple' object does not support item assignment}.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 40}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+s1 = {1, 2, 3, 4}
+s2 = {3, 4, 5, 6}
+print(s1 & s2)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item \{1, 2, 3, 4, 5, 6\}
+    \item \{3, 4\}
+    \item \{1, 2\}
+    \item \{5, 6\}
+\end{enumerate}
+
+\textbf{Answer: B) \{3, 4\}}
+
+\textbf{Rationale:} The \texttt{\&} operator performs set intersection, returning elements present in both sets. 3 and 4 are common.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 41}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+s = {1, 2, 2, 3, 3, 3}
+print(len(s))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 6
+    \item 3
+    \item 1
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) 3}
+
+\textbf{Rationale:} Sets automatically remove duplicates. The set contains only unique values \{1, 2, 3\}, so length is 3.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 10: DICTIONARIES (Q42-Q44)
+% ============================================
+\section{Dictionaries (Questions 42-44)}
+
+\subsection*{Question 42}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+d = {"a": 1, "b": 2, "c": 3}
+print(d.get("d", 0))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item None
+    \item 0
+    \item KeyError
+    \item d
+\end{enumerate}
+
+\textbf{Answer: B) 0}
+
+\textbf{Rationale:} \texttt{get()} returns the value for key if it exists, otherwise returns the default value (0 here). Key ``d'' doesn't exist, so 0 is returned.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 43}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+d = {"a": 1, "b": 2}
+d.update({"b": 3, "c": 4})
+print(d)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item \{"a": 1, "b": 2\}
+    \item \{"a": 1, "b": 3, "c": 4\}
+    \item \{"b": 3, "c": 4\}
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) \{"a": 1, "b": 3, "c": 4\}}
+
+\textbf{Rationale:} \texttt{update()} merges dictionaries. Existing key ``b'' is updated to 3, new key ``c'' is added with value 4.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 44}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+d = {"x": 10, "y": 20, "z": 30}
+print(list(d.values()))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item ['x', 'y', 'z']
+    \item [10, 20, 30]
+    \item [('x', 10), ('y', 20), ('z', 30)]
+    \item \{10, 20, 30\}
+\end{enumerate}
+
+\textbf{Answer: B) [10, 20, 30]}
+
+\textbf{Rationale:} \texttt{values()} returns a view of all values. Converting to list gives \texttt{[10, 20, 30]}. Use \texttt{keys()} for keys, \texttt{items()} for tuples.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 11: FILE HANDLING & JSON (Q45-Q46)
+% ============================================
+\section{File Handling \& JSON (Questions 45-46)}
+
+\subsection*{Question 45}
+What mode should be used to append to an existing file without overwriting?
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item "r"
+    \item "w"
+    \item "a"
+    \item "x"
+\end{enumerate}
+
+\textbf{Answer: C) "a"}
+
+\textbf{Rationale:} ``a'' is append mode (adds to end). ``r'' is read, ``w'' is write (overwrites), ``x'' is exclusive create (fails if exists).
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 46}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+import json
+data = '{"name": "Alice", "age": 25}'
+obj = json.loads(data)
+print(type(obj), obj["name"])
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item <class 'str'> Alice
+    \item <class 'dict'> Alice
+    \item <class 'list'> Alice
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) <class 'dict'> Alice}
+
+\textbf{Rationale:} \texttt{json.loads()} parses a JSON string into a Python object. A JSON object becomes a Python dictionary.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 12: NUMPY (Q47-Q48)
+% ============================================
+\section{NumPy (Questions 47-48)}
+
+\subsection*{Question 47}
+What is the shape of this array?
+\begin{lstlisting}[style=codeStyle]
+import numpy as np
+arr = np.array([[1, 2, 3], [4, 5, 6]])
+print(arr.shape)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item (3, 2)
+    \item (2, 3)
+    \item (6,)
+    \item 6
+\end{enumerate}
+
+\textbf{Answer: B) (2, 3)}
+
+\textbf{Rationale:} The array has 2 rows and 3 columns. Shape is always (rows, columns) = (2, 3).
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 48}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+import numpy as np
+arr = np.array([1, 2, 3, 4, 5])
+print(arr[arr > 2])
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item [False, False, True, True, True]
+    \item [3, 4, 5]
+    \item [1, 2]
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) [3, 4, 5]}
+
+\textbf{Rationale:} \texttt{arr > 2} creates a boolean mask \texttt{[False, False, True, True, True]}. Using this mask as index returns elements where True: \texttt{[3, 4, 5]}.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 13: PANDAS (Q49-Q50)
+% ============================================
+\section{Pandas (Questions 49-50)}
+
+\subsection*{Question 49}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+import pandas as pd
+df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+print(df['A'].sum())
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item [1, 2, 3]
+    \item 6
+    \item 21
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) 6}
+
+\textbf{Rationale:} \texttt{df['A']} selects column A as a Series \texttt{[1, 2, 3]}. The \texttt{sum()} method returns \texttt{1 + 2 + 3 = 6}.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 50}
+What method is used to get the first 5 rows of a DataFrame?
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{df.first(5)}
+    \item \texttt{df.head()}
+    \item \texttt{df.top(5)}
+    \item \texttt{df[0:5]}
+\end{enumerate}
+
+\textbf{Answer: B) df.head()}
+
+\textbf{Rationale:} \texttt{head()} returns the first 5 rows by default (or \texttt{head(n)} for n rows). While \texttt{df[0:5]} also works, \texttt{head()} is the idiomatic Pandas method.
+
+\hrule
+\vspace{2em}
+
+% ============================================
+% ANSWER KEY
+% ============================================
+\section*{Quick Answer Key}
+
+\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} \\
+\hline
+1 & B & 11 & A & 21 & B & 31 & A & 41 & B \\
+\hline
+2 & A & 12 & A & 22 & B & 32 & B & 42 & B \\
+\hline
+3 & B & 13 & B & 23 & B & 33 & B & 43 & B \\
+\hline
+4 & A & 14 & C & 24 & A & 34 & B & 44 & B \\
+\hline
+5 & D & 15 & B & 25 & B & 35 & B & 45 & C \\
+\hline
+6 & A & 16 & B & 26 & B & 36 & B & 46 & B \\
+\hline
+7 & A & 17 & C & 27 & B & 37 & A & 47 & B \\
+\hline
+8 & B & 18 & D & 28 & A & 38 & A & 48 & B \\
+\hline
+9 & A & 19 & B & 29 & B & 39 & C & 49 & B \\
+\hline
+10 & B & 20 & C & 30 & A & 40 & B & 50 & B \\
+\hline
+\end{longtable}
+
+\section*{Topic Distribution}
+\begin{itemize}
+    \item Variables \& Data Types: Q1--Q5 (5 questions)
+    \item Operators: Q6--Q10 (5 questions)
+    \item Strings: Q11--Q15 (5 questions)
+    \item Conditionals: Q16--Q20 (5 questions)
+    \item Loops: Q21--Q25 (5 questions)
+    \item Functions: Q26--Q30 (5 questions)
+    \item Error Handling: Q31--Q33 (3 questions)
+    \item Lists: Q34--Q38 (5 questions)
+    \item Tuples \& Sets: Q39--Q41 (3 questions)
+    \item Dictionaries: Q42--Q44 (3 questions)
+    \item File Handling \& JSON: Q45--Q46 (2 questions)
+    \item NumPy: Q47--Q48 (2 questions)
+    \item Pandas: Q49--Q50 (2 questions)
+\end{itemize}
+
+\end{document}
