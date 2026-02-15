@@ -1,112 +1,104 @@
-# Teaching Materials Repository
+# AI-Driven Drug Discovery (AIDD) Training
 
-**AI-Driven Development Training**
+**Foundation of Python Programming for Cheminformatics & Bioinformatics**
 
-A comprehensive collection of teaching materials for programming and technology courses.
+Teaching materials for Python programming with a focus on drug discovery, cheminformatics, and bioinformatics applications.
 
-## 📚 Available Modules
+## 📚 Course Module
 
-| Module | Status | Description |
-|--------|--------|-------------|
-| [01-python-foundation](./01-python-foundation/) | ✅ Complete | Python fundamentals for beginners |
-
-*More modules coming soon*
+| Module | Description |
+|--------|-------------|
+| [01-python-foundation](./01-python-foundation/) | Python fundamentals with cheminformatics & bioinformatics examples |
 
 ## 🎯 Target Audience
 
-- Entry-level to intermediate programmers
-- Corporate training programs
-- Self-paced learners
-- Bootcamp students
+- Scientists entering computational drug discovery
+- Biologists/Chemists learning programming
+- Entry-level bioinformaticians/cheminformaticians
+- Corporate AIDD training programs
 
 ## 📁 Repository Structure
 
 ```
 teaching/
-├── README.md                    # This file
-├── LICENSE                      # MIT License
-├── .gitignore                   # Git ignore rules
+├── README.md                          # This file
+├── LICENSE                            # MIT License
+├── .gitignore                         # Git ignore rules
 │
-└── 01-python-foundation/        # Module 1: Python Basics
-    ├── README.md
-    ├── lession-lab-1-AIDD-Training.tex   # Lecture slides
-    ├── lab-solutions.tex                  # Lab solutions
-    ├── homework-assignment.tex            # Homework problems
-    ├── homework-solutions.py              # Homework solutions
-    ├── quiz-questions-answers.tex         # Quiz with answers
-    └── quiz-answer-key.py                 # Quiz answer key
+└── 01-python-foundation/              # Module 1: Python for AIDD
+    ├── README.md                      # Module overview
+    ├── build-pdfs.sh                  # Auto-compile all LaTeX → PDF
+    │
+    ├── lessons-AIDD-Training.tex      # Lecture slides (theory)
+    ├── lessons-AIDD-Training.pdf      # Compiled lectures
+    │
+    ├── labs-AIDD-Training.tex         # Hands-on lab exercises
+    ├── labs-AIDD-Training.pdf         # Compiled labs
+    ├── lab-solutions.tex              # Lab solutions
+    ├── lab-solutions.pdf              # Compiled solutions
+    │
+    ├── homework-assignment.tex        # 20 homework problems
+    ├── homework-assignment.pdf        # Compiled homework
+    ├── homework-solutions.py          # Complete Python solutions
+    │
+    ├── quiz-questions-answers.tex     # 50 quiz questions with answers
+    ├── quiz-questions-answers.pdf     # Compiled quiz
+    └── quiz-answer-key.py             # Quick reference answer key
 ```
+
+## 🧬 Course Topics
+
+**13 Lessons covering:**
+- Python basics (variables, operators, strings)
+- Control flow with drug discovery examples (pIC50 classification, potency)
+- Data structures for molecular data (SMILES lists, compound dictionaries)
+- Functions for cheminformatics workflows
+- File I/O for molecular files (FASTA, SDF, CSV)
+- Introduction to NumPy & Pandas for data analysis
+
+**Special Topics:**
+- Drug discovery data types (SMILES, activity data, sequences)
+- Molecular representations (SMARTS, SELFIES, InChI, Fingerprints)
+- Central Dogma of Molecular Biology
+- Rosalind bioinformatics problems
 
 ## 🚀 Quick Start
 
-### For Instructors
+```bash
+# Clone the repository
+git clone https://github.com/bhatnira/teaching.git
+cd teaching/01-python-foundation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/bhatnira/teaching.git
-   ```
+# Build all PDFs (requires LaTeX)
+./build-pdfs.sh
 
-2. Navigate to the desired module:
-   ```bash
-   cd teaching/01-python-foundation
-   ```
+# Or compile individual files
+pdflatex lessons-AIDD-Training.tex
+```
 
-3. Compile LaTeX files to PDF:
-   ```bash
-   pdflatex lession-lab-1-AIDD-Training.tex
-   ```
+## 📊 Assessments
 
-### For Students
-
-1. Access the module materials
-2. Follow the lecture slides
-3. Complete lab exercises
-4. Submit homework assignments
-5. Review with quizzes
-
-## 📊 Module 1: Python Foundation
-
-**Duration:** 2-3 weeks  
-**Prerequisites:** Basic computer literacy  
-**Topics:**
-- Variables, data types, operators
-- Control flow (if/else, loops)
-- Data structures (lists, tuples, sets, dictionaries)
-- Functions and error handling
-- File I/O, JSON, regex
-- Introduction to NumPy & Pandas
-
-**Assessments:**
-- 13 Lab exercises
-- 20 Homework problems (100 points)
-- 50 Quiz questions (100 points)
+| Type | Count | Points |
+|------|-------|--------|
+| Lab Exercises | 13 | Practice |
+| Homework Problems | 20 | 100 pts |
+| Quiz Questions | 50 | 100 pts |
 
 ## 🛠️ Requirements
 
-### For LaTeX Compilation
-- LaTeX distribution (TeX Live, MiKTeX, or MacTeX)
-- Required packages: beamer, listings, tikz, xcolor
+**LaTeX Compilation:**
+- BasicTeX, TeX Live, or MacTeX
+- Packages: beamer, listings, tikz, xcolor, enumitem
 
-### For Python Exercises
+**Python Exercises:**
 ```bash
 pip install numpy pandas
 ```
-
-## 📝 Contributing
-
-To add a new module:
-1. Create a folder: `XX-module-name/`
-2. Follow the structure of `01-python-foundation/`
-3. Update this README
 
 ## 📄 License
 
 MIT License - See [LICENSE](./LICENSE) for details.
 
-## 👤 Author
-
-**AI-Driven Development Training Team**
-
 ---
 
-*Last updated: February 2026*
+*AI-Driven Development Training | February 2026*

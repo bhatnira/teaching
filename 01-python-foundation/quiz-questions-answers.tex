@@ -29,8 +29,8 @@
     morekeywords={self, True, False, None, with, as, match, case}
 }
 
-\title{Python Programming: 50 Quiz Questions\\with Answers and Rationales}
-\author{AI-Driven Development Training}
+\title{Python for Cheminformatics \& Bioinformatics\\50 Quiz Questions with Answers and Rationales}
+\author{AI-Driven Drug Development Training}
 \date{February 2026}
 
 \begin{document}
@@ -44,16 +44,17 @@
 % ============================================
 \section{Variables \& Data Types (Questions 1-5)}
 
-\subsection*{Question 1}
+\subsection*{Question 1: Compound Data Storage}
 What is the output of the following code?
 \begin{lstlisting}[style=codeStyle]
-x = 5
-y = "5"
-print(type(x) == type(y))
+compound_name = "Aspirin"
+mw = 180.16
+pic50 = "8.28"
+print(type(mw) == type(pic50))
 \end{lstlisting}
 
 \textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
+\begin{enumerate}[label=\Alph*)}
     \item True
     \item False
     \item Error
@@ -62,88 +63,90 @@ print(type(x) == type(y))
 
 \textbf{Answer: B) False}
 
-\textbf{Rationale:} \texttt{x} is an integer (\texttt{int}) while \texttt{y} is a string (\texttt{str}). The \texttt{type()} function returns the data type, and comparing \texttt{<class 'int'>} with \texttt{<class 'str'>} returns \texttt{False}.
+\textbf{Rationale:} \texttt{mw} is a float (\texttt{float}) while \texttt{pic50} is stored as a string (\texttt{str}). The \texttt{type()} function returns different classes, so the comparison returns \texttt{False}. In real QSAR data, always ensure numeric values are stored as numbers, not strings.
 
 \hrule
 \vspace{1em}
 
-\subsection*{Question 2}
-What will be the value of \texttt{result}?
+\subsection*{Question 2: Tuple Unpacking for Molecular Data}
+What will be the value of \texttt{logp}?
 \begin{lstlisting}[style=codeStyle]
-a, b, c = 1, 2, 3
-result = a, b = b, a
-print(b)
+compound = ("Ibuprofen", 206.28, 3.97)
+name, mw, logp = compound
+print(logp)
 \end{lstlisting}
 
 \textbf{Options:}
 \begin{enumerate}[label=\Alph*)]
-    \item 1
-    \item 2
-    \item (2, 1)
+    \item "Ibuprofen"
+    \item 206.28
+    \item 3.97
     \item Error
 \end{enumerate}
 
-\textbf{Answer: A) 1}
+\textbf{Answer: C) 3.97}
 
-\textbf{Rationale:} The statement \texttt{a, b = b, a} performs tuple unpacking and swaps the values. After execution, \texttt{a = 2} and \texttt{b = 1}. The \texttt{result} variable holds the tuple \texttt{(2, 1)}.
+\textbf{Rationale:} Tuple unpacking assigns each element to the corresponding variable in order. \texttt{name} gets ``Ibuprofen'', \texttt{mw} gets 206.28, and \texttt{logp} gets 3.97.
 
 \hrule
 \vspace{1em}
 
-\subsection*{Question 3}
+\subsection*{Question 3: Falsy Values in Drug Data}
 What is the output?
 \begin{lstlisting}[style=codeStyle]
-x = None
-print(bool(x), bool(0), bool(""), bool([]))
+ic50 = None  # Missing measurement
+activity = 0  # No inhibition
+smiles = ""   # Empty SMILES
+print(bool(ic50), bool(activity), bool(smiles))
 \end{lstlisting}
 
 \textbf{Options:}
 \begin{enumerate}[label=\Alph*)]
-    \item True True True True
-    \item False False False False
-    \item None 0 "" []
+    \item True True True
+    \item False False False
+    \item None 0 ""
     \item Error
 \end{enumerate}
 
-\textbf{Answer: B) False False False False}
+\textbf{Answer: B) False False False}
 
-\textbf{Rationale:} In Python, \texttt{None}, \texttt{0}, empty strings \texttt{""}, and empty lists \texttt{[]} are all ``falsy'' values. When converted to boolean using \texttt{bool()}, they all return \texttt{False}.
+\textbf{Rationale:} In Python, \texttt{None}, \texttt{0}, and empty strings are ``falsy'' values. When handling drug discovery data, these values often indicate missing or invalid measurements that need special handling.
 
 \hrule
 \vspace{1em}
 
-\subsection*{Question 4}
-What is the result of \texttt{int(3.9) + int(-3.9)}?
+\subsection*{Question 4: Type Conversion for IC50}
+What is the result of \texttt{int(5.8) + int(-2.3)}?
 
 \textbf{Options:}
 \begin{enumerate}[label=\Alph*)]
-    \item 0
-    \item 1
-    \item -1
-    \item 7
+    \item 3
+    \item 4
+    \item 3.5
+    \item Error
 \end{enumerate}
 
-\textbf{Answer: A) 0}
+\textbf{Answer: A) 3}
 
-\textbf{Rationale:} \texttt{int()} truncates towards zero. \texttt{int(3.9) = 3} and \texttt{int(-3.9) = -3}. Therefore, \texttt{3 + (-3) = 0}.
+\textbf{Rationale:} \texttt{int()} truncates towards zero (not floor!). \texttt{int(5.8) = 5} and \texttt{int(-2.3) = -2}. Therefore, \texttt{5 + (-2) = 3}. Be careful when converting IC50 or other bioactivity values.
 
 \hrule
 \vspace{1em}
 
-\subsection*{Question 5}
-Which statement correctly creates a multi-line string?
+\subsection*{Question 5: Multi-line SMILES/Sequences}
+Which statement correctly creates a multi-line DNA sequence string?
 
 \textbf{Options:}
 \begin{enumerate}[label=\Alph*)]
-    \item \texttt{s = "Hello\textbackslash nWorld"}
-    \item \texttt{s = '''Hello World'''}
-    \item \texttt{s = """Hello\textbackslash nWorld"""}
+    \item \texttt{seq = "ATGC\textbackslash nGCTA"}
+    \item \texttt{seq = '''ATGC\\GCTA'''}
+    \item \texttt{seq = """ATGC\textbackslash nGCTA"""}
     \item All of the above
 \end{enumerate}
 
 \textbf{Answer: D) All of the above}
 
-\textbf{Rationale:} Multi-line strings can be created using: escape character \texttt{\textbackslash n}, triple single quotes \texttt{'''}, or triple double quotes \texttt{"""}. All methods are valid.
+\textbf{Rationale:} Multi-line strings can be created using escape character \texttt{\textbackslash n}, triple single quotes, or triple double quotes. This is useful for storing FASTA sequences or long SMILES strings.
 
 \hrule
 \vspace{1em}
@@ -151,12 +154,14 @@ Which statement correctly creates a multi-line string?
 % ============================================
 % SECTION 2: OPERATORS (Q6-Q10)
 % ============================================
-\section{Operators (Questions 6-10)}
+\section{Operators for Molecular Calculations (Questions 6-10)}
 
-\subsection*{Question 6}
+\subsection*{Question 6: Division Operators}
 What is the output?
 \begin{lstlisting}[style=codeStyle]
-print(17 // 5, 17 % 5, 17 / 5)
+total_atoms = 17
+heavy_atoms = 5
+print(total_atoms // heavy_atoms, total_atoms % heavy_atoms, total_atoms / heavy_atoms)
 \end{lstlisting}
 
 \textbf{Options:}
@@ -169,53 +174,20 @@ print(17 // 5, 17 % 5, 17 / 5)
 
 \textbf{Answer: A) 3 2 3.4}
 
-\textbf{Rationale:} \texttt{//} is floor division (returns integer quotient), \texttt{\%} is modulo (remainder), and \texttt{/} is true division (returns float). 17//5=3, 17\%5=2, 17/5=3.4.
+\textbf{Rationale:} \texttt{//} is floor division (integer quotient), \texttt{\%} is modulo (remainder), \texttt{/} is true division (float). When counting atoms or codons, floor division is often useful.
 
 \hrule
 \vspace{1em}
 
-\subsection*{Question 7}
+\subsection*{Question 7: Lipinski Rule Checking}
 What is the output?
 \begin{lstlisting}[style=codeStyle]
-x = 10
-print(x > 5 and x < 15 or x == 20)
+mw = 450
+logp = 4.5
+passes_mw = mw <= 500
+passes_logp = logp <= 5
+print(passes_mw and passes_logp)
 \end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item True
-    \item False
-    \item 10
-    \item Error
-\end{enumerate}
-
-\textbf{Answer: A) True}
-
-\textbf{Rationale:} \texttt{and} has higher precedence than \texttt{or}. First, \texttt{x > 5 and x < 15} evaluates to \texttt{True and True = True}. Then \texttt{True or False = True}.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 8}
-What is the value of \texttt{2 ** 3 ** 2}?
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item 64
-    \item 512
-    \item 256
-    \item 81
-\end{enumerate}
-
-\textbf{Answer: B) 512}
-
-\textbf{Rationale:} The \texttt{**} operator is right-associative. So \texttt{2 ** 3 ** 2} = \texttt{2 ** (3 ** 2)} = \texttt{2 ** 9} = 512.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 9}
-What does \texttt{not not True} evaluate to?
 
 \textbf{Options:}
 \begin{enumerate}[label=\Alph*)]
@@ -227,1055 +199,1120 @@ What does \texttt{not not True} evaluate to?
 
 \textbf{Answer: A) True}
 
-\textbf{Rationale:} \texttt{not True = False}, then \texttt{not False = True}. Double negation returns the original value.
+\textbf{Rationale:} Both conditions evaluate to \texttt{True}: MW 450 $\leq$ 500 and LogP 4.5 $\leq$ 5. The \texttt{and} operator returns \texttt{True} only when both operands are \texttt{True}. This pattern is used for Lipinski Rule of Five checks.
 
 \hrule
 \vspace{1em}
 
-\subsection*{Question 10}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-a = [1, 2, 3]
-b = [1, 2, 3]
-print(a == b, a is b)
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item True True
-    \item True False
-    \item False True
-    \item False False
-\end{enumerate}
-
-\textbf{Answer: B) True False}
-
-\textbf{Rationale:} \texttt{==} compares values (both lists have same elements), \texttt{is} compares identity (they are different objects in memory). Same content, different objects.
-
-\hrule
-\vspace{1em}
-
-% ============================================
-% SECTION 3: STRINGS (Q11-Q15)
-% ============================================
-\section{Strings (Questions 11-15)}
-
-\subsection*{Question 11}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-s = "Python"
-print(s[1:4], s[-3:], s[::2])
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item yth hon Pto
-    \item yth hon Pto
-    \item Pyt hon Pto
-    \item yth tho Pto
-\end{enumerate}
-
-\textbf{Answer: A) yth hon Pto}
-
-\textbf{Rationale:} \texttt{s[1:4]} = characters at index 1,2,3 = ``yth''. \texttt{s[-3:]} = last 3 characters = ``hon''. \texttt{s[::2]} = every 2nd character = ``Pto''.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 12}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-print("Hello" * 2 + "World")
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item HelloHelloWorld
-    \item Hello2World
-    \item HelloWorldWorld
-    \item Error
-\end{enumerate}
-
-\textbf{Answer: A) HelloHelloWorld}
-
-\textbf{Rationale:} String multiplication \texttt{* 2} repeats the string twice, then \texttt{+} concatenates with ``World''.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 13}
-What method removes whitespace from both ends of a string?
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item \texttt{trim()}
-    \item \texttt{strip()}
-    \item \texttt{clean()}
-    \item \texttt{remove()}
-\end{enumerate}
-
-\textbf{Answer: B) strip()}
-
-\textbf{Rationale:} \texttt{strip()} removes leading and trailing whitespace. \texttt{lstrip()} removes left only, \texttt{rstrip()} removes right only. Python doesn't have \texttt{trim()}.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 14}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-s = "a,b,c,d"
-print(s.split(",")[2])
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item a
-    \item b
-    \item c
-    \item d
-\end{enumerate}
-
-\textbf{Answer: C) c}
-
-\textbf{Rationale:} \texttt{split(",")} creates list \texttt{['a', 'b', 'c', 'd']}. Index 2 is the third element, which is ``c''.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 15}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-name = "Alice"
-age = 25
-print(f"{name} is {age} years old")
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item \{name\} is \{age\} years old
-    \item Alice is 25 years old
-    \item name is age years old
-    \item Error
-\end{enumerate}
-
-\textbf{Answer: B) Alice is 25 years old}
-
-\textbf{Rationale:} f-strings (formatted string literals) replace expressions inside \texttt{\{\}} with their values. \texttt{\{name\}} becomes ``Alice'' and \texttt{\{age\}} becomes 25.
-
-\hrule
-\vspace{1em}
-
-% ============================================
-% SECTION 4: CONDITIONALS (Q16-Q20)
-% ============================================
-\section{Conditionals (Questions 16-20)}
-
-\subsection*{Question 16}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-x = 5
-if x > 3:
-    if x > 7:
-        print("A")
-    else:
-        print("B")
-else:
-    print("C")
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item A
-    \item B
-    \item C
-    \item No output
-\end{enumerate}
-
-\textbf{Answer: B) B}
-
-\textbf{Rationale:} \texttt{x=5 > 3} is True, so we enter first if. Then \texttt{5 > 7} is False, so we go to else and print ``B''.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 17}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-score = 75
-grade = "A" if score >= 90 else "B" if score >= 80 else "C"
-print(grade)
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item A
-    \item B
-    \item C
-    \item Error
-\end{enumerate}
-
-\textbf{Answer: C) C}
-
-\textbf{Rationale:} This is a chained ternary operator. 75 >= 90 is False, 75 >= 80 is False, so grade = ``C''.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 18}
-Which value is NOT considered ``falsy'' in Python?
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item 0
-    \item ""
-    \item []
-    \item "False"
-\end{enumerate}
-
-\textbf{Answer: D) "False"}
-
-\textbf{Rationale:} The string \texttt{"False"} is a non-empty string, which is truthy. Only empty strings are falsy. The word ``False'' inside doesn't make it boolean False.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 19}
-What is the output? (Python 3.10+)
-\begin{lstlisting}[style=codeStyle]
-status = 404
-match status:
-    case 200:
-        print("OK")
-    case 404:
-        print("Not Found")
-    case _:
-        print("Unknown")
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item OK
-    \item Not Found
-    \item Unknown
-    \item Error
-\end{enumerate}
-
-\textbf{Answer: B) Not Found}
-
-\textbf{Rationale:} The \texttt{match-case} statement matches \texttt{status=404} with \texttt{case 404}, printing ``Not Found''. The underscore \texttt{\_} is the wildcard/default case.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 20}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-x = 10
-y = 20
-print("Equal" if x == y else "X > Y" if x > y else "X < Y")
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item Equal
-    \item X > Y
-    \item X < Y
-    \item Error
-\end{enumerate}
-
-\textbf{Answer: C) X < Y}
-
-\textbf{Rationale:} \texttt{x == y} (10==20) is False. \texttt{x > y} (10>20) is False. So the final else returns ``X < Y''.
-
-\hrule
-\vspace{1em}
-
-% ============================================
-% SECTION 5: LOOPS (Q21-Q25)
-% ============================================
-\section{Loops (Questions 21-25)}
-
-\subsection*{Question 21}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-for i in range(3):
-    print(i, end=" ")
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item 1 2 3
-    \item 0 1 2
-    \item 0 1 2 3
-    \item 1 2
-\end{enumerate}
-
-\textbf{Answer: B) 0 1 2}
-
-\textbf{Rationale:} \texttt{range(3)} generates 0, 1, 2 (not including 3). The \texttt{end=" "} keeps output on same line with spaces.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 22}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-for i in range(5):
-    if i == 3:
-        continue
-    print(i, end=" ")
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item 0 1 2 3 4
-    \item 0 1 2 4
-    \item 0 1 2
-    \item 3
-\end{enumerate}
-
-\textbf{Answer: B) 0 1 2 4}
-
-\textbf{Rationale:} \texttt{continue} skips the current iteration when \texttt{i == 3}, so 3 is not printed. All other values (0, 1, 2, 4) are printed.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 23}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-i = 0
-while i < 5:
-    i += 1
-    if i == 3:
-        break
-print(i)
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item 2
-    \item 3
-    \item 4
-    \item 5
-\end{enumerate}
-
-\textbf{Answer: B) 3}
-
-\textbf{Rationale:} The loop increments \texttt{i} first, then checks if \texttt{i == 3}. When \texttt{i} becomes 3, \texttt{break} exits the loop, and \texttt{i} remains 3.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 24}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-for i in range(3):
-    for j in range(2):
-        print(f"{i},{j}", end=" ")
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item 0,0 0,1 1,0 1,1 2,0 2,1
-    \item 0,0 1,1 2,2
-    \item 0,0 0,1 0,2 1,0 1,1 1,2
-    \item Error
-\end{enumerate}
-
-\textbf{Answer: A) 0,0 0,1 1,0 1,1 2,0 2,1}
-
-\textbf{Rationale:} Nested loops: outer loop runs 3 times (i=0,1,2), inner loop runs 2 times for each outer iteration (j=0,1). Total 6 combinations.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 25}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-for i in range(5):
-    pass
-else:
-    print("Done")
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item Nothing
-    \item Done
-    \item Error
-    \item 0 1 2 3 4 Done
-\end{enumerate}
-
-\textbf{Answer: B) Done}
-
-\textbf{Rationale:} The \texttt{else} clause of a \texttt{for} loop executes when the loop completes normally (not broken). \texttt{pass} does nothing, loop finishes normally, ``Done'' prints.
-
-\hrule
-\vspace{1em}
-
-% ============================================
-% SECTION 6: FUNCTIONS (Q26-Q30)
-% ============================================
-\section{Functions (Questions 26-30)}
-
-\subsection*{Question 26}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-def greet(name="World"):
-    return f"Hello, {name}!"
-
-print(greet())
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item Hello, !
-    \item Hello, World!
-    \item Error
-    \item None
-\end{enumerate}
-
-\textbf{Answer: B) Hello, World!}
-
-\textbf{Rationale:} When no argument is passed, the default value ``World'' is used for the \texttt{name} parameter.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 27}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-def add(*args):
-    return sum(args)
-
-print(add(1, 2, 3, 4, 5))
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item (1, 2, 3, 4, 5)
-    \item 15
-    \item [1, 2, 3, 4, 5]
-    \item Error
-\end{enumerate}
-
-\textbf{Answer: B) 15}
-
-\textbf{Rationale:} \texttt{*args} collects all positional arguments into a tuple. \texttt{sum((1,2,3,4,5))} = 15.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 28}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-def info(**kwargs):
-    return len(kwargs)
-
-print(info(name="Alice", age=25, city="NYC"))
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item 3
-    \item \{name: Alice, age: 25, city: NYC\}
-    \item Error
-    \item None
-\end{enumerate}
-
-\textbf{Answer: A) 3}
-
-\textbf{Rationale:} \texttt{**kwargs} collects keyword arguments into a dictionary. Three key-value pairs are passed, so \texttt{len(kwargs) = 3}.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 29}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-def outer():
-    x = 10
-    def inner():
-        return x * 2
-    return inner
-
-f = outer()
-print(f())
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item 10
-    \item 20
-    \item Error
-    \item None
-\end{enumerate}
-
-\textbf{Answer: B) 20}
-
-\textbf{Rationale:} This demonstrates closure. \texttt{outer()} returns \texttt{inner} function which remembers \texttt{x=10} from enclosing scope. Calling \texttt{f()} returns \texttt{10 * 2 = 20}.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 30}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-def func(a, b=2, *args, **kwargs):
-    return a + b + sum(args) + len(kwargs)
-
-print(func(1, 3, 4, 5, x=10, y=20))
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item 15
-    \item 13
-    \item 43
-    \item Error
-\end{enumerate}
-
-\textbf{Answer: A) 15}
-
-\textbf{Rationale:} \texttt{a=1}, \texttt{b=3}, \texttt{args=(4,5)}, \texttt{kwargs=\{x:10, y:20\}}. Result: \texttt{1 + 3 + (4+5) + 2 = 15}.
-
-\hrule
-\vspace{1em}
-
-% ============================================
-% SECTION 7: ERROR HANDLING (Q31-Q33)
-% ============================================
-\section{Error Handling (Questions 31-33)}
-
-\subsection*{Question 31}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-try:
-    x = 10 / 0
-except ZeroDivisionError:
-    print("A")
-except:
-    print("B")
-else:
-    print("C")
-finally:
-    print("D")
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item A D
-    \item B D
-    \item A C D
-    \item C D
-\end{enumerate}
-
-\textbf{Answer: A) A D}
-
-\textbf{Rationale:} Division by zero raises \texttt{ZeroDivisionError}, caught by first except (prints ``A''). \texttt{else} runs only if no exception. \texttt{finally} always runs (prints ``D'').
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 32}
-Which exception is raised when accessing a non-existent dictionary key?
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item IndexError
-    \item KeyError
-    \item ValueError
-    \item AttributeError
-\end{enumerate}
-
-\textbf{Answer: B) KeyError}
-
-\textbf{Rationale:} \texttt{KeyError} is raised when a dictionary key is not found. \texttt{IndexError} is for list indices, \texttt{ValueError} for invalid values, \texttt{AttributeError} for missing attributes.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 33}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-def risky():
-    try:
-        return 1
-    finally:
-        return 2
-
-print(risky())
-\end{lstlisting}
+\subsection*{Question 8: pIC50 Calculation}
+What is the value of \texttt{10 ** (9 - 8)}?
 
 \textbf{Options:}
 \begin{enumerate}[label=\Alph*)]
     \item 1
-    \item 2
-    \item 1 2
-    \item Error
+    \item 10
+    \item 100
+    \item 0.1
 \end{enumerate}
 
-\textbf{Answer: B) 2}
+\textbf{Answer: B) 10}
 
-\textbf{Rationale:} The \texttt{finally} block always executes, even after a return. The return in \texttt{finally} overrides the return in \texttt{try}, so 2 is returned.
+\textbf{Rationale:} \texttt{10 ** (9 - 8) = 10 ** 1 = 10}. This formula converts pIC50 to IC50 in nM: IC50\_nM = 10 ** (9 - pIC50). For pIC50=8, IC50=10 nM.
 
 \hrule
 \vspace{1em}
 
-% ============================================
-% SECTION 8: LISTS (Q34-Q38)
-% ============================================
-\section{Lists (Questions 34-38)}
-
-\subsection*{Question 34}
-What is the output?
+\subsection*{Question 9: GC Content Logic}
+What is the output for calculating GC content?
 \begin{lstlisting}[style=codeStyle]
-lst = [1, 2, 3, 4, 5]
-print(lst[1:4])
+seq = "ATGCGC"
+gc_count = seq.count("G") + seq.count("C")
+gc_percent = gc_count / len(seq) * 100
+print(gc_percent)
 \end{lstlisting}
 
 \textbf{Options:}
 \begin{enumerate}[label=\Alph*)]
-    \item [1, 2, 3, 4]
-    \item [2, 3, 4]
-    \item [2, 3, 4, 5]
-    \item [1, 2, 3]
+    \item 66.67 (approximately)
+    \item 50.0
+    \item 33.33
+    \item Error
 \end{enumerate}
 
-\textbf{Answer: B) [2, 3, 4]}
+\textbf{Answer: A) 66.67 (approximately)}
 
-\textbf{Rationale:} Slicing \texttt{[1:4]} returns elements at indices 1, 2, 3 (end index is exclusive). Values are 2, 3, 4.
+\textbf{Rationale:} The sequence has 2 G's and 2 C's out of 6 nucleotides. GC\% = (4/6) $\times$ 100 = 66.67\%. GC content is important in bioinformatics for primer design and genome analysis.
 
 \hrule
 \vspace{1em}
 
-\subsection*{Question 35}
+\subsection*{Question 10: Identity vs Equality}
 What is the output?
 \begin{lstlisting}[style=codeStyle]
-lst = [1, 2, 3]
-lst.append([4, 5])
-print(len(lst))
+smiles1 = "CCO"
+smiles2 = "CCO"
+list1 = [smiles1]
+list2 = [smiles2]
+print(smiles1 == smiles2, list1 == list2, list1 is list2)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item True True True
+    \item True True False
+    \item True False False
+    \item False False False
+\end{enumerate}
+
+\textbf{Answer: B) True True False}
+
+\textbf{Rationale:} \texttt{==} compares values (both strings are ``CCO'', both lists contain ``CCO''). \texttt{is} compares identity (memory location). The lists have equal content but are different objects.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 3: STRINGS - DNA/SMILES (Q11-Q15)
+% ============================================
+\section{Strings for Sequences \& SMILES (Questions 11-15)}
+
+\subsection*{Question 11: DNA Sequence Slicing}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+dna = "ATGCGATCG"
+print(dna[:3], dna[-3:], dna[::3])
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item ATG TCG AGC
+    \item ATG TCG AGAG
+    \item ATG GCG ATG
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: A) ATG TCG AGC}
+
+\textbf{Rationale:} \texttt{dna[:3]} = first 3 chars = ``ATG'' (start codon!). \texttt{dna[-3:]} = last 3 chars = ``TCG''. \texttt{dna[::3]} = every 3rd char = ``A'', ``C'', ``T'' = ``AGC''. Slicing is essential for codon extraction.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 12: DNA Transcription}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+dna = "ATGC"
+rna = dna.replace("T", "U")
+print(rna)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item AUGC
+    \item ATGC
+    \item UAGC
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: A) AUGC}
+
+\textbf{Rationale:} DNA transcription replaces thymine (T) with uracil (U). The \texttt{replace()} method creates a new string with all T's replaced by U's.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 13: SMILES Ring Detection}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+smiles = "c1ccccc1"  # Benzene
+has_ring = any(c.isdigit() for c in smiles)
+print(has_ring)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item True
+    \item False
+    \item 1
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: A) True}
+
+\textbf{Rationale:} In SMILES notation, digits indicate ring closure points. Benzene's SMILES ``c1ccccc1'' contains ``1'' twice (ring opening and closing). The \texttt{any()} function returns \texttt{True} if any digit is found.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 14: F-strings for Compound Data}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+name = "Aspirin"
+pic50 = 5.28
+print(f"{name}: pIC50 = {pic50:.1f}")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item Aspirin: pIC50 = 5.28
+    \item Aspirin: pIC50 = 5.3
+    \item Aspirin: pIC50 = 5
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) Aspirin: pIC50 = 5.3}
+
+\textbf{Rationale:} The format specifier \texttt{:.1f} rounds to 1 decimal place. 5.28 rounds to 5.3. F-strings are ideal for formatting molecular property reports.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 15: String Immutability}
+What happens when you run this code?
+\begin{lstlisting}[style=codeStyle]
+seq = "ATGC"
+seq[0] = "G"  # Try to create mutation
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item TypeError - strings are immutable
+    \item seq becomes "GTGC"
+    \item seq becomes "GATGC"
+    \item None
+\end{enumerate}
+
+\textbf{Answer: A) TypeError - strings are immutable}
+
+\textbf{Rationale:} Strings cannot be modified in place. To ``mutate'' a sequence, create a new string: \texttt{seq = "G" + seq[1:]}. This is important when simulating mutations in bioinformatics.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 4: LISTS (Q16-Q20)
+% ============================================
+\section{Lists for Compound Libraries (Questions 16-20)}
+
+\subsection*{Question 16: List References}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+library_a = ["CCO", "CC", "CCC"]
+library_b = library_a  # Reference, not copy!
+library_a.append("CCCC")
+print(len(library_b))
 \end{lstlisting}
 
 \textbf{Options:}
 \begin{enumerate}[label=\Alph*)]
     \item 3
     \item 4
-    \item 5
     \item Error
+    \item None
 \end{enumerate}
 
 \textbf{Answer: B) 4}
 
-\textbf{Rationale:} \texttt{append()} adds the entire \texttt{[4, 5]} list as a single element. Result: \texttt{[1, 2, 3, [4, 5]]}. Length is 4.
+\textbf{Rationale:} \texttt{library\_b = library\_a} creates a reference to the same list object. Modifying \texttt{library\_a} affects \texttt{library\_b}. Use \texttt{library\_b = library\_a.copy()} for independent copies.
 
 \hrule
 \vspace{1em}
 
-\subsection*{Question 36}
+\subsection*{Question 17: List extend() vs append()}
 What is the output?
 \begin{lstlisting}[style=codeStyle]
-lst = [1, 2, 3]
-lst.extend([4, 5])
-print(lst)
+compounds = ["Aspirin", "Ibuprofen"]
+compounds.extend(["Caffeine", "Metformin"])
+print(len(compounds))
 \end{lstlisting}
 
 \textbf{Options:}
 \begin{enumerate}[label=\Alph*)]
-    \item [1, 2, 3, [4, 5]]
-    \item [1, 2, 3, 4, 5]
-    \item [[1, 2, 3], [4, 5]]
-    \item Error
-\end{enumerate}
-
-\textbf{Answer: B) [1, 2, 3, 4, 5]}
-
-\textbf{Rationale:} \texttt{extend()} adds each element of the iterable individually to the list, unlike \texttt{append()} which adds the whole object.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 37}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-lst = [3, 1, 4, 1, 5, 9, 2, 6]
-print(lst.count(1), lst.index(5))
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item 2 4
-    \item 2 5
-    \item 1 4
-    \item 1 5
-\end{enumerate}
-
-\textbf{Answer: A) 2 4}
-
-\textbf{Rationale:} \texttt{count(1)} returns how many times 1 appears (twice). \texttt{index(5)} returns the first index where 5 is found (index 4).
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 38}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-lst = [[1, 2], [3, 4], [5, 6]]
-print([x for row in lst for x in row if x % 2 == 0])
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item [2, 4, 6]
-    \item [[2], [4], [6]]
-    \item [1, 3, 5]
-    \item Error
-\end{enumerate}
-
-\textbf{Answer: A) [2, 4, 6]}
-
-\textbf{Rationale:} This nested list comprehension flattens the list and filters even numbers. Iteration order: for each row, for each x in row, keep if x is even.
-
-\hrule
-\vspace{1em}
-
-% ============================================
-% SECTION 9: TUPLES & SETS (Q39-Q41)
-% ============================================
-\section{Tuples \& Sets (Questions 39-41)}
-
-\subsection*{Question 39}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-t = (1, 2, 3)
-t[0] = 10
-print(t)
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item (10, 2, 3)
-    \item (1, 2, 3)
-    \item TypeError
-    \item [10, 2, 3]
-\end{enumerate}
-
-\textbf{Answer: C) TypeError}
-
-\textbf{Rationale:} Tuples are immutable. Attempting to modify an element raises \texttt{TypeError: 'tuple' object does not support item assignment}.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 40}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-s1 = {1, 2, 3, 4}
-s2 = {3, 4, 5, 6}
-print(s1 & s2)
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item \{1, 2, 3, 4, 5, 6\}
-    \item \{3, 4\}
-    \item \{1, 2\}
-    \item \{5, 6\}
-\end{enumerate}
-
-\textbf{Answer: B) \{3, 4\}}
-
-\textbf{Rationale:} The \texttt{\&} operator performs set intersection, returning elements present in both sets. 3 and 4 are common.
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 41}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-s = {1, 2, 2, 3, 3, 3}
-print(len(s))
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item 6
+    \item 2
     \item 3
+    \item 4
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: C) 4}
+
+\textbf{Rationale:} \texttt{extend()} adds each element individually. Compare: \texttt{append()} would add the entire list as one element, giving length 3.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 18: List Comprehension for Filtering}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+pic50_values = [5.2, 6.8, 7.3, 4.9, 8.1]
+actives = [p for p in pic50_values if p >= 6.0]
+print(len(actives))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 2
+    \item 3
+    \item 4
+    \item 5
+\end{enumerate}
+
+\textbf{Answer: B) 3}
+
+\textbf{Rationale:} List comprehension filters pIC50 values $\geq$ 6.0: [6.8, 7.3, 8.1]. Only 3 compounds pass the activity threshold. This is a common pattern for filtering active compounds.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 19: Nested Lists for Descriptor Matrix}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+# [MW, LogP, HBD, HBA]
+descriptors = [
+    [180.16, 1.19, 1, 4],   # Aspirin
+    [206.28, 3.97, 1, 2],   # Ibuprofen
+    [194.19, -0.07, 0, 6]   # Caffeine
+]
+print(descriptors[1][1])
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 180.16
+    \item 1.19
+    \item 3.97
+    \item 206.28
+\end{enumerate}
+
+\textbf{Answer: C) 3.97}
+
+\textbf{Rationale:} \texttt{descriptors[1]} accesses Ibuprofen's row, \texttt{[1]} gets LogP (index 1). Nested lists can represent descriptor matrices before converting to NumPy/Pandas.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 20: List Sorting}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+compounds = [("Aspirin", 5.2), ("Drug_X", 8.1), ("Ibuprofen", 6.8)]
+compounds.sort(key=lambda x: x[1], reverse=True)
+print(compounds[0][0])
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item Aspirin
+    \item Drug\_X
+    \item Ibuprofen
+    \item 8.1
+\end{enumerate}
+
+\textbf{Answer: B) Drug\_X}
+
+\textbf{Rationale:} Sorting by pIC50 (index 1) in descending order puts Drug\_X (8.1) first. This pattern ranks compounds by potency.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 5: TUPLES & SETS (Q21-Q25)
+% ============================================
+\section{Tuples \& Sets for Molecular Data (Questions 21-25)}
+
+\subsection*{Question 21: Tuple Immutability}
+What happens?
+\begin{lstlisting}[style=codeStyle]
+compound = ("Aspirin", 180.16, 5.2)
+compound[2] = 6.0  # Try to update pIC50
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item TypeError
+    \item compound becomes ("Aspirin", 180.16, 6.0)
+    \item None
+    \item SyntaxError
+\end{enumerate}
+
+\textbf{Answer: A) TypeError}
+
+\textbf{Rationale:} Tuples are immutable -- they cannot be modified after creation. Use tuples for fixed compound records, lists for mutable collections.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 22: Extended Tuple Unpacking}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+data = (1, 2, 3, 4, 5, 6, 7)
+first, *middle, last = data
+print(len(middle))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 7
+    \item 5
+    \item 2
     \item 1
+\end{enumerate}
+
+\textbf{Answer: B) 5}
+
+\textbf{Rationale:} \texttt{*middle} captures all elements between first (1) and last (7). middle = [2, 3, 4, 5, 6], length 5. Useful for parsing variable-length data records.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 23: Set Intersection for Common Compounds}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+library_a = {"CMP001", "CMP002", "CMP003"}
+library_b = {"CMP002", "CMP003", "CMP004"}
+common = library_a & library_b
+print(common)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item \{``CMP001'', ``CMP004''\}
+    \item \{``CMP001'', ``CMP002'', ``CMP003'', ``CMP004''\}
+    \item \{``CMP002'', ``CMP003''\}
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: C) \{``CMP002'', ``CMP003''\}}
+
+\textbf{Rationale:} The \texttt{\&} operator finds set intersection (common elements). This is useful for finding compounds shared between screening libraries.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 24: Set Uniqueness}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+scaffolds = {"benzene", "pyridine", "benzene", "furan", "pyridine"}
+print(len(scaffolds))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 5
+    \item 3
+    \item 2
     \item Error
 \end{enumerate}
 
 \textbf{Answer: B) 3}
 
-\textbf{Rationale:} Sets automatically remove duplicates. The set contains only unique values \{1, 2, 3\}, so length is 3.
+\textbf{Rationale:} Sets automatically remove duplicates. Only unique scaffolds remain: benzene, pyridine, furan. Use sets to count unique molecular scaffolds.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 25: Set Difference}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+all_compounds = {"A", "B", "C", "D"}
+tested = {"B", "D"}
+untested = all_compounds - tested
+print(untested)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item \{``B'', ``D''\}
+    \item \{``A'', ``C''\}
+    \item \{``A'', ``B'', ``C'', ``D''\}
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) \{``A'', ``C''\}}
+
+\textbf{Rationale:} Set difference (\texttt{-}) returns elements in the first set not in the second. Useful for tracking which compounds still need testing.
 
 \hrule
 \vspace{1em}
 
 % ============================================
-% SECTION 10: DICTIONARIES (Q42-Q44)
+% SECTION 6: DICTIONARIES (Q26-Q30)
 % ============================================
-\section{Dictionaries (Questions 42-44)}
+\section{Dictionaries for Compound Databases (Questions 26-30)}
 
-\subsection*{Question 42}
+\subsection*{Question 26: Dictionary get() Method}
 What is the output?
 \begin{lstlisting}[style=codeStyle]
-d = {"a": 1, "b": 2, "c": 3}
-print(d.get("d", 0))
+compound = {"name": "Aspirin", "MW": 180.16}
+logp = compound.get("LogP", "N/A")
+print(logp)
 \end{lstlisting}
 
 \textbf{Options:}
 \begin{enumerate}[label=\Alph*)]
     \item None
+    \item N/A
+    \item Error (KeyError)
     \item 0
-    \item KeyError
-    \item d
 \end{enumerate}
 
-\textbf{Answer: B) 0}
+\textbf{Answer: B) N/A}
 
-\textbf{Rationale:} \texttt{get()} returns the value for key if it exists, otherwise returns the default value (0 here). Key ``d'' doesn't exist, so 0 is returned.
+\textbf{Rationale:} \texttt{get(key, default)} returns the default value if key doesn't exist. This avoids KeyError and is useful for handling missing molecular properties.
 
 \hrule
 \vspace{1em}
 
-\subsection*{Question 43}
-What is the output?
+\subsection*{Question 27: Dictionary Iteration}
+What is printed?
 \begin{lstlisting}[style=codeStyle]
-d = {"a": 1, "b": 2}
-d.update({"b": 3, "c": 4})
-print(d)
+props = {"MW": 180.16, "LogP": 1.19, "HBD": 1}
+for item in props:
+    print(item, end=" ")
 \end{lstlisting}
 
 \textbf{Options:}
 \begin{enumerate}[label=\Alph*)]
-    \item \{"a": 1, "b": 2\}
-    \item \{"a": 1, "b": 3, "c": 4\}
-    \item \{"b": 3, "c": 4\}
+    \item 180.16 1.19 1
+    \item MW LogP HBD
+    \item (``MW'', 180.16) (``LogP'', 1.19) (``HBD'', 1)
     \item Error
 \end{enumerate}
 
-\textbf{Answer: B) \{"a": 1, "b": 3, "c": 4\}}
+\textbf{Answer: B) MW LogP HBD}
 
-\textbf{Rationale:} \texttt{update()} merges dictionaries. Existing key ``b'' is updated to 3, new key ``c'' is added with value 4.
+\textbf{Rationale:} Iterating over a dictionary iterates over keys only. Use \texttt{props.values()} for values or \texttt{props.items()} for key-value pairs.
 
 \hrule
 \vspace{1em}
 
-\subsection*{Question 44}
+\subsection*{Question 28: Nested Dictionary}
 What is the output?
 \begin{lstlisting}[style=codeStyle]
-d = {"x": 10, "y": 20, "z": 30}
-print(list(d.values()))
+compounds = {
+    "Aspirin": {"MW": 180.16, "pIC50": 5.2},
+    "Ibuprofen": {"MW": 206.28, "pIC50": 6.8}
+}
+print(compounds["Aspirin"]["pIC50"])
 \end{lstlisting}
 
 \textbf{Options:}
 \begin{enumerate}[label=\Alph*)]
-    \item ['x', 'y', 'z']
-    \item [10, 20, 30]
-    \item [('x', 10), ('y', 20), ('z', 30)]
-    \item \{10, 20, 30\}
-\end{enumerate}
-
-\textbf{Answer: B) [10, 20, 30]}
-
-\textbf{Rationale:} \texttt{values()} returns a view of all values. Converting to list gives \texttt{[10, 20, 30]}. Use \texttt{keys()} for keys, \texttt{items()} for tuples.
-
-\hrule
-\vspace{1em}
-
-% ============================================
-% SECTION 11: FILE HANDLING & JSON (Q45-Q46)
-% ============================================
-\section{File Handling \& JSON (Questions 45-46)}
-
-\subsection*{Question 45}
-What mode should be used to append to an existing file without overwriting?
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item "r"
-    \item "w"
-    \item "a"
-    \item "x"
-\end{enumerate}
-
-\textbf{Answer: C) "a"}
-
-\textbf{Rationale:} ``a'' is append mode (adds to end). ``r'' is read, ``w'' is write (overwrites), ``x'' is exclusive create (fails if exists).
-
-\hrule
-\vspace{1em}
-
-\subsection*{Question 46}
-What is the output?
-\begin{lstlisting}[style=codeStyle]
-import json
-data = '{"name": "Alice", "age": 25}'
-obj = json.loads(data)
-print(type(obj), obj["name"])
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item <class 'str'> Alice
-    \item <class 'dict'> Alice
-    \item <class 'list'> Alice
+    \item 180.16
+    \item 5.2
+    \item 6.8
     \item Error
 \end{enumerate}
 
-\textbf{Answer: B) <class 'dict'> Alice}
+\textbf{Answer: B) 5.2}
 
-\textbf{Rationale:} \texttt{json.loads()} parses a JSON string into a Python object. A JSON object becomes a Python dictionary.
-
-\hrule
-\vspace{1em}
-
-% ============================================
-% SECTION 12: NUMPY (Q47-Q48)
-% ============================================
-\section{NumPy (Questions 47-48)}
-
-\subsection*{Question 47}
-What is the shape of this array?
-\begin{lstlisting}[style=codeStyle]
-import numpy as np
-arr = np.array([[1, 2, 3], [4, 5, 6]])
-print(arr.shape)
-\end{lstlisting}
-
-\textbf{Options:}
-\begin{enumerate}[label=\Alph*)]
-    \item (3, 2)
-    \item (2, 3)
-    \item (6,)
-    \item 6
-\end{enumerate}
-
-\textbf{Answer: B) (2, 3)}
-
-\textbf{Rationale:} The array has 2 rows and 3 columns. Shape is always (rows, columns) = (2, 3).
+\textbf{Rationale:} First access gets Aspirin's dict, second access gets its pIC50 value. Nested dicts are common for storing compound databases.
 
 \hrule
 \vspace{1em}
 
-\subsection*{Question 48}
+\subsection*{Question 29: Dict Comprehension}
 What is the output?
 \begin{lstlisting}[style=codeStyle]
-import numpy as np
-arr = np.array([1, 2, 3, 4, 5])
-print(arr[arr > 2])
+import math
+ic50_nm = {"A": 10, "B": 100, "C": 1000}
+pic50 = {k: 9 - math.log10(v) for k, v in ic50_nm.items()}
+print(round(pic50["A"], 1))
 \end{lstlisting}
 
 \textbf{Options:}
 \begin{enumerate}[label=\Alph*)]
-    \item [False, False, True, True, True]
-    \item [3, 4, 5]
-    \item [1, 2]
+    \item 7.0
+    \item 8.0
+    \item 9.0
+    \item 10.0
+\end{enumerate}
+
+\textbf{Answer: B) 8.0}
+
+\textbf{Rationale:} pIC50 = 9 - log10(IC50\_nM). For IC50=10 nM: pIC50 = 9 - log10(10) = 9 - 1 = 8.0. Dict comprehension efficiently converts all values.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 30: Codon Table Lookup}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+codon_table = {"AUG": "M", "UGG": "W", "UAA": "*"}
+protein = codon_table.get("AUG", "X") + codon_table.get("UGG", "X")
+print(protein)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item MW
+    \item AUG UGG
+    \item XX
     \item Error
 \end{enumerate}
 
-\textbf{Answer: B) [3, 4, 5]}
+\textbf{Answer: A) MW}
 
-\textbf{Rationale:} \texttt{arr > 2} creates a boolean mask \texttt{[False, False, True, True, True]}. Using this mask as index returns elements where True: \texttt{[3, 4, 5]}.
+\textbf{Rationale:} AUG codes for Methionine (M), UGG codes for Tryptophan (W). The codon table dictionary enables RNA-to-protein translation.
 
 \hrule
 \vspace{1em}
 
 % ============================================
-% SECTION 13: PANDAS (Q49-Q50)
+% SECTION 7: CONTROL FLOW (Q31-Q35)
 % ============================================
-\section{Pandas (Questions 49-50)}
+\section{Control Flow for Data Processing (Questions 31-35)}
 
-\subsection*{Question 49}
+\subsection*{Question 31: Activity Classification}
 What is the output?
 \begin{lstlisting}[style=codeStyle]
-import pandas as pd
-df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
-print(df['A'].sum())
+pic50 = 7.5
+if pic50 >= 8:
+    print("Highly Active")
+elif pic50 >= 6:
+    print("Active")
+else:
+    print("Inactive")
 \end{lstlisting}
 
 \textbf{Options:}
 \begin{enumerate}[label=\Alph*)]
-    \item [1, 2, 3]
-    \item 6
-    \item 21
+    \item Highly Active
+    \item Active
+    \item Inactive
     \item Error
 \end{enumerate}
 
-\textbf{Answer: B) 6}
+\textbf{Answer: B) Active}
 
-\textbf{Rationale:} \texttt{df['A']} selects column A as a Series \texttt{[1, 2, 3]}. The \texttt{sum()} method returns \texttt{1 + 2 + 3 = 6}.
+\textbf{Rationale:} pIC50 7.5 is $<$ 8 (not highly active) but $\geq$ 6 (active). The first True condition determines the output.
 
 \hrule
 \vspace{1em}
 
-\subsection*{Question 50}
-What method is used to get the first 5 rows of a DataFrame?
+\subsection*{Question 32: Loop with Range}
+What is the sum?
+\begin{lstlisting}[style=codeStyle]
+total = 0
+for i in range(0, 10, 2):  # 0, 2, 4, 6, 8
+    total += i
+print(total)
+\end{lstlisting}
 
 \textbf{Options:}
 \begin{enumerate}[label=\Alph*)]
-    \item \texttt{df.first(5)}
-    \item \texttt{df.head()}
-    \item \texttt{df.top(5)}
-    \item \texttt{df[0:5]}
+    \item 20
+    \item 25
+    \item 30
+    \item 45
 \end{enumerate}
 
-\textbf{Answer: B) df.head()}
+\textbf{Answer: A) 20}
 
-\textbf{Rationale:} \texttt{head()} returns the first 5 rows by default (or \texttt{head(n)} for n rows). While \texttt{df[0:5]} also works, \texttt{head()} is the idiomatic Pandas method.
+\textbf{Rationale:} \texttt{range(0, 10, 2)} generates 0, 2, 4, 6, 8. Sum = 0+2+4+6+8 = 20. Step parameter is useful for processing every nth item.
 
 \hrule
-\vspace{2em}
+\vspace{1em}
+
+\subsection*{Question 33: Break Statement}
+What is printed?
+\begin{lstlisting}[style=codeStyle]
+pic50_values = [5.2, 5.8, 7.5, 6.2, 8.1]
+for p in pic50_values:
+    if p >= 7.0:
+        print(f"Found potent: {p}")
+        break
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item Found potent: 8.1
+    \item Found potent: 7.5
+    \item Found potent: 7.5\\Found potent: 8.1
+    \item Nothing printed
+\end{enumerate}
+
+\textbf{Answer: B) Found potent: 7.5}
+
+\textbf{Rationale:} \texttt{break} exits the loop immediately after finding the first potent compound (pIC50 $\geq$ 7.0). Only 7.5 is printed, 8.1 is never reached.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 34: Continue Statement}
+What is printed?
+\begin{lstlisting}[style=codeStyle]
+for compound in ["valid", None, "active", "", "potent"]:
+    if not compound:
+        continue
+    print(compound, end=" ")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item valid None active potent
+    \item valid active potent
+    \item None
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) valid active potent}
+
+\textbf{Rationale:} \texttt{continue} skips falsy values (None, ``''). Only truthy strings are printed. This pattern filters invalid data entries.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 35: Loop with Else}
+What is printed?
+\begin{lstlisting}[style=codeStyle]
+pic50_values = [5.2, 5.8, 5.5]
+for p in pic50_values:
+    if p >= 6.0:
+        print("Found active")
+        break
+else:
+    print("No actives found")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item No actives found
+    \item Found active
+    \item Nothing
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: A) No actives found}
+
+\textbf{Rationale:} The \texttt{else} clause executes when the loop completes without hitting \texttt{break}. Since no pIC50 $\geq$ 6.0, the else block runs.
+
+\hrule
+\vspace{1em}
 
 % ============================================
-% ANSWER KEY
+% SECTION 8: FUNCTIONS (Q36-Q40)
 % ============================================
-\section*{Quick Answer Key}
+\section{Functions for Molecular Calculations (Questions 36-40)}
 
-\begin{longtable}{|c|c|c|c|c|c|c|c|c|c|}
-\hline
-\textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} \\
-\hline
-1 & B & 11 & A & 21 & B & 31 & A & 41 & B \\
-\hline
-2 & A & 12 & A & 22 & B & 32 & B & 42 & B \\
-\hline
-3 & B & 13 & B & 23 & B & 33 & B & 43 & B \\
-\hline
-4 & A & 14 & C & 24 & A & 34 & B & 44 & B \\
-\hline
-5 & D & 15 & B & 25 & B & 35 & B & 45 & C \\
-\hline
-6 & A & 16 & B & 26 & B & 36 & B & 46 & B \\
-\hline
-7 & A & 17 & C & 27 & B & 37 & A & 47 & B \\
-\hline
-8 & B & 18 & D & 28 & A & 38 & A & 48 & B \\
-\hline
-9 & A & 19 & B & 29 & B & 39 & C & 49 & B \\
-\hline
-10 & B & 20 & C & 30 & A & 40 & B & 50 & B \\
-\hline
-\end{longtable}
+\subsection*{Question 36: Default Parameters}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+def classify_activity(pic50, threshold=6.0):
+    return "Active" if pic50 >= threshold else "Inactive"
 
-\section*{Topic Distribution}
+print(classify_activity(5.5))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item Active
+    \item Inactive
+    \item Error
+    \item None
+\end{enumerate}
+
+\textbf{Answer: B) Inactive}
+
+\textbf{Rationale:} Default threshold is 6.0. pIC50 5.5 $<$ 6.0, so returns ``Inactive''. Default parameters make functions more flexible.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 37: Return Values}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+def validate_smiles(smiles):
+    if not smiles:
+        return  # implicit None
+    print("Valid")
+
+result = validate_smiles("")
+print(result)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item None
+    \item Valid\\None
+    \item Error
+    \item Valid
+\end{enumerate}
+
+\textbf{Answer: A) None}
+
+\textbf{Rationale:} Empty string is falsy, so function returns early without printing. Functions without explicit return value return \texttt{None}.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 38: *args for Multiple Compounds}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+def average_pic50(*values):
+    return sum(values) / len(values)
+
+print(average_pic50(5.2, 6.8, 7.3))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 19.3
+    \item 6.43 (approximately)
+    \item Error
+    \item (5.2, 6.8, 7.3)
+\end{enumerate}
+
+\textbf{Answer: B) 6.43 (approximately)}
+
+\textbf{Rationale:} \texttt{*values} collects all arguments into a tuple. Average = (5.2 + 6.8 + 7.3) / 3 = 6.43. Use *args for variable-length inputs.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 39: **kwargs for Properties}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+def create_compound(**props):
+    return props
+
+compound = create_compound(name="Aspirin", MW=180.16)
+print(type(compound))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{<class 'tuple'>}
+    \item \texttt{<class 'dict'>}
+    \item \texttt{<class 'list'>}
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) \texttt{<class 'dict'>}}
+
+\textbf{Rationale:} \texttt{**kwargs} collects keyword arguments into a dictionary. This pattern creates flexible compound property containers.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 40: Lambda for Conversion}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+import math
+ic50_to_pic50 = lambda ic50_nm: 9 - math.log10(ic50_nm)
+print(ic50_to_pic50(100))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 7.0
+    \item 8.0
+    \item 9.0
+    \item 2.0
+\end{enumerate}
+
+\textbf{Answer: A) 7.0}
+
+\textbf{Rationale:} pIC50 = 9 - log10(100) = 9 - 2 = 7.0. Lambda functions are concise for simple conversions used in map/filter operations.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 9: FILE HANDLING & ERROR HANDLING (Q41-Q45)
+% ============================================
+\section{File \& Error Handling (Questions 41-45)}
+
+\subsection*{Question 41: Reading FASTA Files}
+What is the correct way to read a file?
+\begin{lstlisting}[style=codeStyle]
+with open("sequence.fasta", "r") as f:
+    content = f.read()
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item The file is automatically closed after the with block
+    \item You must call f.close() manually
+    \item The file stays open
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: A) The file is automatically closed after the with block}
+
+\textbf{Rationale:} The \texttt{with} statement is a context manager that ensures proper file cleanup, even if an exception occurs.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 42: File Modes}
+What happens when you try to write to a file opened in read mode?
+\begin{lstlisting}[style=codeStyle]
+with open("compounds.csv", "r") as f:
+    f.write("Aspirin,180.16")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item Data is written successfully
+    \item io.UnsupportedOperation error
+    \item FileNotFoundError
+    \item Nothing happens
+\end{enumerate}
+
+\textbf{Answer: B) io.UnsupportedOperation error}
+
+\textbf{Rationale:} Mode ``r'' is read-only. Use ``w'' for writing or ``a'' for appending. Always check file modes when handling compound data files.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 43: Try/Except for Invalid SMILES}
+What is printed?
+\begin{lstlisting}[style=codeStyle]
+def parse_smiles(smiles):
+    if not smiles:
+        raise ValueError("Empty SMILES")
+    return smiles
+
+try:
+    result = parse_smiles("")
+except ValueError:
+    print("Error")
+print("Done")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item Error
+    \item Done
+    \item Error\\Done
+    \item Nothing
+\end{enumerate}
+
+\textbf{Answer: C) Error\\Done}
+
+\textbf{Rationale:} ValueError is caught, ``Error'' is printed, then execution continues to ``Done''. Exception handling allows graceful recovery from invalid data.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 44: Finally Block}
+What is printed?
+\begin{lstlisting}[style=codeStyle]
+def process_compound():
+    try:
+        return "Processed"
+    finally:
+        print("Cleanup")
+
+result = process_compound()
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item Processed
+    \item Cleanup
+    \item Both (Cleanup first, then returns ``Processed'')
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: C) Both (Cleanup first, then returns ``Processed'')}
+
+\textbf{Rationale:} \texttt{finally} always executes, even after a return statement. This ensures cleanup (closing files, releasing resources) happens reliably.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 45: Specific Exception Handling}
+What is printed?
+\begin{lstlisting}[style=codeStyle]
+try:
+    ic50 = float("invalid")
+except ValueError:
+    print("Invalid IC50")
+except TypeError:
+    print("Wrong type")
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item Invalid IC50
+    \item Wrong type
+    \item Both
+    \item Error (uncaught)
+\end{enumerate}
+
+\textbf{Answer: A) Invalid IC50}
+
+\textbf{Rationale:} Converting ``invalid'' to float raises ValueError, not TypeError. The first matching except block handles it.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 10: ADVANCED TOPICS (Q46-Q50)
+% ============================================
+\section{Advanced Python for Data Analysis (Questions 46-50)}
+
+\subsection*{Question 46: Generator Expression}
+What is the difference?
+\begin{lstlisting}[style=codeStyle]
+list_comp = [x**2 for x in range(1000000)]
+gen_exp = (x**2 for x in range(1000000))
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item Both use the same memory
+    \item Generator uses less memory (lazy evaluation)
+    \item List uses less memory
+    \item They produce different values
+\end{enumerate}
+
+\textbf{Answer: B) Generator uses less memory (lazy evaluation)}
+
+\textbf{Rationale:} Generators compute values on-demand, not all at once. For large compound libraries, generators prevent memory issues.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 47: Map Function}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+import math
+ic50_values = [10, 100, 1000]
+pic50_values = list(map(lambda x: 9 - math.log10(x), ic50_values))
+print(pic50_values)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{[8.0, 7.0, 6.0]}
+    \item \texttt{[1.0, 2.0, 3.0]}
+    \item \texttt{[10, 100, 1000]}
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: A) \texttt{[8.0, 7.0, 6.0]}}
+
+\textbf{Rationale:} map() applies the IC50-to-pIC50 conversion to each value: 9-log10(10)=8, 9-log10(100)=7, 9-log10(1000)=6.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 48: Filter Function}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+pic50_values = [5.2, 6.8, 7.3, 4.9, 8.1]
+potent = list(filter(lambda p: p >= 7.0, pic50_values))
+print(potent)
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{[5.2, 6.8, 4.9]}
+    \item \texttt{[6.8, 7.3, 8.1]}
+    \item \texttt{[7.3, 8.1]}
+    \item \texttt{[8.1]}
+\end{enumerate}
+
+\textbf{Answer: C) \texttt{[7.3, 8.1]}}
+
+\textbf{Rationale:} filter() keeps elements where the lambda returns True (pIC50 $\geq$ 7.0). Only 7.3 and 8.1 pass the potency threshold.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 49: Zip Function}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+names = ["Aspirin", "Ibuprofen", "Caffeine"]
+pic50s = [5.2, 6.8, 4.8]
+compounds = list(zip(names, pic50s))
+print(compounds[0])
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item Aspirin
+    \item 5.2
+    \item \texttt{("Aspirin", 5.2)}
+    \item \texttt{["Aspirin", 5.2]}
+\end{enumerate}
+
+\textbf{Answer: C) \texttt{("Aspirin", 5.2)}}
+
+\textbf{Rationale:} zip() pairs elements from multiple iterables into tuples. First element is (``Aspirin'', 5.2). Useful for combining parallel data arrays.
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 50: Enumerate Function}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+smiles_list = ["CCO", "CC(=O)O", "c1ccccc1"]
+for idx, smiles in enumerate(smiles_list, start=1):
+    print(f"{idx}: {smiles}")
+    break  # Only print first
+\end{lstlisting}
+
+\textbf{Options:}
+\begin{enumerate}[label=\Alph*)]
+    \item 0: CCO
+    \item 1: CCO
+    \item CCO: 1
+    \item Error
+\end{enumerate}
+
+\textbf{Answer: B) 1: CCO}
+
+\textbf{Rationale:} enumerate() with start=1 begins counting from 1 (useful for 1-indexed output). Provides both index and value during iteration.
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SUMMARY
+% ============================================
+\section*{Summary: Topics Covered}
+
+\begin{center}
+\begin{tabular}{|l|l|p{8cm}|}
+\hline
+\textbf{Section} & \textbf{Questions} & \textbf{Key Concepts} \\
+\hline
+Variables \& Types & 1-5 & Data types, type conversion, falsy values \\
+\hline
+Operators & 6-10 & Arithmetic, comparison, logical operators \\
+\hline
+Strings & 11-15 & Slicing, methods, immutability, f-strings \\
+\hline
+Lists & 16-20 & Mutability, comprehensions, sorting \\
+\hline
+Tuples \& Sets & 21-25 & Immutability, set operations \\
+\hline
+Dictionaries & 26-30 & Key-value pairs, nested dicts, comprehensions \\
+\hline
+Control Flow & 31-35 & if/elif/else, loops, break/continue \\
+\hline
+Functions & 36-40 & Parameters, *args, **kwargs, lambda \\
+\hline
+File/Error Handling & 41-45 & with statement, try/except/finally \\
+\hline
+Advanced Topics & 46-50 & Generators, map, filter, zip, enumerate \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+\textbf{All examples use cheminformatics and bioinformatics contexts:}
 \begin{itemize}
-    \item Variables \& Data Types: Q1--Q5 (5 questions)
-    \item Operators: Q6--Q10 (5 questions)
-    \item Strings: Q11--Q15 (5 questions)
-    \item Conditionals: Q16--Q20 (5 questions)
-    \item Loops: Q21--Q25 (5 questions)
-    \item Functions: Q26--Q30 (5 questions)
-    \item Error Handling: Q31--Q33 (3 questions)
-    \item Lists: Q34--Q38 (5 questions)
-    \item Tuples \& Sets: Q39--Q41 (3 questions)
-    \item Dictionaries: Q42--Q44 (3 questions)
-    \item File Handling \& JSON: Q45--Q46 (2 questions)
-    \item NumPy: Q47--Q48 (2 questions)
-    \item Pandas: Q49--Q50 (2 questions)
+    \item SMILES strings and molecular properties
+    \item IC50/pIC50 conversions
+    \item DNA/RNA sequence manipulation
+    \item Lipinski Rule of Five
+    \item Compound library management
+    \item FASTA file handling
 \end{itemize}
 
 \end{document}

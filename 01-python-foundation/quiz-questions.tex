@@ -1,0 +1,2132 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{enumitem}
+\geometry{margin=0.75in}
+
+% Python code style
+\definecolor{codegray}{rgb}{0.95,0.95,0.95}
+\definecolor{keyword}{rgb}{0.0,0.0,0.6}
+\definecolor{comment}{rgb}{0.0,0.5,0.0}
+\definecolor{string}{rgb}{0.64,0.08,0.08}
+
+\lstdefinestyle{codeStyle}{
+    language=Python,
+    backgroundcolor=\color{codegray},
+    commentstyle=\color{comment}\itshape,
+    keywordstyle=\color{keyword}\bfseries,
+    stringstyle=\color{string},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    showstringspaces=false,
+    tabsize=4,
+    morekeywords={self, True, False, None, with, as, match, case}
+}
+
+\title{Python for Cheminformatics \& Bioinformatics\\Quiz: 100 Questions}
+\author{AI-Driven Drug Development Training}
+\date{February 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Instructions}
+\begin{itemize}
+    \item Total Questions: 100
+    \item Time Allowed: 120 minutes
+    \item Each question is worth 1 point (Total: 100 points)
+    \item Select the best answer for each question
+    \item Write your answers on the answer sheet provided
+\end{itemize}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 1: VARIABLES & DATA TYPES (Q1-Q5)
+% ============================================
+\section{Variables \& Data Types (Questions 1-5)}
+
+\subsection*{Question 1}
+What is the output of the following code?
+\begin{lstlisting}[style=codeStyle]
+compound_name = "Aspirin"
+mw = 180.16
+pic50 = "8.28"
+print(type(mw) == type(pic50))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item True
+    \item False
+    \item Error
+    \item None
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 2}
+What will be the value of \texttt{logp}?
+\begin{lstlisting}[style=codeStyle]
+compound = ("Ibuprofen", 206.28, 3.97)
+name, mw, logp = compound
+print(logp)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item "Ibuprofen"
+    \item 206.28
+    \item 3.97
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 3}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+ic50 = None  # Missing measurement
+activity = 0  # No inhibition
+smiles = ""   # Empty SMILES
+print(bool(ic50), bool(activity), bool(smiles))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item True True True
+    \item False False False
+    \item None 0 ""
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 4}
+What is the result of \texttt{int(5.8) + int(-2.3)}?
+
+\begin{enumerate}[label=\Alph*)]
+    \item 3
+    \item 4
+    \item 3.5
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 5}
+Which statement correctly creates a multi-line DNA sequence string?
+
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{seq = "ATGC\textbackslash nGCTA"}
+    \item \texttt{seq = '''ATGC\\GCTA'''}
+    \item \texttt{seq = """ATGC\textbackslash nGCTA"""}
+    \item All of the above
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 2: OPERATORS (Q6-Q10)
+% ============================================
+\section{Operators (Questions 6-10)}
+
+\subsection*{Question 6}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+total_atoms = 17
+heavy_atoms = 5
+print(total_atoms // heavy_atoms, total_atoms % heavy_atoms, total_atoms / heavy_atoms)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 3 2 3.4
+    \item 3.4 2 3
+    \item 3 2 3.0
+    \item 3.0 2.0 3.4
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 7}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+mw = 450
+logp = 4.5
+passes_mw = mw <= 500
+passes_logp = logp <= 5
+print(passes_mw and passes_logp)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item True
+    \item False
+    \item None
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 8}
+What is the value of \texttt{10 ** (9 - 8)}?
+
+\begin{enumerate}[label=\Alph*)]
+    \item 1
+    \item 10
+    \item 100
+    \item 0.1
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 9}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+seq = "ATGCGC"
+gc_count = seq.count("G") + seq.count("C")
+gc_percent = gc_count / len(seq) * 100
+print(gc_percent)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 66.67 (approximately)
+    \item 50.0
+    \item 33.33
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 10}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+smiles1 = "CCO"
+smiles2 = "CCO"
+list1 = [smiles1]
+list2 = [smiles2]
+print(smiles1 == smiles2, list1 == list2, list1 is list2)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item True True True
+    \item True True False
+    \item True False False
+    \item False False False
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 3: STRINGS (Q11-Q15)
+% ============================================
+\section{Strings (Questions 11-15)}
+
+\subsection*{Question 11}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+dna = "ATGCGATCG"
+print(dna[:3], dna[-3:], dna[::3])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item ATG TCG AGC
+    \item ATG TCG AGAG
+    \item ATG GCG ATG
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 12}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+dna = "ATGC"
+rna = dna.replace("T", "U")
+print(rna)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item AUGC
+    \item ATGC
+    \item UAGC
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 13}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+smiles = "c1ccccc1"  # Benzene
+has_ring = any(c.isdigit() for c in smiles)
+print(has_ring)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item True
+    \item False
+    \item 1
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 14}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+name = "Aspirin"
+pic50 = 5.28
+print(f"{name}: pIC50 = {pic50:.1f}")
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Aspirin: pIC50 = 5.28
+    \item Aspirin: pIC50 = 5.3
+    \item Aspirin: pIC50 = 5
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 15}
+What happens when you run this code?
+\begin{lstlisting}[style=codeStyle]
+seq = "ATGC"
+seq[0] = "G"  # Try to create mutation
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item TypeError - strings are immutable
+    \item seq becomes "GTGC"
+    \item seq becomes "GATGC"
+    \item None
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 4: LISTS (Q16-Q20)
+% ============================================
+\section{Lists (Questions 16-20)}
+
+\subsection*{Question 16}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+library_a = ["CCO", "CC", "CCC"]
+library_b = library_a  # Reference, not copy!
+library_a.append("CCCC")
+print(len(library_b))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 3
+    \item 4
+    \item Error
+    \item None
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 17}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+compounds = ["Aspirin", "Ibuprofen"]
+compounds.extend(["Caffeine", "Metformin"])
+print(len(compounds))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 2
+    \item 3
+    \item 4
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 18}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+pic50_values = [5.2, 6.8, 7.3, 4.9, 8.1]
+actives = [p for p in pic50_values if p >= 6.0]
+print(len(actives))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 2
+    \item 3
+    \item 4
+    \item 5
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 19}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+# [MW, LogP, HBD, HBA]
+descriptors = [
+    [180.16, 1.19, 1, 4],   # Aspirin
+    [206.28, 3.97, 1, 2],   # Ibuprofen
+    [194.19, -0.07, 0, 6]   # Caffeine
+]
+print(descriptors[1][1])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 180.16
+    \item 1.19
+    \item 3.97
+    \item 206.28
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 20}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+compounds = [("Aspirin", 5.2), ("Drug_X", 8.1), ("Ibuprofen", 6.8)]
+compounds.sort(key=lambda x: x[1], reverse=True)
+print(compounds[0][0])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Aspirin
+    \item Drug\_X
+    \item Ibuprofen
+    \item 8.1
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 5: TUPLES & SETS (Q21-Q25)
+% ============================================
+\section{Tuples \& Sets (Questions 21-25)}
+
+\subsection*{Question 21}
+What happens?
+\begin{lstlisting}[style=codeStyle]
+compound = ("Aspirin", 180.16, 5.2)
+compound[2] = 6.0  # Try to update pIC50
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item TypeError
+    \item compound becomes ("Aspirin", 180.16, 6.0)
+    \item None
+    \item SyntaxError
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 22}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+data = (1, 2, 3, 4, 5, 6, 7)
+first, *middle, last = data
+print(len(middle))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 7
+    \item 5
+    \item 2
+    \item 1
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 23}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+library_a = {"CMP001", "CMP002", "CMP003"}
+library_b = {"CMP002", "CMP003", "CMP004"}
+common = library_a & library_b
+print(common)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item \{``CMP001'', ``CMP004''\}
+    \item \{``CMP001'', ``CMP002'', ``CMP003'', ``CMP004''\}
+    \item \{``CMP002'', ``CMP003''\}
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 24}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+scaffolds = {"benzene", "pyridine", "benzene", "furan", "pyridine"}
+print(len(scaffolds))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 5
+    \item 3
+    \item 2
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 25}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+all_compounds = {"A", "B", "C", "D"}
+tested = {"B", "D"}
+untested = all_compounds - tested
+print(untested)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item \{``B'', ``D''\}
+    \item \{``A'', ``C''\}
+    \item \{``A'', ``B'', ``C'', ``D''\}
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 6: DICTIONARIES (Q26-Q30)
+% ============================================
+\section{Dictionaries (Questions 26-30)}
+
+\subsection*{Question 26}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+compound = {"name": "Aspirin", "MW": 180.16}
+logp = compound.get("LogP", "N/A")
+print(logp)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item None
+    \item N/A
+    \item Error (KeyError)
+    \item 0
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 27}
+What is printed?
+\begin{lstlisting}[style=codeStyle]
+props = {"MW": 180.16, "LogP": 1.19, "HBD": 1}
+for item in props:
+    print(item, end=" ")
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 180.16 1.19 1
+    \item MW LogP HBD
+    \item (``MW'', 180.16) (``LogP'', 1.19) (``HBD'', 1)
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 28}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+compounds = {
+    "Aspirin": {"MW": 180.16, "pIC50": 5.2},
+    "Ibuprofen": {"MW": 206.28, "pIC50": 6.8}
+}
+print(compounds["Aspirin"]["pIC50"])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 180.16
+    \item 5.2
+    \item 6.8
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 29}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+import math
+ic50_nm = {"A": 10, "B": 100, "C": 1000}
+pic50 = {k: 9 - math.log10(v) for k, v in ic50_nm.items()}
+print(round(pic50["A"], 1))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 7.0
+    \item 8.0
+    \item 9.0
+    \item 10.0
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 30}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+codon_table = {"AUG": "M", "UGG": "W", "UAA": "*"}
+protein = codon_table.get("AUG", "X") + codon_table.get("UGG", "X")
+print(protein)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item MW
+    \item AUG UGG
+    \item XX
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 7: CONTROL FLOW (Q31-Q35)
+% ============================================
+\section{Control Flow (Questions 31-35)}
+
+\subsection*{Question 31}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+pic50 = 7.5
+if pic50 >= 8:
+    print("Highly Active")
+elif pic50 >= 6:
+    print("Active")
+else:
+    print("Inactive")
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Highly Active
+    \item Active
+    \item Inactive
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 32}
+What is the sum?
+\begin{lstlisting}[style=codeStyle]
+total = 0
+for i in range(0, 10, 2):
+    total += i
+print(total)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 20
+    \item 25
+    \item 30
+    \item 45
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 33}
+What is printed?
+\begin{lstlisting}[style=codeStyle]
+pic50_values = [5.2, 5.8, 7.5, 6.2, 8.1]
+for p in pic50_values:
+    if p >= 7.0:
+        print(f"Found potent: {p}")
+        break
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Found potent: 8.1
+    \item Found potent: 7.5
+    \item Found potent: 7.5\\Found potent: 8.1
+    \item Nothing printed
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 34}
+What is printed?
+\begin{lstlisting}[style=codeStyle]
+for compound in ["valid", None, "active", "", "potent"]:
+    if not compound:
+        continue
+    print(compound, end=" ")
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item valid None active potent
+    \item valid active potent
+    \item None
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 35}
+What is printed?
+\begin{lstlisting}[style=codeStyle]
+pic50_values = [5.2, 5.8, 5.5]
+for p in pic50_values:
+    if p >= 6.0:
+        print("Found active")
+        break
+else:
+    print("No actives found")
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item No actives found
+    \item Found active
+    \item Nothing
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 8: FUNCTIONS (Q36-Q40)
+% ============================================
+\section{Functions (Questions 36-40)}
+
+\subsection*{Question 36}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+def classify_activity(pic50, threshold=6.0):
+    return "Active" if pic50 >= threshold else "Inactive"
+
+print(classify_activity(5.5))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Active
+    \item Inactive
+    \item Error
+    \item None
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 37}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+def validate_smiles(smiles):
+    if not smiles:
+        return
+    print("Valid")
+
+result = validate_smiles("")
+print(result)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item None
+    \item Valid\\None
+    \item Error
+    \item Valid
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 38}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+def average_pic50(*values):
+    return sum(values) / len(values)
+
+print(average_pic50(5.2, 6.8, 7.3))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 19.3
+    \item 6.43 (approximately)
+    \item Error
+    \item (5.2, 6.8, 7.3)
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 39}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+def create_compound(**props):
+    return props
+
+compound = create_compound(name="Aspirin", MW=180.16)
+print(type(compound))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{<class 'tuple'>}
+    \item \texttt{<class 'dict'>}
+    \item \texttt{<class 'list'>}
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 40}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+import math
+ic50_to_pic50 = lambda ic50_nm: 9 - math.log10(ic50_nm)
+print(ic50_to_pic50(100))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 7.0
+    \item 8.0
+    \item 9.0
+    \item 2.0
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 9: FILE & ERROR HANDLING (Q41-Q45)
+% ============================================
+\section{File \& Error Handling (Questions 41-45)}
+
+\subsection*{Question 41}
+What is correct about this code?
+\begin{lstlisting}[style=codeStyle]
+with open("sequence.fasta", "r") as f:
+    content = f.read()
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item The file is automatically closed after the with block
+    \item You must call f.close() manually
+    \item The file stays open
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 42}
+What happens?
+\begin{lstlisting}[style=codeStyle]
+with open("compounds.csv", "r") as f:
+    f.write("Aspirin,180.16")
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Data is written successfully
+    \item io.UnsupportedOperation error
+    \item FileNotFoundError
+    \item Nothing happens
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 43}
+What is printed?
+\begin{lstlisting}[style=codeStyle]
+def parse_smiles(smiles):
+    if not smiles:
+        raise ValueError("Empty SMILES")
+    return smiles
+
+try:
+    result = parse_smiles("")
+except ValueError:
+    print("Error")
+print("Done")
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Error
+    \item Done
+    \item Error\\Done
+    \item Nothing
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 44}
+What is printed?
+\begin{lstlisting}[style=codeStyle]
+def process_compound():
+    try:
+        return "Processed"
+    finally:
+        print("Cleanup")
+
+result = process_compound()
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Processed
+    \item Cleanup
+    \item Both (Cleanup first, then returns ``Processed'')
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 45}
+What is printed?
+\begin{lstlisting}[style=codeStyle]
+try:
+    ic50 = float("invalid")
+except ValueError:
+    print("Invalid IC50")
+except TypeError:
+    print("Wrong type")
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Invalid IC50
+    \item Wrong type
+    \item Both
+    \item Error (uncaught)
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 10: ADVANCED TOPICS (Q46-Q50)
+% ============================================
+\section{Advanced Topics (Questions 46-50)}
+
+\subsection*{Question 46}
+What is the difference?
+\begin{lstlisting}[style=codeStyle]
+list_comp = [x**2 for x in range(1000000)]
+gen_exp = (x**2 for x in range(1000000))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Both use the same memory
+    \item Generator uses less memory (lazy evaluation)
+    \item List uses less memory
+    \item They produce different values
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 47}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+import math
+ic50_values = [10, 100, 1000]
+pic50_values = list(map(lambda x: 9 - math.log10(x), ic50_values))
+print(pic50_values)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{[8.0, 7.0, 6.0]}
+    \item \texttt{[1.0, 2.0, 3.0]}
+    \item \texttt{[10, 100, 1000]}
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 48}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+pic50_values = [5.2, 6.8, 7.3, 4.9, 8.1]
+potent = list(filter(lambda p: p >= 7.0, pic50_values))
+print(potent)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{[5.2, 6.8, 4.9]}
+    \item \texttt{[6.8, 7.3, 8.1]}
+    \item \texttt{[7.3, 8.1]}
+    \item \texttt{[8.1]}
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 49}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+names = ["Aspirin", "Ibuprofen", "Caffeine"]
+pic50s = [5.2, 6.8, 4.8]
+compounds = list(zip(names, pic50s))
+print(compounds[0])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Aspirin
+    \item 5.2
+    \item \texttt{("Aspirin", 5.2)}
+    \item \texttt{["Aspirin", 5.2]}
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 50}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+smiles_list = ["CCO", "CC(=O)O", "c1ccccc1"]
+for idx, smiles in enumerate(smiles_list, start=1):
+    print(f"{idx}: {smiles}")
+    break
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 0: CCO
+    \item 1: CCO
+    \item CCO: 1
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 11: CLASSES & OOP (Q51-Q60)
+% ============================================
+\section{Classes \& Object-Oriented Programming (Questions 51-60)}
+
+\subsection*{Question 51}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+class Compound:
+    def __init__(self, name, mw):
+        self.name = name
+        self.mw = mw
+
+aspirin = Compound("Aspirin", 180.16)
+print(aspirin.name)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Compound
+    \item Aspirin
+    \item 180.16
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 52}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+class Molecule:
+    atom_count = 0  # Class variable
+    
+    def __init__(self, atoms):
+        Molecule.atom_count += atoms
+
+m1 = Molecule(10)
+m2 = Molecule(15)
+print(Molecule.atom_count)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 10
+    \item 15
+    \item 25
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 53}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+class Drug:
+    def __init__(self, name):
+        self._name = name  # Protected
+    
+    @property
+    def name(self):
+        return self._name.upper()
+
+d = Drug("aspirin")
+print(d.name)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item aspirin
+    \item ASPIRIN
+    \item \_name
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 54}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+class Protein:
+    def __len__(self):
+        return 150  # amino acids
+
+p = Protein()
+print(len(p))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Protein
+    \item 150
+    \item None
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 55}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+class Compound:
+    def __init__(self, name):
+        self.name = name
+    
+    def __str__(self):
+        return f"Compound: {self.name}"
+
+c = Compound("Caffeine")
+print(c)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{<Compound object>}
+    \item Compound: Caffeine
+    \item Caffeine
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 56}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+class Molecule:
+    pass
+
+class Drug(Molecule):
+    pass
+
+d = Drug()
+print(isinstance(d, Molecule))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item True
+    \item False
+    \item Drug
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 57}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+class Compound:
+    def describe(self):
+        return "Generic compound"
+
+class Drug(Compound):
+    def describe(self):
+        return "Therapeutic drug"
+
+d = Drug()
+print(d.describe())
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Generic compound
+    \item Therapeutic drug
+    \item Both
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 58}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+class Enzyme:
+    @staticmethod
+    def calculate_kcat(vmax, enzyme_conc):
+        return vmax / enzyme_conc
+
+result = Enzyme.calculate_kcat(100, 0.5)
+print(result)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 50.0
+    \item 200.0
+    \item 0.005
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 59}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+class Counter:
+    count = 0
+    
+    @classmethod
+    def increment(cls):
+        cls.count += 1
+        return cls.count
+
+print(Counter.increment(), Counter.increment())
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 1 1
+    \item 1 2
+    \item 0 1
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 60}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+class Compound:
+    def __init__(self, name, mw):
+        self.name = name
+        self.mw = mw
+    
+    def __eq__(self, other):
+        return self.name == other.name
+
+c1 = Compound("Aspirin", 180.16)
+c2 = Compound("Aspirin", 180.0)
+print(c1 == c2)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item True
+    \item False
+    \item Error
+    \item None
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 12: MODULES & IMPORTS (Q61-Q65)
+% ============================================
+\section{Modules \& Imports (Questions 61-65)}
+
+\subsection*{Question 61}
+Which import statement is correct for using only the \texttt{sqrt} function?
+
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{import math.sqrt}
+    \item \texttt{from math import sqrt}
+    \item \texttt{import sqrt from math}
+    \item \texttt{math.import(sqrt)}
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 62}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+from math import log10 as lg
+ic50 = 100  # nM
+pic50 = 9 - lg(ic50)
+print(pic50)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 7.0
+    \item 9.0
+    \item 2.0
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 63}
+What does \texttt{\_\_name\_\_ == "\_\_main\_\_"} check?
+
+\begin{enumerate}[label=\Alph*)]
+    \item If the module is imported
+    \item If the script is run directly
+    \item If the function is main
+    \item If Python version is correct
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 64}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+import random
+random.seed(42)
+print(random.randint(1, 10), random.randint(1, 10))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Random numbers each run
+    \item Same numbers each run
+    \item 42 42
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 65}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+from collections import Counter
+bases = "ATGCGATCGATCG"
+counts = Counter(bases)
+print(counts["G"])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 3
+    \item 4
+    \item 5
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 13: LIST METHODS (Q66-Q70)
+% ============================================
+\section{List Methods (Questions 66-70)}
+
+\subsection*{Question 66}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+compounds = ["Aspirin", "Ibuprofen", "Caffeine"]
+compounds.insert(1, "Metformin")
+print(compounds[1])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Aspirin
+    \item Metformin
+    \item Ibuprofen
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 67}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+pic50_values = [5.2, 8.1, 6.8, 7.3]
+removed = pic50_values.pop(1)
+print(removed, len(pic50_values))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 5.2 3
+    \item 8.1 3
+    \item 8.1 4
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 68}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+smiles = ["CCO", "CC", "CCC", "CC"]
+print(smiles.count("CC"))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 1
+    \item 2
+    \item 3
+    \item 4
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 69}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+compounds = ["Aspirin", "Caffeine", "Ibuprofen"]
+compounds.reverse()
+print(compounds[0])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Aspirin
+    \item Caffeine
+    \item Ibuprofen
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 70}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+library = ["CCO", "CC(=O)O", "c1ccccc1"]
+library_copy = library.copy()
+library.append("CCN")
+print(len(library_copy))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 3
+    \item 4
+    \item Error
+    \item None
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 14: STRING METHODS (Q71-Q75)
+% ============================================
+\section{String Methods (Questions 71-75)}
+
+\subsection*{Question 71}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+smiles = "  CCO  "
+print(len(smiles.strip()))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 7
+    \item 3
+    \item 5
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 72}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+sequence = "ATGCGATCG"
+parts = sequence.split("G")
+print(len(parts))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 2
+    \item 3
+    \item 4
+    \item 9
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 73}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+compounds = ["Aspirin", "Ibuprofen", "Caffeine"]
+result = ", ".join(compounds)
+print(result)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{["Aspirin", "Ibuprofen", "Caffeine"]}
+    \item Aspirin, Ibuprofen, Caffeine
+    \item AspirinIbuprofenCaffeine
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 74}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+name = "aspirin"
+print(name.capitalize(), name.upper())
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Aspirin ASPIRIN
+    \item ASPIRIN Aspirin
+    \item aspirin ASPIRIN
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 75}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+smiles = "c1ccccc1"
+print(smiles.startswith("c"), smiles.endswith("1"))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item True True
+    \item True False
+    \item False True
+    \item False False
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 15: DICTIONARY METHODS (Q76-Q80)
+% ============================================
+\section{Dictionary Methods (Questions 76-80)}
+
+\subsection*{Question 76}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+compound = {"name": "Aspirin", "MW": 180.16}
+compound.update({"LogP": 1.19, "MW": 180.2})
+print(compound["MW"])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 180.16
+    \item 180.2
+    \item Error
+    \item None
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 77}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+props = {"MW": 180.16, "LogP": 1.19}
+keys = list(props.keys())
+print(keys)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{["MW", "LogP"]}
+    \item \texttt{[180.16, 1.19]}
+    \item \texttt{[("MW", 180.16), ("LogP", 1.19)]}
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 78}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+compound = {"name": "Aspirin", "MW": 180.16}
+removed = compound.pop("MW")
+print(removed, "MW" in compound)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 180.16 True
+    \item 180.16 False
+    \item None False
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 79}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+compound = {"name": "Aspirin"}
+compound.setdefault("MW", 180.16)
+compound.setdefault("name", "Ibuprofen")
+print(compound["name"], compound["MW"])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Ibuprofen 180.16
+    \item Aspirin 180.16
+    \item Aspirin None
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 80}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+d1 = {"a": 1, "b": 2}
+d2 = {"b": 3, "c": 4}
+merged = {**d1, **d2}
+print(merged["b"])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 2
+    \item 3
+    \item 5
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 16: COMPREHENSIONS (Q81-Q85)
+% ============================================
+\section{Comprehensions (Questions 81-85)}
+
+\subsection*{Question 81}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+mw_values = [180, 206, 194, 267]
+heavy = [mw for mw in mw_values if mw > 200]
+print(heavy)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{[180, 194]}
+    \item \texttt{[206, 267]}
+    \item \texttt{[206, 194, 267]}
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 82}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+names = ["aspirin", "ibuprofen"]
+upper_names = [n.upper() for n in names]
+print(upper_names[0])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item aspirin
+    \item ASPIRIN
+    \item Aspirin
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 83}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+sequence = "ATGC"
+base_set = {base for base in sequence}
+print(len(base_set))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 4
+    \item 3
+    \item 1
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 84}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+compounds = ["Aspirin", "Ibuprofen", "Caffeine"]
+name_len = {c: len(c) for c in compounds}
+print(name_len["Caffeine"])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Caffeine
+    \item 8
+    \item 7
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 85}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+matrix = [[i*j for j in range(1, 4)] for i in range(1, 3)]
+print(matrix[1][2])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 3
+    \item 4
+    \item 6
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 17: SORTING & ORDERING (Q86-Q90)
+% ============================================
+\section{Sorting \& Ordering (Questions 86-90)}
+
+\subsection*{Question 86}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+pic50 = [5.2, 8.1, 6.8, 7.3]
+sorted_pic50 = sorted(pic50)
+print(sorted_pic50[-1])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 5.2
+    \item 8.1
+    \item 7.3
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 87}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+names = ["Caffeine", "Aspirin", "Ibuprofen"]
+names.sort()
+print(names[0])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item Caffeine
+    \item Aspirin
+    \item Ibuprofen
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 88}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+compounds = ["CC", "CCCC", "C", "CCC"]
+by_length = sorted(compounds, key=len)
+print(by_length[0])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item CC
+    \item CCCC
+    \item C
+    \item CCC
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 89}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+data = [(5.2, "A"), (8.1, "B"), (6.8, "C")]
+sorted_data = sorted(data, reverse=True)
+print(sorted_data[0][1])
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item A
+    \item B
+    \item C
+    \item 8.1
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 90}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+values = [3, 1, 4, 1, 5, 9, 2, 6]
+print(min(values), max(values))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 1 9
+    \item 9 1
+    \item 1 6
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 18: TYPE CONVERSION (Q91-Q95)
+% ============================================
+\section{Type Conversion (Questions 91-95)}
+
+\subsection*{Question 91}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+mw = "180.16"
+print(type(float(mw)))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{<class 'str'>}
+    \item \texttt{<class 'float'>}
+    \item \texttt{<class 'int'>}
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 92}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+values = (1, 2, 3, 2, 1)
+unique = set(values)
+print(len(unique))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 5
+    \item 3
+    \item 2
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 93}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+sequence = "ATGC"
+base_list = list(sequence)
+print(base_list)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item ATGC
+    \item \texttt{["ATGC"]}
+    \item \texttt{["A", "T", "G", "C"]}
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 94}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+bases = ["A", "T", "G", "C"]
+seq = "".join(bases)
+print(seq)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item \texttt{["A", "T", "G", "C"]}
+    \item A T G C
+    \item ATGC
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 95}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+pic50 = 7.8
+print(int(pic50), round(pic50))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 7 7
+    \item 7 8
+    \item 8 8
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+% ============================================
+% SECTION 19: BOOLEAN & NONE (Q96-Q100)
+% ============================================
+\section{Boolean \& None (Questions 96-100)}
+
+\subsection*{Question 96}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+result = None
+if result is None:
+    print("No data")
+else:
+    print(result)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item No data
+    \item None
+    \item result
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 97}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+active = True
+selective = False
+print(active and selective, active or selective)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item True True
+    \item False True
+    \item True False
+    \item False False
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 98}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+values = [0, "", None, "active", 42]
+truthy = [v for v in values if v]
+print(len(truthy))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item 5
+    \item 3
+    \item 2
+    \item 0
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 99}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+x = 5
+y = 10
+print(not (x > y), x != y)
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item True True
+    \item False True
+    \item True False
+    \item False False
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\subsection*{Question 100}
+What is the output?
+\begin{lstlisting}[style=codeStyle]
+def check_compound(smiles):
+    return smiles or "No SMILES provided"
+
+print(check_compound(""))
+print(check_compound("CCO"))
+\end{lstlisting}
+
+\begin{enumerate}[label=\Alph*)]
+    \item "" CCO
+    \item No SMILES provided CCO
+    \item None CCO
+    \item Error
+\end{enumerate}
+
+\hrule
+\vspace{2em}
+
+\section*{Answer Sheet}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+\hline
+ &  &  &  &  &  &  &  &  &  \\
+\hline
+\end{tabular}
+
+\vspace{0.5em}
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 \\
+\hline
+ &  &  &  &  &  &  &  &  &  \\
+\hline
+\end{tabular}
+
+\vspace{0.5em}
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+21 & 22 & 23 & 24 & 25 & 26 & 27 & 28 & 29 & 30 \\
+\hline
+ &  &  &  &  &  &  &  &  &  \\
+\hline
+\end{tabular}
+
+\vspace{0.5em}
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+31 & 32 & 33 & 34 & 35 & 36 & 37 & 38 & 39 & 40 \\
+\hline
+ &  &  &  &  &  &  &  &  &  \\
+\hline
+\end{tabular}
+
+\vspace{0.5em}
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+41 & 42 & 43 & 44 & 45 & 46 & 47 & 48 & 49 & 50 \\
+\hline
+ &  &  &  &  &  &  &  &  &  \\
+\hline
+\end{tabular}
+
+\vspace{0.5em}
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+51 & 52 & 53 & 54 & 55 & 56 & 57 & 58 & 59 & 60 \\
+\hline
+ &  &  &  &  &  &  &  &  &  \\
+\hline
+\end{tabular}
+
+\vspace{0.5em}
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+61 & 62 & 63 & 64 & 65 & 66 & 67 & 68 & 69 & 70 \\
+\hline
+ &  &  &  &  &  &  &  &  &  \\
+\hline
+\end{tabular}
+
+\vspace{0.5em}
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+71 & 72 & 73 & 74 & 75 & 76 & 77 & 78 & 79 & 80 \\
+\hline
+ &  &  &  &  &  &  &  &  &  \\
+\hline
+\end{tabular}
+
+\vspace{0.5em}
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+81 & 82 & 83 & 84 & 85 & 86 & 87 & 88 & 89 & 90 \\
+\hline
+ &  &  &  &  &  &  &  &  &  \\
+\hline
+\end{tabular}
+
+\vspace{0.5em}
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+91 & 92 & 93 & 94 & 95 & 96 & 97 & 98 & 99 & 100 \\
+\hline
+ &  &  &  &  &  &  &  &  &  \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{2em}
+
+\begin{center}
+\textbf{Name:} \underline{\hspace{6cm}} \hspace{2cm} \textbf{Date:} \underline{\hspace{3cm}}
+\end{center}
+
+\end{document}

@@ -1,0 +1,547 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\geometry{margin=1in}
+
+\title{Python for Cheminformatics \& Bioinformatics\\Quiz: Answer Key (Instructor Copy) - 100 Questions}
+\author{AI-Driven Drug Development Training}
+\date{February 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{Quick Reference Answer Key}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|c|c||c|c||c|c||c|c||c|c|}
+\hline
+\rowcolor{gray!30}
+\textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} \\
+\hline
+1 & B & 11 & A & 21 & A & 31 & B & 41 & A \\
+\hline
+2 & C & 12 & A & 22 & B & 32 & A & 42 & B \\
+\hline
+3 & B & 13 & A & 23 & C & 33 & B & 43 & C \\
+\hline
+4 & A & 14 & B & 24 & B & 34 & B & 44 & C \\
+\hline
+5 & D & 15 & A & 25 & B & 35 & A & 45 & A \\
+\hline
+6 & A & 16 & B & 26 & B & 36 & B & 46 & B \\
+\hline
+7 & A & 17 & C & 27 & B & 37 & A & 47 & A \\
+\hline
+8 & B & 18 & B & 28 & B & 38 & B & 48 & C \\
+\hline
+9 & A & 19 & C & 29 & B & 39 & B & 49 & C \\
+\hline
+10 & B & 20 & B & 30 & A & 40 & A & 50 & B \\
+\hline
+\end{tabular}
+
+\vspace{1em}
+
+\begin{tabular}{|c|c||c|c||c|c||c|c||c|c|}
+\hline
+\rowcolor{gray!30}
+\textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} & \textbf{Q} & \textbf{Ans} \\
+\hline
+51 & B & 61 & B & 71 & B & 81 & B & 91 & B \\
+\hline
+52 & C & 62 & A & 72 & C & 82 & B & 92 & B \\
+\hline
+53 & B & 63 & B & 73 & B & 83 & A & 93 & C \\
+\hline
+54 & B & 64 & B & 74 & A & 84 & B & 94 & C \\
+\hline
+55 & B & 65 & A & 75 & A & 85 & C & 95 & B \\
+\hline
+56 & A & 66 & B & 76 & B & 86 & B & 96 & A \\
+\hline
+57 & B & 67 & B & 77 & A & 87 & B & 97 & B \\
+\hline
+58 & B & 68 & B & 78 & B & 88 & C & 98 & C \\
+\hline
+59 & B & 69 & C & 79 & B & 89 & B & 99 & A \\
+\hline
+60 & A & 70 & A & 80 & B & 90 & A & 100 & B \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\section{Detailed Answers with Rationales}
+
+\subsection*{Section 1: Variables \& Data Types (Q1-Q5)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endfirsthead
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endhead
+1 & B & \texttt{mw} is a float (180.16) and \texttt{pic50} is a string (``8.28''). They have different types, so the comparison returns False. \\
+\hline
+2 & C & Tuple unpacking assigns values positionally: \texttt{name} = ``Ibuprofen'', \texttt{mw} = 206.28, \texttt{logp} = 3.97. \\
+\hline
+3 & B & \texttt{None}, \texttt{0}, and empty string \texttt{""} are all falsy values. \texttt{bool()} returns False for each. \\
+\hline
+4 & A & \texttt{int(5.8)} truncates to 5, \texttt{int(-2.3)} truncates to -2. Sum is 5 + (-2) = 3. \\
+\hline
+5 & D & All options create valid multi-line strings: A uses \textbackslash n, B uses backslash in triple quotes, C combines both, and D acknowledges all work. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 2: Operators (Q6-Q10)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endfirsthead
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endhead
+6 & A & \texttt{17 // 5 = 3} (floor division), \texttt{17 \% 5 = 2} (remainder), \texttt{17 / 5 = 3.4} (true division). \\
+\hline
+7 & A & \texttt{450 <= 500} is True, \texttt{4.5 <= 5} is True. \texttt{True and True} equals True (Lipinski's Rule of 5 passes). \\
+\hline
+8 & B & Parentheses first: \texttt{9 - 8 = 1}. Then \texttt{10 ** 1 = 10}. \\
+\hline
+9 & A & ``ATGCGC'' has 2 G's and 2 C's = 4 GC. Length is 6. \texttt{4/6 * 100 = 66.67\%}. \\
+\hline
+10 & B & String values are equal (\texttt{==}), list contents are equal, but lists are different objects in memory (\texttt{is} returns False). \\
+\hline
+\end{longtable}
+
+\subsection*{Section 3: Strings (Q11-Q15)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endfirsthead
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endhead
+11 & A & \texttt{[:3]} = ``ATG'' (first 3), \texttt{[-3:]} = ``TCG'' (last 3), \texttt{[::3]} = ``AGC'' (every 3rd char: index 0, 3, 6). \\
+\hline
+12 & A & \texttt{replace(``T'', ``U'')} creates a new string with T replaced by U: ``AUGC'' (DNA to RNA transcription). \\
+\hline
+13 & A & SMILES ``c1ccccc1'' contains digit '1' for ring closure. \texttt{any(c.isdigit()...)} finds it, returns True. \\
+\hline
+14 & B & f-string \texttt{\{pic50:.1f\}} formats 5.28 to 1 decimal place: ``5.3'' (rounds up). \\
+\hline
+15 & A & Strings are immutable in Python. Attempting item assignment raises TypeError. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 4: Lists (Q16-Q20)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endfirsthead
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endhead
+16 & B & \texttt{library\_b = library\_a} creates a reference to the same list. Appending to \texttt{library\_a} affects both. Length becomes 4. \\
+\hline
+17 & C & \texttt{extend()} adds each element from the iterable. 2 original + 2 new = 4 compounds. \\
+\hline
+18 & B & Values $\geq$ 6.0 are: 6.8, 7.3, 8.1 = 3 active compounds. \\
+\hline
+19 & C & \texttt{descriptors[1]} = Ibuprofen row, \texttt{[1]} = second element (LogP) = 3.97. \\
+\hline
+20 & B & Sorting by pIC50 descending puts (``Drug\_X'', 8.1) first. \texttt{[0][0]} gets the name: ``Drug\_X''. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 5: Tuples \& Sets (Q21-Q25)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endfirsthead
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endhead
+21 & A & Tuples are immutable. Attempting item assignment raises TypeError. \\
+\hline
+22 & B & Extended unpacking: \texttt{first=1}, \texttt{last=7}, \texttt{*middle} captures [2,3,4,5,6] = 5 elements. \\
+\hline
+23 & C & \texttt{\&} is set intersection. Common elements: \{``CMP002'', ``CMP003''\}. \\
+\hline
+24 & B & Sets automatically remove duplicates. Unique scaffolds: benzene, pyridine, furan = 3. \\
+\hline
+25 & B & Set difference \texttt{-} removes tested from all. Result: \{``A'', ``C''\}. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 6: Dictionaries (Q26-Q30)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endfirsthead
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endhead
+26 & B & \texttt{.get(key, default)} returns default if key not found. ``LogP'' doesn't exist, returns ``N/A''. \\
+\hline
+27 & B & Iterating over a dict iterates over keys only: ``MW'', ``LogP'', ``HBD''. \\
+\hline
+28 & B & Nested dict access: \texttt{compounds[``Aspirin'']} returns inner dict, then \texttt{[``pIC50'']} = 5.2. \\
+\hline
+29 & B & For IC50=10nM: pIC50 = 9 - log10(10) = 9 - 1 = 8.0. \\
+\hline
+30 & A & ``AUG'' maps to ``M'' (Methionine/Start), ``UGG'' maps to ``W'' (Tryptophan). Concatenated: ``MW''. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 7: Control Flow (Q31-Q35)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endfirsthead
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endhead
+31 & B & pIC50=7.5: First condition (>=8) is False, second (>=6) is True. Prints ``Active''. \\
+\hline
+32 & A & \texttt{range(0, 10, 2)} = [0, 2, 4, 6, 8]. Sum = 0+2+4+6+8 = 20. \\
+\hline
+33 & B & First value $\geq$ 7.0 is 7.5. \texttt{break} exits immediately after printing ``Found potent: 7.5''. \\
+\hline
+34 & B & \texttt{continue} skips falsy values (None, ``''). Prints: ``valid active potent''. \\
+\hline
+35 & A & No values $\geq$ 6.0, so loop completes without break. The \texttt{else} clause executes. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 8: Functions (Q36-Q40)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endfirsthead
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endhead
+36 & B & Default threshold=6.0. 5.5 < 6.0, so returns ``Inactive''. \\
+\hline
+37 & A & Empty string is falsy, function returns early (implicit None). Prints ``None''. \\
+\hline
+38 & B & \texttt{*values} collects args as tuple. (5.2+6.8+7.3)/3 = 19.3/3 $\approx$ 6.43. \\
+\hline
+39 & B & \texttt{**kwargs} collects keyword arguments into a dictionary. Returns dict type. \\
+\hline
+40 & A & Lambda computes: 9 - log10(100) = 9 - 2 = 7.0. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 9: File \& Error Handling (Q41-Q45)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endfirsthead
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endhead
+41 & A & \texttt{with} statement is a context manager that automatically closes file after block exits. \\
+\hline
+42 & B & File opened in read mode (``r'') doesn't support write operations. Raises io.UnsupportedOperation. \\
+\hline
+43 & C & ValueError is caught, prints ``Error''. Execution continues, prints ``Done''. \\
+\hline
+44 & C & \texttt{finally} always executes, even with return. Prints ``Cleanup'', then returns ``Processed''. \\
+\hline
+45 & A & \texttt{float(``invalid'')} raises ValueError (not TypeError). First matching except block catches it. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 10: Advanced Topics (Q46-Q50)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endfirsthead
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+\endhead
+46 & B & List comprehension creates all values in memory immediately. Generator expression uses lazy evaluation---computes values on demand, using far less memory. \\
+\hline
+47 & A & \texttt{map} applies lambda to each: 9-log10(10)=8, 9-log10(100)=7, 9-log10(1000)=6. Result: \texttt{[8.0, 7.0, 6.0]}. \\
+\hline
+48 & C & \texttt{filter} keeps values where lambda returns True. Values $\geq$ 7.0: \texttt{[7.3, 8.1]}. \\
+\hline
+49 & C & \texttt{zip} pairs corresponding elements. First pair: (``Aspirin'', 5.2) as a tuple. \\
+\hline
+50 & B & \texttt{enumerate(start=1)} begins counting at 1. First iteration: idx=1, smiles=``CCO''. Prints ``1: CCO''. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 11: Classes \& OOP (Q51-Q60)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+51 & B & \texttt{\_\_init\_\_} sets instance attributes. \texttt{aspirin.name} returns ``Aspirin''. \\
+\hline
+52 & C & Class variable \texttt{atom\_count} is shared. Both instances add to it: 10+15=25. \\
+\hline
+53 & B & \texttt{@property} decorator makes \texttt{name} a computed property returning uppercase. \\
+\hline
+54 & B & \texttt{\_\_len\_\_} magic method allows \texttt{len()} on custom objects. Returns 150. \\
+\hline
+55 & B & \texttt{\_\_str\_\_} defines string representation. \texttt{print(c)} outputs ``Compound: Caffeine''. \\
+\hline
+56 & A & \texttt{Drug} inherits from \texttt{Molecule}. \texttt{isinstance} checks inheritance chain. \\
+\hline
+57 & B & Method overriding: \texttt{Drug.describe()} overrides parent method. Returns ``Therapeutic drug''. \\
+\hline
+58 & B & \texttt{@staticmethod} doesn't need instance. 100/0.5 = 200.0. \\
+\hline
+59 & B & \texttt{@classmethod} modifies class state. First call returns 1, second returns 2. \\
+\hline
+60 & A & \texttt{\_\_eq\_\_} compares names only. Both have ``Aspirin'' so they're equal. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 12: Modules \& Imports (Q61-Q65)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+61 & B & \texttt{from math import sqrt} imports only \texttt{sqrt} function directly. \\
+\hline
+62 & A & Using alias \texttt{lg} for \texttt{log10}: 9 - lg(100) = 9 - 2 = 7.0. \\
+\hline
+63 & B & \texttt{\_\_name\_\_ == "\_\_main\_\_"} is True when script runs directly, not imported. \\
+\hline
+64 & B & \texttt{random.seed(42)} makes random numbers reproducible---same sequence each run. \\
+\hline
+65 & A & \texttt{Counter} counts occurrences. ``ATGCGATCGATCG'' has 3 G's. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 13: List Methods (Q66-Q70)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+66 & B & \texttt{insert(1, x)} inserts at index 1. ``Metformin'' is now at position 1. \\
+\hline
+67 & B & \texttt{pop(1)} removes and returns element at index 1 (8.1). List now has 3 elements. \\
+\hline
+68 & B & \texttt{count()} returns occurrences. ``CC'' appears twice in the list. \\
+\hline
+69 & C & \texttt{reverse()} reverses in-place. ``Ibuprofen'' moves to index 0. \\
+\hline
+70 & A & \texttt{copy()} creates shallow copy. Appending to original doesn't affect copy. Length stays 3. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 14: String Methods (Q71-Q75)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+71 & B & \texttt{strip()} removes leading/trailing whitespace. ``CCO'' has length 3. \\
+\hline
+72 & C & \texttt{split("G")} splits at each G. ``ATGCGATCG'' splits into 4 parts. \\
+\hline
+73 & B & \texttt{join()} concatenates with separator. Result: ``Aspirin, Ibuprofen, Caffeine''. \\
+\hline
+74 & A & \texttt{capitalize()} uppercases first letter. \texttt{upper()} makes all uppercase. \\
+\hline
+75 & A & \texttt{startswith("c")} is True, \texttt{endswith("1")} is True. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 15: Dictionary Methods (Q76-Q80)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+76 & B & \texttt{update()} merges dicts. Existing key ``MW'' gets overwritten to 180.2. \\
+\hline
+77 & A & \texttt{keys()} returns dict keys. Converted to list: [``MW'', ``LogP'']. \\
+\hline
+78 & B & \texttt{pop()} removes and returns value. 180.16 returned, ``MW'' no longer in dict. \\
+\hline
+79 & B & \texttt{setdefault()} only sets if key missing. ``name'' exists, keeps ``Aspirin''. \\
+\hline
+80 & B & Dict unpacking with \texttt{**}. Later dict overwrites: \texttt{d2["b"]=3} wins. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 16: Comprehensions (Q81-Q85)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+81 & B & Filter MW $>$ 200: 206 and 267 pass. Result: [206, 267]. \\
+\hline
+82 & B & Transform each to uppercase. First element is ``ASPIRIN''. \\
+\hline
+83 & A & Set comprehension from ``ATGC''. All 4 bases are unique. Length is 4. \\
+\hline
+84 & B & Dict comprehension maps name to length. ``Caffeine'' has 8 characters. \\
+\hline
+85 & C & Nested comprehension. \texttt{matrix[1][2]} = 2*3 = 6. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 17: Sorting \& Ordering (Q86-Q90)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+86 & B & \texttt{sorted()} returns new sorted list. Last element ([-1]) is max: 8.1. \\
+\hline
+87 & B & \texttt{sort()} sorts in-place alphabetically. ``Aspirin'' comes first. \\
+\hline
+88 & C & \texttt{key=len} sorts by length. Shortest is ``C'' (length 1). \\
+\hline
+89 & B & Tuples sort by first element. Descending: (8.1, ``B'') is first. Answer is ``B''. \\
+\hline
+90 & A & \texttt{min()} returns 1, \texttt{max()} returns 9. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 18: Type Conversion (Q91-Q95)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+91 & B & \texttt{float("180.16")} converts string to float type. \\
+\hline
+92 & B & \texttt{set()} removes duplicates from (1,2,3,2,1). Unique values: 1,2,3. Length is 3. \\
+\hline
+93 & C & \texttt{list()} on string creates list of characters: [``A'', ``T'', ``G'', ``C'']. \\
+\hline
+94 & C & \texttt{"".join()} concatenates without separator. Result: ``ATGC''. \\
+\hline
+95 & B & \texttt{int(7.8)} truncates to 7. \texttt{round(7.8)} rounds to 8. \\
+\hline
+\end{longtable}
+
+\subsection*{Section 19: Boolean \& None (Q96-Q100)}
+
+\begin{longtable}{|c|p{1cm}|p{11cm}|}
+\hline
+\rowcolor{gray!20}
+\textbf{Q} & \textbf{Ans} & \textbf{Rationale} \\
+\hline
+96 & A & \texttt{result is None} is True, so prints ``No data''. \\
+\hline
+97 & B & \texttt{True and False} = False. \texttt{True or False} = True. \\
+\hline
+98 & C & Falsy values (0, ``'', None) filtered out. ``active'' and 42 remain. Length is 2. \\
+\hline
+99 & A & \texttt{not (5 $>$ 10)} = \texttt{not False} = True. \texttt{5 != 10} = True. \\
+\hline
+100 & B & Empty string is falsy, so \texttt{or} returns default. ``CCO'' is truthy, returned as-is. \\
+\hline
+\end{longtable}
+
+\vspace{2em}
+\hrule
+\vspace{1em}
+
+\section*{Grading Scale}
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+\rowcolor{gray!20}
+\textbf{Grade} & \textbf{Score Range} & \textbf{Performance} \\
+\hline
+A & 90-100 (45-50 correct) & Excellent \\
+\hline
+B & 80-89 (40-44 correct) & Good \\
+\hline
+C & 70-79 (35-39 correct) & Satisfactory \\
+\hline
+D & 60-69 (30-34 correct) & Needs Improvement \\
+\hline
+F & Below 60 (<30 correct) & Unsatisfactory \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{2em}
+
+\begin{center}
+\textit{This answer key is for instructor use only. Do not distribute to students.}
+\end{center}
+
+\end{document}
