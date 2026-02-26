@@ -240,14 +240,32 @@
     \small
     \begin{block}{Exercise 5.3 -- Filter Active Compounds}
         Given pIC50 values: [5.2, 6.8, 7.3, 4.9, 8.1, 5.9, 6.2]\\
-        Use a loop with continue to skip inactive (pIC50 $<$ 6)\\
+        Use a for loop with continue to skip inactive (pIC50 $<$ 6)\\
         Print only active compounds.
     \end{block}
     \vspace{0.5em}
-    \begin{block}{Exercise 5.4 -- Find First Potent Compound}
+    \begin{block}{Exercise 5.4 -- Find First Potent (While Loop)}
         Given pIC50 values: [5.2, 5.8, 6.1, 7.5, 8.2, 6.8]\\
         Use a while loop with break to find the first ``highly potent'' compound (pIC50 $\geq$ 7.5)\\
-        Print its index and value.
+        Print its index and value.\\
+        \textit{Hint: Use index variable i, increment i += 1}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Lab 5: Loops (cont.)}
+    \small
+    \begin{block}{Exercise 5.5 -- Read Until Stop Codon (While Loop)}
+        Given codons: [``ATG'', ``CGA'', ``TCG'', ``GGC'', ``TAA'', ``AAA'']\\
+        Use a while loop to read codons and build a sequence string.\\
+        Stop when you encounter a stop codon (``TAA'', ``TAG'', or ``TGA'').\\
+        Print the sequence built before the stop codon.
+    \end{block}
+    \vspace{0.5em}
+    \begin{block}{Exercise 5.6 -- Compound Screening (While Loop)}
+        Simulate screening compounds until finding 3 active ones:\\
+        Given: [4.5, 5.2, 6.8, 5.1, 7.3, 4.9, 8.1, 5.9]\\
+        Use while loop to count actives (pIC50 $\geq$ 6), stop when count reaches 3.\\
+        Print how many compounds were screened total.
     \end{block}
 \end{frame}
 

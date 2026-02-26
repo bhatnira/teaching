@@ -259,14 +259,15 @@ has_cooh = mol.HasSubstructMatch(pattern)  # True
 \begin{frame}{SELFIES: Self-Referencing Embedded Strings}
     \small
     \textbf{What is SELFIES?}\\
-    A 100\% robust molecular string representation for machine learning.
+    A 100\% robust molecular string representation for machine learning.\\
+    Uses bracket tokens (e.g., \texttt{[C]}, \texttt{[Branch1]}) with grammar rules that guarantee every string decodes to a valid molecule.
     \vspace{0.5em}
     
     \textbf{Key Advantages over SMILES:}
     \begin{itemize}
         \item \textbf{Always valid}: Every SELFIES string is a valid molecule
         \item \textbf{No syntax errors}: Perfect for generative models
-        \item \textbf{Bijective}: One-to-one mapping to molecules
+        \item \textbf{Bijective}: Each SELFIES maps to exactly one molecule (unlike SMILES, which can have multiple representations for the same molecule)
         \item \textbf{ML-friendly}: Ideal for VAEs, GANs, transformers
     \end{itemize}
     \vspace{0.3em}
@@ -293,20 +294,20 @@ has_cooh = mol.HasSubstructMatch(pattern)  # True
     
     \textbf{Python Example:}
     \begin{lstlisting}[style=codeStyle, basicstyle=\ttfamily\scriptsize]
-import selfies as sf
+import selfies
 
 # SMILES to SELFIES
 smiles = "CC(=O)Oc1ccccc1C(=O)O"  # Aspirin
-selfies = sf.encoder(smiles)
-print(selfies)
-# [C][C][=Branch1][C][=O][O][C][=C][C][=C]...
+selfies_str = selfies.encoder(smiles)
+print(f"SELFIES: {selfies_str}")
 
 # SELFIES to SMILES
-recovered = sf.decoder(selfies)
-print(recovered)  # CC(=O)Oc1ccccc1C(=O)O
+recovered_smiles = selfies.decoder(selfies_str)
+print(f"Recovered: {recovered_smiles}")
 
-# Get alphabet for tokenization
-alphabet = sf.get_alphabet_from_selfies([selfies])
+# Get alphabet (unique tokens) for tokenization
+alphabet = selfies.get_alphabet_from_selfies([selfies_str])
+print(f"Tokens: {list(alphabet)[:5]}...")
     \end{lstlisting}
     
     \vspace{0.2em}
@@ -632,19 +633,19 @@ LRSLNGEWRFAWFPAPEAVPESWLECDLPEADTVVVPSNWQMHGYDAPIYT
 \begin{frame}{The Central Dogma of Molecular Biology}
     \small
     \begin{center}
-        \begin{tikzpicture}[node distance=2.5cm, scale=0.9, every node/.style={scale=0.9}]
-            \node (dna) [startstop, fill=blue!20, minimum width=3cm] {\textbf{DNA}\\ATGCGATCG};
-            \node (rna) [startstop, fill=green!20, right=of dna, minimum width=3cm] {\textbf{RNA}\\AUGCGAUCG};
-            \node (protein) [startstop, fill=orange!20, right=of rna, minimum width=3cm] {\textbf{Protein}\\MAI...};
+        \begin{tikzpicture}[node distance=2.2cm, scale=0.85, every node/.style={scale=0.85}]
+            \node (dna) [startstop, fill=blue!20, minimum width=2.8cm] {\textbf{DNA}\\ATGCGATCG};
+            \node (rna) [startstop, fill=green!20, right=of dna, minimum width=2.8cm] {\textbf{RNA}\\AUGCGAUCG};
+            \node (protein) [startstop, fill=orange!20, right=of rna, minimum width=2.8cm] {\textbf{Protein}\\MAI...};
             
             \draw[arrow] (dna) -- node[above] {Transcription} node[below] {\scriptsize T $\to$ U} (rna);
             \draw[arrow] (rna) -- node[above] {Translation} node[below] {\scriptsize Codon table} (protein);
             
             % Replication arrow (loop above DNA)
-            \draw[arrow] (dna.north west) to[out=120,in=60,looseness=4] node[above] {Replication} (dna.north east);
+            \draw[arrow] (dna.north) to[out=60,in=120,looseness=5] node[above] {Replication} (dna.north);
         \end{tikzpicture}
     \end{center}
-    \vspace{0.5em}
+    \vspace{0.3em}
     
     \textbf{Key Operations in Bioinformatics:}
     \begin{itemize}
@@ -1000,7 +1001,7 @@ print(f"{nucleotide} is a {base_type}")
     \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{Lesson 5 Code Example}
+\begin{frame}[fragile]{Lesson 5 Code Example: For Loops}
     \small
     \begin{lstlisting}[style=codeStyle]
 import math
@@ -1024,6 +1025,39 @@ for name, pic50 in compounds:
     if pic50 < 6: continue  # skip inactive
     if pic50 > 8: break     # found highly active
     print(f"{name}: Active (pIC50={pic50})")
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Lesson 5 Code Example: While Loops}
+    \small
+    \begin{lstlisting}[style=codeStyle]
+# While loop: find first potent compound (pIC50 >= 7.5)
+pic50_values = [5.2, 5.8, 6.1, 7.5, 8.2, 6.8]
+i = 0
+while i < len(pic50_values):
+    if pic50_values[i] >= 7.5:
+        print(f"First potent at index {i}: pIC50={pic50_values[i]}")
+        break  # exit loop when found
+    i += 1
+
+# While loop: read codons until stop codon
+sequence = ""
+codons = ["ATG", "CGA", "TCG", "TAA"]  # TAA is stop
+idx = 0
+while idx < len(codons) and codons[idx] not in ["TAA", "TAG", "TGA"]:
+    sequence += codons[idx]
+    idx += 1
+print(f"Sequence before stop: {sequence}")  # ATGCGATCG
+
+# While with counter
+active_count = 0
+data = [4.5, 5.2, 6.8, 7.3, 8.1]
+i = 0
+while i < len(data) and active_count < 2:
+    if data[i] >= 6.0:
+        active_count += 1
+    i += 1
+print(f"Screened {i} to find {active_count} actives")
     \end{lstlisting}
 \end{frame}
 
@@ -1053,9 +1087,13 @@ for name, pic50 in compounds:
 \begin{frame}{Lesson 6: Functions}
     \small
     \texttt{def name(params):} define function\\
-    \texttt{return} for return value\\
-    Default arguments, *args, **kwargs
-    \vspace{0.5em}
+    \texttt{return} for return value\\[0.3em]
+    \textbf{Special Parameters:}
+    \begin{itemize}
+        \item \texttt{*args} -- accepts any number of \textbf{positional} arguments as a tuple
+        \item \texttt{**kwargs} -- accepts any number of \textbf{keyword} arguments as a dictionary
+    \end{itemize}
+    \vspace{0.3em}
     \begin{center}
         \begin{tikzpicture}[node distance=1cm, scale=0.8, every node/.style={scale=0.8}]
             \node (start) [startstop] {Start Function};
@@ -1070,15 +1108,19 @@ for name, pic50 in compounds:
     \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{Lesson 6 Code Example}
+\begin{frame}[fragile]{Lesson 6 Code Example: Basic Functions}
     \small
     \begin{lstlisting}[style=codeStyle]
+import math
+from rdkit import Chem
+from rdkit.Chem import Descriptors
+
 # Function: IC50 to pIC50 conversion
 def ic50_to_pic50(ic50_nm):
     """Convert IC50 (nM) to pIC50."""
     return -math.log10(ic50_nm * 1e-9)
 
-# Function with validation
+# Function with validation (returns tuple)
 def calculate_molecular_weight(smiles):
     """Calculate MW from SMILES."""
     mol = Chem.MolFromSmiles(smiles)
@@ -1086,16 +1128,36 @@ def calculate_molecular_weight(smiles):
         return None, "Invalid SMILES"
     return Descriptors.MolWt(mol), "Success"
 
-# *args - process multiple compounds
+# Usage
+print(ic50_to_pic50(10))  # 8.0
+mw, status = calculate_molecular_weight("CCO")
+print(f"MW: {mw:.2f}, Status: {status}")
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Lesson 6 Code Example: *args and **kwargs}
+    \small
+    \begin{lstlisting}[style=codeStyle]
+# *args - accept variable number of positional arguments
 def average_activity(*pic50_values):
+    """Calculate average pIC50 from multiple values."""
     return sum(pic50_values) / len(pic50_values)
 
-# **kwargs - compound properties
+# **kwargs - accept variable number of keyword arguments
 def print_compound(**props):
+    """Print compound properties as key-value pairs."""
     for key, value in props.items():
         print(f"{key}: {value}")
 
-print(ic50_to_pic50(10))  # 8.0
+# Usage examples
+avg = average_activity(5.2, 6.8, 7.3, 8.1)
+print(f"Average pIC50: {avg:.2f}")
+
+print_compound(name="Aspirin", MW=180.16, pIC50=5.2)
+# Output:
+# name: Aspirin
+# MW: 180.16
+# pIC50: 5.2
     \end{lstlisting}
 \end{frame}
 
@@ -1356,7 +1418,8 @@ print(actives, ic50_nm, potent)
 \begin{frame}{Lesson 8B: Lambda Functions \& Variable Scope}
     \small
     \textbf{Lambda:} Anonymous single-expression functions\\[0.3em]
-    \texttt{lambda args: expression}\\[0.5em]
+    \textbf{Basic Structure:}\\[0.2em]
+    \colorbox{codegray}{\texttt{lambda arguments: expression}}\\[0.5em]
     \textbf{Variable Scope:}
     \begin{itemize}
         \item \textbf{Local} -- inside function

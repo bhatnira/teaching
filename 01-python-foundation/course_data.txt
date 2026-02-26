@@ -1,0 +1,394 @@
+# ============================================
+# Python for Cheminformatics & Bioinformatics
+# Course Data File
+# ============================================
+# This file contains all sample data used in lessons and labs
+# for the AI-Driven Drug Development Training
+
+# ============================================
+# SECTION 1: SMILES STRINGS (Chemical Structures)
+# ============================================
+
+# Common Drugs
+Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,180.16
+Ibuprofen,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,206.28
+Caffeine,CN1C=NC2=C1C(=O)N(C(=O)N2C)C,194.19
+
+# Simple Molecules
+Ethanol,CCO,46.07
+Acetic_acid,CC(=O)O,60.05
+Benzene,c1ccccc1,78.11
+Isobutane,CC(C)C,58.12
+Methanol,CO,32.04
+
+# Additional Drug-Like Compounds
+Acetaminophen,CC(=O)NC1=CC=C(O)C=C1,151.16
+Naproxen,COC1=CC2=CC(C(C)C(=O)O)=CC=C2C=C1,230.26
+Diazepam,CN1C(=O)CN=C(C2=CC=CC=C21)C3=CC=CC=C3Cl,284.74
+
+# For SMILES Analysis Exercises
+# Format: Name,SMILES,Has_Ring,Has_Double_Bond,Has_Aromatic
+Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,Yes,Yes,Yes
+Ethanol,CCO,No,No,No
+Benzene,c1ccccc1,Yes,No,Yes
+Propane,CCC,No,No,No
+
+# ============================================
+# SECTION 2: DNA SEQUENCES
+# ============================================
+
+# Simple DNA Sequences
+DNA_seq_1,ATGCGATCGATCG
+DNA_seq_2,ATGCGATCGATCGATCGATCG
+DNA_seq_3,ATGCGCGCTA
+DNA_seq_4,AGCTATAG
+DNA_seq_5,GCGCGCGC
+DNA_seq_6,ATATAT
+
+# Rosalind DNA Problem Sample
+Rosalind_DNA,AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC
+
+# Rosalind REVC Problem (Reverse Complement)
+REVC_input,AAAACCCGGT
+REVC_output,ACCGGGTTTT
+
+# DNA with Restriction Sites
+DNA_EcoRI,ATGAATTCGCGAATTCTA
+# EcoRI recognition site: GAATTC
+# BamHI recognition site: GGATCC
+
+# Codon Sequences
+Codon_seq_1,ATGCGATCGTAA
+# Codons: ATG (Start/Met), CGA (Arg), TCG (Ser), TAA (Stop)
+
+# Start and Stop Codons
+Start_codon,ATG
+Stop_codons,TAA,TAG,TGA
+
+# GC Content Test Sequences
+GC_low,ATATAT
+GC_medium,AGCTATAG
+GC_high,GCGCGCGC
+
+# ============================================
+# SECTION 3: RNA SEQUENCES
+# ============================================
+
+# Transcribed from DNA (T -> U)
+RNA_seq_1,AUGCGAUCGAUCG
+RNA_seq_2,AUGCGAUCGAUCGAUCGAUCG
+RNA_seq_3,AUGCGCGCUA
+
+# ============================================
+# SECTION 4: PROTEIN SEQUENCES
+# ============================================
+
+# Sample Protein Sequences
+Protein_1,MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSH
+Protein_2,MNIFEMLRIDEGLRLKIYKDTEGYYTIGIGHLLTKSPSLNAAKSELDKAIGRNCNGVITKDEAEKLFNQDVDAAVRGILRNAKLKPVYDSLDAVRRCALINMVFQMGETGVAGFTNSLRMLQQKRWDEAAVNLAKSRWYNQTPNRAKRVITTFRTGTWDAYKNL
+
+# Amino Acid Single Letter Codes
+AA_codes,A,R,N,D,C,Q,E,G,H,I,L,K,M,F,P,S,T,W,Y,V
+
+# ============================================
+# SECTION 5: BIOACTIVITY DATA (pIC50 & IC50)
+# ============================================
+
+# pIC50 Values for Exercises (higher = more active)
+# Compound_ID,pIC50
+CPD001,5.2
+CPD002,6.8
+CPD003,7.3
+CPD004,4.9
+CPD005,8.1
+CPD006,5.9
+CPD007,6.2
+CPD008,7.8
+
+# pIC50 Classification Dataset
+# pIC50 >= 8: Highly Active
+# 7 <= pIC50 < 8: Active
+# 6 <= pIC50 < 7: Moderately Active
+# 5 <= pIC50 < 6: Weakly Active
+# pIC50 < 5: Inactive
+
+pIC50_values,5.2,6.8,7.3,4.9,8.1,5.9,6.2,7.8
+pIC50_test_values,8.5,7.2,6.5,5.3,4.1
+pIC50_potent_search,5.2,5.8,6.1,7.5,8.2,6.8
+
+# IC50 Values (nM) for Conversion Exercises
+IC50_list_nM,1.0,10.0,100.0,1000.0,10000.0
+# Corresponding pIC50: 9.0, 8.0, 7.0, 6.0, 5.0
+
+# IC50 to pIC50 Conversion Formula:
+# pIC50 = -log10(IC50_M) = 9 - log10(IC50_nM)
+
+# Code Example IC50 Values
+ic50_example_values,5.2,120.0,8.7,2.1,450.0
+
+# ============================================
+# SECTION 6: LIPINSKI RULE OF FIVE DATA
+# ============================================
+
+# Lipinski Rules:
+# MW <= 500 Da
+# LogP <= 5
+# HBD (H-bond donors) <= 5
+# HBA (H-bond acceptors) <= 10
+
+# Compound Properties for Lipinski Check
+# Name,MW,LogP,HBD,HBA
+Aspirin,180.16,1.19,1,4
+Ibuprofen,206.28,3.97,1,2
+Caffeine,194.19,-0.07,0,6
+Drug_X,320.5,3.2,2,5
+
+# Test Compound for Lipinski Exercises
+Lipinski_test,450,3.5,2,6
+# Expected: Passes Rule of Five (0 violations)
+
+# Borderline Compound
+Lipinski_borderline,520,4.8,3,8
+# Expected: 1 violation (MW > 500)
+
+# ============================================
+# SECTION 7: COMPOUND DATABASES
+# ============================================
+
+# Format: Name,SMILES,MW,LogP,pIC50,Is_Active
+Compound_DB_1,Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,180.16,1.19,5.2,False
+Compound_DB_2,Ibuprofen,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,206.28,3.97,6.1,True
+Compound_DB_3,Caffeine,CN1C=NC2=C1C(=O)N(C(=O)N2C)C,194.19,-0.07,4.8,False
+Compound_DB_4,Drug_X,CCN(CC)C(=O)C1=CC=CC=C1,177.24,2.1,7.5,True
+Compound_DB_5,Drug_Y,CC1=CC(=O)OC2=CC=CC=C12,160.17,2.5,8.2,True
+
+# Library Comparison Sets
+Library_A,CMP001,CMP002,CMP003,CMP004
+Library_B,CMP003,CMP004,CMP005,CMP006
+# Union: CMP001, CMP002, CMP003, CMP004, CMP005, CMP006
+# Intersection: CMP003, CMP004
+# A - B: CMP001, CMP002
+# B - A: CMP005, CMP006
+
+# ============================================
+# SECTION 8: CODON TABLE (PARTIAL)
+# ============================================
+
+# Standard Genetic Code (DNA codons)
+# Format: Codon,Amino_Acid,Full_Name
+ATG,M,Methionine (Start)
+TGG,W,Tryptophan
+TTT,F,Phenylalanine
+TTC,F,Phenylalanine
+TTA,L,Leucine
+TTG,L,Leucine
+CTT,L,Leucine
+CTC,L,Leucine
+CTA,L,Leucine
+CTG,L,Leucine
+ATT,I,Isoleucine
+ATC,I,Isoleucine
+ATA,I,Isoleucine
+GTT,V,Valine
+GTC,V,Valine
+GTA,V,Valine
+GTG,V,Valine
+TAA,Stop,Ochre
+TAG,Stop,Amber
+TGA,Stop,Opal
+TCT,S,Serine
+TCC,S,Serine
+TCA,S,Serine
+TCG,S,Serine
+CCT,P,Proline
+CCC,P,Proline
+CCA,P,Proline
+CCG,P,Proline
+ACT,T,Threonine
+ACC,T,Threonine
+ACA,T,Threonine
+ACG,T,Threonine
+GCT,A,Alanine
+GCC,A,Alanine
+GCA,A,Alanine
+GCG,A,Alanine
+TAT,Y,Tyrosine
+TAC,Y,Tyrosine
+CAT,H,Histidine
+CAC,H,Histidine
+CAA,Q,Glutamine
+CAG,Q,Glutamine
+AAT,N,Asparagine
+AAC,N,Asparagine
+AAA,K,Lysine
+AAG,K,Lysine
+GAT,D,Aspartic_acid
+GAC,D,Aspartic_acid
+GAA,E,Glutamic_acid
+GAG,E,Glutamic_acid
+TGT,C,Cysteine
+TGC,C,Cysteine
+CGT,R,Arginine
+CGC,R,Arginine
+CGA,R,Arginine
+CGG,R,Arginine
+AGA,R,Arginine
+AGG,R,Arginine
+AGT,S,Serine
+AGC,S,Serine
+GGT,G,Glycine
+GGC,G,Glycine
+GGA,G,Glycine
+GGG,G,Glycine
+
+# ============================================
+# SECTION 9: SAMPLE FILES CONTENT
+# ============================================
+
+# --- compounds.csv ---
+# name,smiles,pIC50
+# Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,5.2
+# Ibuprofen,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,6.1
+# Caffeine,CN1C=NC2=C1C(=O)N(C(=O)N2C)C,4.8
+# Acetaminophen,CC(=O)NC1=CC=C(O)C=C1,5.5
+# Naproxen,COC1=CC2=CC(C(C)C(=O)O)=CC=C2C=C1,6.8
+
+# --- sequence.fasta ---
+# >Sequence_1 | Human hemoglobin alpha
+# MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSH
+
+# >Sequence_2 | Sample DNA
+# ATGCGATCGATCGATCGATCGATCGATCGATCGATCGATCG
+
+# ============================================
+# SECTION 10: JSON DATA SAMPLES
+# ============================================
+
+# PubChem-style compound data
+# {"CID": 2244, "name": "Aspirin", "MW": 180.16}
+# {"CID": 3672, "name": "Ibuprofen", "MW": 206.28}
+# {"CID": 2519, "name": "Caffeine", "MW": 194.19}
+
+# Compound with full properties
+# {
+#   "name": "Aspirin",
+#   "CID": 2244,
+#   "SMILES": "CC(=O)OC1=CC=CC=C1C(=O)O",
+#   "MW": 180.16,
+#   "LogP": 1.19,
+#   "HBD": 1,
+#   "HBA": 4,
+#   "pIC50": 5.2,
+#   "is_active": false
+# }
+
+# ============================================
+# SECTION 11: MOLECULAR DESCRIPTOR MATRICES
+# ============================================
+
+# NumPy Array Data (Rows: compounds, Columns: MW, LogP, HBD, HBA)
+# Compound 1: 180.16, 1.19, 1, 4
+# Compound 2: 206.28, 3.97, 1, 2
+# Compound 3: 194.19, -0.07, 0, 6
+# Compound 4: 320.50, 3.20, 2, 5
+# Compound 5: 450.25, 4.50, 3, 8
+
+descriptor_matrix
+180.16,1.19,1,4
+206.28,3.97,1,2
+194.19,-0.07,0,6
+320.50,3.20,2,5
+450.25,4.50,3,8
+
+# ============================================
+# SECTION 12: RESTRICTION ENZYME SITES
+# ============================================
+
+# Enzyme,Recognition_Site,Cut_Pattern
+EcoRI,GAATTC,G^AATTC
+BamHI,GGATCC,G^GATCC
+HindIII,AAGCTT,A^AGCTT
+PstI,CTGCAG,CTGCA^G
+SalI,GTCGAC,G^TCGAC
+XbaI,TCTAGA,T^CTAGA
+NotI,GCGGCCGC,GC^GGCCGC
+SmaI,CCCGGG,CCC^GGG
+
+# ============================================
+# SECTION 13: EXERCISE TEST DATA
+# ============================================
+
+# Lab 1.2: DNA Sequence Analysis
+Lab1_DNA,ATGCGATCGATCGATCGATCG
+# Expected: Length=21, A_count=4, T_count=4
+
+# Lab 2.3: GC Content
+Lab2_GC_seq,AGCTATAG
+# Expected: G=2, C=1, Total=8, GC%=37.5%
+
+# Lab 3.2: Reverse Complement
+Lab3_REVC_input,AAAACCCGGT
+Lab3_REVC_output,ACCGGGTTTT
+
+# Lab 5.2: Nucleotide Counter (Rosalind DNA)
+Lab5_DNA,AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGT
+# Expected output: 20 12 17 21 (A C G T counts)
+
+# Lab 6.2: GC Content Function Test Sequences
+GC_test_1,AGCTATAG
+GC_test_2,GCGCGCGC
+GC_test_3,ATATAT
+# Expected: ~37.5%, 100%, 0%
+
+# Lab 5.4: Find First Potent (While Loop)
+Lab5_potent_search,5.2,5.8,6.1,7.5,8.2,6.8
+# Expected: First potent at index 3, pIC50=7.5
+
+# Lab 5.5: Read Until Stop Codon (While Loop)
+Lab5_codons,ATG,CGA,TCG,GGC,TAA,AAA
+# Stop codons: TAA, TAG, TGA
+# Expected sequence: ATGCGATCGGGC
+
+# Lab 5.6: Compound Screening (While Loop)
+Lab5_screening,4.5,5.2,6.8,5.1,7.3,4.9,8.1,5.9
+# Find 3 actives (>=6): 6.8 at index 2, 7.3 at index 4, 8.1 at index 6
+# Screened 7 compounds to find 3 actives
+
+# Lab 8.1: Filter Active Compounds
+Lab8_pIC50,5.2,6.8,7.3,4.9,8.1,5.9
+# Active (>=6): 6.8, 7.3, 8.1
+
+# Lab 8.2: Batch IC50 Conversion
+Lab8_IC50,10,100,1000
+# pIC50: 8, 7, 6
+
+# Lab 12.2: EcoRI Sites
+Lab12_DNA,ATGAATTCGCGAATTCTA
+# EcoRI sites at positions: 2, 10
+
+# ============================================
+# QUICK REFERENCE
+# ============================================
+
+# IC50 to pIC50 Conversion:
+# pIC50 = -log10(IC50_M)
+# pIC50 = 9 - log10(IC50_nM)
+
+# Activity Classification Thresholds:
+# Highly Active: pIC50 >= 8 (IC50 <= 10 nM)
+# Active: pIC50 >= 6 (IC50 <= 1000 nM)  
+# Inactive: pIC50 < 6 (IC50 > 1000 nM)
+
+# Lipinski Rule of Five:
+# MW <= 500
+# LogP <= 5
+# HBD <= 5
+# HBA <= 10
+
+# Complement Pairs:
+# DNA: A-T, G-C
+# RNA: A-U, G-C
+
+# ============================================
+# END OF DATA FILE
+# ============================================

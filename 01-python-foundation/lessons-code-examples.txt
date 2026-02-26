@@ -1,0 +1,1085 @@
+# ============================================
+# Python for Cheminformatics & Bioinformatics
+# All Code Examples from Lessons
+# ============================================
+
+# ============================================
+# SMARTS Pattern Matching (Slide 9)
+# ============================================
+from rdkit import Chem
+mol = Chem.MolFromSmiles("CC(=O)O")  # Acetic acid
+pattern = Chem.MolFromSmarts("[CX3](=O)[OX2H1]")
+has_cooh = mol.HasSubstructMatch(pattern)  # True
+
+
+# ============================================
+# SELFIES: Python Usage (Slide 11)
+# ============================================
+import selfies
+
+# SMILES to SELFIES
+smiles = "CC(=O)Oc1ccccc1C(=O)O"  # Aspirin
+selfies_str = selfies.encoder(smiles)
+print(f"SELFIES: {selfies_str}")
+
+# SELFIES to SMILES
+recovered_smiles = selfies.decoder(selfies_str)
+print(f"Recovered: {recovered_smiles}")
+
+# Get alphabet (unique tokens) for tokenization
+alphabet = selfies.get_alphabet_from_selfies([selfies_str])
+print(f"Tokens: {list(alphabet)[:5]}...")
+
+
+# ============================================
+# FASTA Format Example (Slide 20)
+# ============================================
+# >Rosalind_6404 Human hemoglobin alpha
+# MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSH
+# GSAQVKGHGKKVADALTNAVAHVDDMPNALSALSDLHAHKLRVDPVNFKLL
+# SHCLLVTLAAHLPAEFTPAVHASLDKFLASVSTVLTSKYR
+# >Rosalind_5959 E. coli beta-galactosidase
+# MTMITDSLAVVLQRRDWENPGVTQLNRLAAHPPFASWRNSEEARTDRPSQQ
+# LRSLNGEWRFAWFPAPEAVPESWLECDLPEADTVVVPSNWQMHGYDAPIYT
+
+
+# ============================================
+# Lesson 1: Variables & Data Types
+# ============================================
+# Compound Info
+compound_name = "Aspirin"
+mw = 180.16  # Molecular Weight (Da)
+logP = 1.19  # Lipophilicity
+smiles = "CC(=O)OC1=CC=CC=C1C(=O)O"
+
+# Bioactivity Data
+ic50_nM = 5.2  # IC50 in nanomolar
+pic50 = 8.28   # -log10(IC50 in M)
+is_active = True
+
+# DNA Sequence
+dna_seq = "ATGCGATCGATCG"
+seq_length = len(dna_seq)
+
+# Type Conversion
+ic50_str = str(ic50_nM)
+mw_int = int(mw)
+
+print(f"{compound_name}: MW={mw}, pIC50={pic50}")
+
+
+# ============================================
+# Lesson 2: Operators
+# ============================================
+import math
+
+# IC50 to pIC50 conversion
+ic50_nM = 10.0  # nanomolar
+ic50_M = ic50_nM * 1e-9  # convert to molar
+pic50 = -math.log10(ic50_M)  # pIC50 = 8.0
+print(f"IC50: {ic50_nM} nM -> pIC50: {pic50:.2f}")
+
+# Lipinski Rule of Five checks
+mw, logP, hbd, hba = 450, 3.5, 2, 6
+lipinski_ok = (mw <= 500) and (logP <= 5) and (hbd <= 5) and (hba <= 10)
+print(f"Passes Lipinski: {lipinski_ok}")
+
+# GC Content calculation
+seq = "ATGCGCGCTA"
+gc_count = seq.count("G") + seq.count("C")
+gc_percent = (gc_count / len(seq)) * 100
+print(f"GC Content: {gc_percent:.1f}%")
+
+
+# ============================================
+# Lesson 3: Strings
+# ============================================
+# DNA Sequence manipulation
+dna = "ATGCGATCGATCG"
+print(f"Length: {len(dna)}")
+print(f"First 3 (codon): {dna[:3]}")  # ATG
+print(f"Last codon: {dna[-3:]}")       # TCG
+
+# Transcription: DNA -> RNA (T -> U)
+rna = dna.replace("T", "U")
+print(f"RNA: {rna}")  # AUGCGAUCGAUCG
+
+# Count nucleotides
+print(f"A: {dna.count('A')}, T: {dna.count('T')}")
+print(f"G: {dna.count('G')}, C: {dna.count('C')}")
+
+# SMILES analysis
+smiles = "CC(=O)OC1=CC=CC=C1C(=O)O"
+has_ring = any(c.isdigit() for c in smiles)
+print(f"Has ring: {has_ring}")  # True
+
+
+# ============================================
+# Lesson 4: Conditional Statements (if/else)
+# ============================================
+# Classify compound activity by pIC50
+pic50 = 7.5
+if pic50 >= 8:
+    activity = "Highly Active"
+elif pic50 >= 6:
+    activity = "Active"
+elif pic50 >= 5:
+    activity = "Moderate"
+else:
+    activity = "Inactive"
+print(f"pIC50 {pic50}: {activity}")
+
+# Check Lipinski Rule of Five
+mw, logP, hbd, hba = 450, 4.2, 2, 6
+violations = 0
+if mw > 500: violations += 1
+if logP > 5: violations += 1
+if hbd > 5: violations += 1
+if hba > 10: violations += 1
+drug_like = "Yes" if violations <= 1 else "No"
+print(f"Drug-like: {drug_like} ({violations} violations)")
+
+
+# ============================================
+# Lesson 4: Conditional Statements (match-case)
+# ============================================
+# Identify codon type (Python 3.10+)
+codon = "ATG"
+match codon:
+    case "ATG":
+        print("Start codon (Methionine)")
+    case "TAA" | "TAG" | "TGA":
+        print("Stop codon")
+    case _:
+        print("Coding codon")
+
+# Classify nucleotide
+nucleotide = "G"
+match nucleotide:
+    case "A" | "G":
+        base_type = "Purine"
+    case "C" | "T":
+        base_type = "Pyrimidine"
+    case _:
+        base_type = "Unknown"
+print(f"{nucleotide} is a {base_type}")
+
+
+# ============================================
+# Lesson 5: Loops
+# ============================================
+import math
+
+# Process compound library - calculate pIC50
+ic50_values = [5.2, 120.0, 8.7, 2.1, 450.0]  # nM
+for ic50 in ic50_values:
+    pic50 = 9 - math.log10(ic50)
+    print(f"IC50: {ic50:>6.1f} nM -> pIC50: {pic50:.2f}")
+
+# Count nucleotides in DNA sequence
+dna = "ATGCGATCGATCG"
+counts = {"A": 0, "T": 0, "G": 0, "C": 0}
+for nucleotide in dna:
+    counts[nucleotide] += 1
+print(f"Nucleotide counts: {counts}")
+
+# Find active compounds (break/continue)
+compounds = [("CPD1", 7.2), ("CPD2", 5.1), ("CPD3", 8.5)]
+for name, pic50 in compounds:
+    if pic50 < 6: continue  # skip inactive
+    if pic50 > 8: break     # found highly active
+    print(f"{name}: Active (pIC50={pic50})")
+
+
+# ============================================
+# Lesson 6: Functions
+# ============================================
+import math
+from rdkit import Chem
+from rdkit.Chem import Descriptors
+
+# Function: IC50 to pIC50 conversion
+def ic50_to_pic50(ic50_nm):
+    """Convert IC50 (nM) to pIC50."""
+    return -math.log10(ic50_nm * 1e-9)
+
+# Function with validation
+def calculate_molecular_weight(smiles):
+    """Calculate MW from SMILES."""
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        return None, "Invalid SMILES"
+    return Descriptors.MolWt(mol), "Success"
+
+# *args - process multiple compounds
+def average_activity(*pic50_values):
+    return sum(pic50_values) / len(pic50_values)
+
+# **kwargs - compound properties
+def print_compound(**props):
+    for key, value in props.items():
+        print(f"{key}: {value}")
+
+print(ic50_to_pic50(10))  # 8.0
+
+
+# ============================================
+# Lesson 6B: Error Handling (try/except)
+# ============================================
+# Basic try/except
+try:
+    num = int(input("Enter number: "))
+    result = 10 / num
+except ValueError:
+    print("Invalid input!")
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+else:
+    print(f"Result: {result}")
+finally:
+    print("Execution complete")
+
+# Raising exceptions
+def divide(a, b):
+    if b == 0:
+        raise ValueError("Divisor cannot be zero")
+    return a / b
+
+
+# ============================================
+# Lesson 7: Python Lists
+# ============================================
+smiles_list = ["CCO", "CC(=O)O", "c1ccccc1"]
+smiles_list.append("CCN")
+smiles_list.insert(1, "CC")
+smiles_list.remove("CCO")
+print(smiles_list[0], smiles_list[-1])
+
+
+# ============================================
+# Lesson 7B: Tuples & Sets
+# ============================================
+# Tuples - immutable (compound data)
+compound = ("Aspirin", "CC(=O)OC1=CC=CC=C1C(=O)O", 180.16)
+name, smiles, mw = compound  # unpacking
+
+# Sets - unique scaffolds
+scaffolds = {"benzene", "pyridine", "benzene"}  # 2 unique
+scaffolds.add("furan")
+
+# Set operations for compound comparison
+lib_A = {"CMP001", "CMP002", "CMP003"}
+lib_B = {"CMP002", "CMP003", "CMP004"}
+print(lib_A | lib_B)  # union: all compounds
+print(lib_A & lib_B)  # intersection: common
+print(lib_A - lib_B)  # unique to lib_A
+
+
+# ============================================
+# Lesson 8: Advanced Lists (Comprehensions)
+# ============================================
+pic50_values = [5.2, 6.8, 7.3, 4.9, 8.1]
+
+# List comprehension: filter active compounds
+actives = [p for p in pic50_values if p >= 6.0]
+
+# Lambda + map: convert pIC50 to IC50 (nM)
+ic50_nm = list(map(lambda p: 10**(9-p), pic50_values))
+
+# Filter: highly potent (pIC50 > 7)
+potent = list(filter(lambda p: p > 7, pic50_values))
+
+print(actives, ic50_nm, potent)
+
+
+# ============================================
+# Lesson 8B: Lambda Functions & Variable Scope
+# ============================================
+import math
+
+# Lambda functions for molecular properties
+to_pic50 = lambda ic50: -math.log10(ic50 * 1e-9)
+is_active = lambda p: p >= 6.0
+
+# Sorting compounds by activity
+compounds = [("Aspirin", 5.2), ("Ibuprofen", 6.8), ("Drug_X", 7.5)]
+compounds.sort(key=lambda x: x[1], reverse=True)
+
+# Variable scope in processing
+processed_count = 0  # global
+
+def process_batch():
+    global processed_count
+    processed_count += 1
+
+def create_counter():
+    count = 0
+    def increment():
+        nonlocal count
+        count += 1
+        return count
+    return increment
+
+
+# ============================================
+# Lesson 9: Dictionaries
+# ============================================
+compound_db = {
+    "Aspirin": {"SMILES": "CC(=O)OC1=CC=CC=C1C(=O)O", "pIC50": 5.2},
+    "Caffeine": {"SMILES": "CN1C=NC2=C1C(=O)N(C(=O)N2C)C", "pIC50": 4.8}
+}
+
+# Add new compound
+compound_db["Ibuprofen"] = {"SMILES": "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O", "pIC50": 6.1}
+
+# Filter actives (dict comprehension)
+actives = {k: v for k, v in compound_db.items() if v["pIC50"] >= 5.0}
+
+print(actives)
+
+
+# ============================================
+# Lesson 10: File Handling
+# ============================================
+# Write compound data to CSV
+with open("compounds.csv", "w") as f:
+    f.write("name,smiles,pIC50\n")
+    f.write("Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,5.2\n")
+
+# Read FASTA file
+with open("sequence.fasta", "r") as f:
+    header = f.readline().strip()  # >sequence_id
+    sequence = ""
+    for line in f:
+        sequence += line.strip()
+
+
+# ============================================
+# Lesson 11: NumPy Arrays
+# ============================================
+import numpy as np
+
+# Array creation
+arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+zeros = np.zeros((2, 3))      # 2x3 array of zeros
+ones = np.ones((3, 3))        # 3x3 array of ones
+seq = np.arange(0, 10, 2)     # [0, 2, 4, 6, 8]
+
+# Properties
+print(arr.shape, arr.dtype, arr.ndim)
+
+# Operations
+print(arr * 2)                # element-wise multiply
+print(arr.sum(axis=0))        # sum per column
+print(arr.mean(axis=1))       # mean per row
+
+# Boolean indexing
+mask = arr > 5
+print(arr[mask])              # [6, 7, 8, 9]
+
+
+# ============================================
+# Lesson 11B: Pandas - Creation
+# ============================================
+import pandas as pd
+
+# Series - activity values with compound IDs
+activities = pd.Series([5.2, 6.8, 7.3], index=['CMP001', 'CMP002', 'CMP003'])
+print(activities['CMP002'])  # 6.8
+
+# DataFrame from compound data
+df = pd.DataFrame({
+    'Name': ['Aspirin', 'Ibuprofen', 'Caffeine'],
+    'SMILES': ['CC(=O)OC1=CC=CC=C1C(=O)O', 'CC(C)CC1=CC=C(C=C1)C(C)C(=O)O', 'CN1C=NC2=C1C(=O)N(C)C(=O)N2C'],
+    'pIC50': [5.2, 6.1, 4.8],
+    'MW': [180.16, 206.28, 194.19]
+})
+print(df)
+
+# DataFrame from list of dicts
+data = [{'x': 1, 'y': 2}, {'x': 3, 'y': 4}]
+df2 = pd.DataFrame(data)
+
+
+# ============================================
+# Lesson 11B: Pandas - Operations
+# ============================================
+import pandas as pd
+
+df = pd.DataFrame({
+    'Name': ['Aspirin', 'Ibuprofen', 'Caffeine', 'Drug_X'],
+    'pIC50': [5.2, 6.1, 4.8, 7.5],
+    'MW': [180.16, 206.28, 194.19, 320.5]
+})
+
+# Basic properties
+print(df.shape, df.columns, df.dtypes)
+
+# Selection
+print(df['Name'])           # single column
+print(df[['Name', 'pIC50']])# multiple columns
+print(df.loc[0])            # row by label
+print(df.iloc[0:2])         # rows by position
+
+# Filtering
+actives = df[df['pIC50'] > 6.0]
+drug_like = df[df['MW'] < 500]
+
+
+# ============================================
+# Lesson 11B: Pandas - Analysis
+# ============================================
+# Aggregation
+print(df['pIC50'].mean())    # average activity
+print(df['pIC50'].max())     # most potent
+print(df.describe())         # summary statistics
+
+# GroupBy by activity class
+df['Class'] = df['pIC50'].apply(lambda x: 'Active' if x >= 6 else 'Inactive')
+grouped = df.groupby('Class')['MW'].mean()
+
+# Adding columns
+df['IC50_nM'] = 10**(9 - df['pIC50'])
+
+# Sorting by activity
+df_sorted = df.sort_values('pIC50', ascending=False)
+
+# Missing data handling
+df['LogP'] = [1.2, None, -0.5, 2.3]
+df['LogP'].fillna(df['LogP'].mean(), inplace=True)
+
+
+# ============================================
+# Lesson 11B: Pandas - File I/O
+# ============================================
+import pandas as pd
+
+# Read compound data from CSV
+df = pd.read_csv('compounds.csv')
+
+# Write filtered actives
+df[df['pIC50'] > 6].to_csv('actives.csv', index=False)
+
+# Read from SDF (via RDKit)
+from rdkit import Chem
+from rdkit.Chem import PandasTools
+df = PandasTools.LoadSDF('molecules.sdf')
+
+# Quick data exploration
+print(df.head())       # first 5 compounds
+print(df.info())       # column types
+print(df.describe())   # statistical summary
+
+
+# ============================================
+# Lesson 12: JSON & Regex
+# ============================================
+import json
+import re
+
+# JSON - PubChem-like data
+data = '{"name": "Aspirin", "CID": 2244, "MW": 180.16}'
+compound = json.loads(data)
+print(compound["name"])
+
+# Regex - find DNA motifs
+seq = "ATGCGATCGATCG"
+matches = re.findall(r"GATC", seq)  # restriction site
+
+
+# ============================================
+# Lesson 13: Modules & Packages
+# ============================================
+# Cheminformatics modules
+from rdkit import Chem
+from rdkit.Chem import Descriptors
+import math
+
+# Create molecule utilities (mol_utils.py)
+# def calc_lipinski(smiles):
+#     mol = Chem.MolFromSmiles(smiles)
+#     return {
+#         'MW': Descriptors.MolWt(mol),
+#         'LogP': Descriptors.MolLogP(mol),
+#         'HBD': Descriptors.NumHDonors(mol),
+#         'HBA': Descriptors.NumHAcceptors(mol)
+#     }
+
+# Main guard
+if __name__ == "__main__":
+    print("Running QSAR pipeline...")
+
+
+# ============================================
+# ============================================
+# LAB SOLUTIONS
+# ============================================
+# ============================================
+
+
+# ============================================
+# LAB 1: VARIABLES & DATA TYPES
+# ============================================
+
+# Exercise 1.1 -- Compound Data Storage
+name = "Ibuprofen"
+smiles = "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O"
+molecular_weight = 206.28
+pic50 = 6.1
+is_active = pic50 >= 6.0  # True
+
+print(f"Compound: {name}")
+print(f"SMILES: {smiles}")
+print(f"Molecular Weight: {molecular_weight} Da")
+print(f"pIC50: {pic50}")
+print(f"Is Active: {is_active}")
+
+# Exercise 1.2 -- DNA Sequence
+dna_sequence = "ATGCGATCGATCGATCGATCG"
+seq_length = len(dna_sequence)
+adenine_count = dna_sequence.count("A")
+thymine_count = dna_sequence.count("T")
+
+print(f"Sequence: {dna_sequence}")
+print(f"Length: {seq_length} bp")
+print(f"Adenines (A): {adenine_count}")
+print(f"Thymines (T): {thymine_count}")
+
+# Exercise 1.3 -- Type Conversion
+import math
+ic50_str = "5.2"
+ic50_nm = float(ic50_str)
+ic50_M = ic50_nm * 1e-9
+pic50 = -math.log10(ic50_M)
+pic50_formatted = f"{pic50:.2f}"
+print(f"IC50: {ic50_nm} nM, pIC50: {pic50_formatted}")
+
+
+# ============================================
+# LAB 2: OPERATORS
+# ============================================
+
+# Exercise 2.1 -- IC50 Conversion
+import math
+ic50_values = [10.0, 100.0, 1000.0]
+for ic50_nm in ic50_values:
+    pic50 = 9 - math.log10(ic50_nm)
+    print(f"IC50: {ic50_nm:>8.1f} nM -> pIC50: {pic50:.2f}")
+
+# Exercise 2.2 -- Lipinski Check
+MW, LogP, HBD, HBA = 450, 3.5, 2, 8
+passes_lipinski = (MW <= 500) and (LogP <= 5) and (HBD <= 5) and (HBA <= 10)
+print(f"Passes Lipinski: {passes_lipinski}")
+
+# Exercise 2.3 -- GC Content (Rosalind)
+sequence = "AGCTATAG"
+g_count = sequence.count("G")
+c_count = sequence.count("C")
+gc_content = (g_count + c_count) / len(sequence) * 100
+print(f"GC Content: {gc_content:.1f}%")
+
+# Exercise 2.4 -- Activity Classification
+pic50 = 7.2
+if pic50 >= 8:
+    classification = "Highly potent"
+elif pic50 >= 7:
+    classification = "Potent"
+elif pic50 >= 6:
+    classification = "Moderate"
+else:
+    classification = "Weak"
+print(f"pIC50 {pic50}: {classification}")
+
+
+# ============================================
+# LAB 3: STRINGS
+# ============================================
+
+# Exercise 3.1 -- DNA Transcription
+dna = "ATGCGATCGATCG"
+rna = dna.replace("T", "U")
+print(f"DNA: {dna}")
+print(f"RNA: {rna}")
+
+# Exercise 3.2 -- Reverse Complement (Rosalind REVC)
+dna = "AAAACCCGGT"
+complement_map = {"A": "T", "T": "A", "G": "C", "C": "G"}
+comp_seq = "".join(complement_map[n] for n in dna)
+reverse_comp = comp_seq[::-1]
+print(f"Original: {dna}")
+print(f"Reverse Complement: {reverse_comp}")
+
+# Alternative using translate
+trans_table = str.maketrans("ATGC", "TACG")
+reverse_comp_v2 = dna.translate(trans_table)[::-1]
+print(f"Reverse Complement (v2): {reverse_comp_v2}")
+
+# Exercise 3.3 -- SMILES Analysis
+smiles = "CC(=O)OC1=CC=CC=C1C(=O)O"  # Aspirin
+has_ring = any(char.isdigit() for char in smiles)
+carbon_count = smiles.count("C")
+oxygen_count = smiles.count("O")
+is_aromatic = any(char.islower() for char in smiles)
+print(f"Contains ring: {has_ring}")
+print(f"Carbon count: {carbon_count}")
+print(f"Oxygen count: {oxygen_count}")
+print(f"Is aromatic: {is_aromatic}")
+
+# Exercise 3.4 -- Nucleotide Count (Rosalind DNA)
+sequence = "AGCTTTTCATTCTGACTGCAACGGGCAATA"
+a = sequence.count("A")
+c = sequence.count("C")
+g = sequence.count("G")
+t = sequence.count("T")
+print(f"A:{a} T:{t} G:{g} C:{c}")
+print(f"Rosalind format: {a} {c} {g} {t}")
+
+
+# ============================================
+# LAB 4: CONDITIONALS
+# ============================================
+
+# Exercise 4.1 -- Drug-Likeness Checker
+mw, logp, hbd, hba = 520, 4.2, 3, 8
+violations = 0
+if mw > 500: violations += 1
+if logp > 5: violations += 1
+if hbd > 5: violations += 1
+if hba > 10: violations += 1
+status = "Drug-like" if violations <= 1 else "Non-drug-like"
+print(f"Result: {status} ({violations} violation(s))")
+
+# Exercise 4.2 -- Codon Identifier
+codon = "ATG"
+if codon == "ATG":
+    codon_type = "Start codon (Methionine)"
+elif codon in ["TAA", "TAG", "TGA"]:
+    codon_type = "Stop codon"
+else:
+    codon_type = "Coding codon"
+print(f"Codon {codon}: {codon_type}")
+
+# Using match-case (Python 3.10+)
+match codon:
+    case "ATG":
+        print("Start codon (Methionine)")
+    case "TAA" | "TAG" | "TGA":
+        print("Stop codon")
+    case _:
+        print("Coding codon")
+
+# Exercise 4.3 -- Activity Classifier
+def classify_activity(pic50):
+    if pic50 >= 8: return "Highly Active"
+    elif pic50 >= 7: return "Active"
+    elif pic50 >= 6: return "Moderately Active"
+    elif pic50 >= 5: return "Weakly Active"
+    else: return "Inactive"
+
+test_values = [8.5, 7.2, 6.5, 5.3, 4.1]
+for pic50 in test_values:
+    print(f"pIC50 {pic50}: {classify_activity(pic50)}")
+
+
+# ============================================
+# LAB 5: LOOPS
+# ============================================
+
+# Exercise 5.1 -- Batch IC50 Conversion
+import math
+ic50_list = [1.0, 10.0, 100.0, 1000.0, 10000.0]
+for ic50_nm in ic50_list:
+    pic50 = 9 - math.log10(ic50_nm)
+    print(f"IC50: {ic50_nm:>8.1f} nM -> pIC50: {pic50:.2f}")
+
+# Exercise 5.2 -- Nucleotide Counter
+seq = "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGT"
+counts = {"A": 0, "C": 0, "G": 0, "T": 0}
+for nucleotide in seq:
+    if nucleotide in counts:
+        counts[nucleotide] += 1
+print(f"Counts: {counts}")
+
+# Exercise 5.3 -- Filter Active Compounds
+pic50_values = [5.2, 6.8, 7.3, 4.9, 8.1, 5.9, 6.2]
+for i, pic50 in enumerate(pic50_values):
+    if pic50 < 6:
+        continue  # Skip inactive
+    print(f"Compound {i+1}: pIC50 = {pic50} (Active)")
+
+# Exercise 5.4 -- Find First Potent Compound
+pic50_values = [5.2, 5.8, 6.1, 7.5, 8.2, 6.8]
+index = 0
+while index < len(pic50_values):
+    if pic50_values[index] >= 7.5:
+        print(f"Found! Index {index}, pIC50 = {pic50_values[index]}")
+        break
+    index += 1
+
+
+# ============================================
+# LAB 6: FUNCTIONS
+# ============================================
+
+# Exercise 6.1 -- pIC50 Converter Function
+import math
+
+def ic50_to_pic50(ic50_nm):
+    """Convert IC50 from nanomolar to pIC50."""
+    return 9 - math.log10(ic50_nm)
+
+for ic50 in [10, 100, 1000]:
+    print(f"IC50 {ic50} nM -> pIC50 {ic50_to_pic50(ic50):.2f}")
+
+# Exercise 6.2 -- GC Content Function
+def gc_content(sequence):
+    """Calculate GC content percentage."""
+    sequence = sequence.upper()
+    g = sequence.count("G")
+    c = sequence.count("C")
+    return (g + c) / len(sequence) * 100 if sequence else 0.0
+
+for seq in ["AGCTATAG", "GCGCGCGC", "ATATAT"]:
+    print(f"{seq}: {gc_content(seq):.1f}%")
+
+# Exercise 6.3 -- Lipinski Calculator
+def check_lipinski(mw, logp, hbd, hba):
+    """Check Lipinski Rule of Five. Returns (passes, violations)."""
+    violations = 0
+    if mw > 500: violations += 1
+    if logp > 5: violations += 1
+    if hbd > 5: violations += 1
+    if hba > 10: violations += 1
+    return violations <= 1, violations
+
+compounds = [
+    ("Aspirin", 180.16, 1.19, 1, 4),
+    ("Drug_A", 520, 4.5, 2, 8),
+    ("Drug_B", 450, 6.2, 7, 12)
+]
+for name, mw, logp, hbd, hba in compounds:
+    passes, violations = check_lipinski(mw, logp, hbd, hba)
+    print(f"{name}: {'PASS' if passes else 'FAIL'} ({violations} violations)")
+
+# Exercise 6.4 -- Reverse Complement Function
+def reverse_complement(dna):
+    """Generate reverse complement of DNA sequence."""
+    comp = {"A": "T", "T": "A", "G": "C", "C": "G"}
+    return "".join(comp[n] for n in reversed(dna.upper()))
+
+print(f"AAAACCCGGT -> {reverse_complement('AAAACCCGGT')}")  # ACCGGGTTTT
+
+
+# ============================================
+# LAB 6B: ERROR HANDLING
+# ============================================
+
+# Exercise 6B.1 -- Safe IC50 Conversion
+import math
+
+def safe_ic50_to_pic50(ic50_nm):
+    """Safely convert IC50 to pIC50 with error handling."""
+    try:
+        ic50_nm = float(ic50_nm)
+        if ic50_nm <= 0:
+            raise ValueError(f"IC50 must be positive, got {ic50_nm}")
+        return 9 - math.log10(ic50_nm)
+    except TypeError:
+        print("Error: Input must be a number")
+        return None
+    except ValueError as e:
+        print(f"Error: {e}")
+        return None
+
+for test in [10, -5, 0, "invalid", 100]:
+    result = safe_ic50_to_pic50(test)
+    print(f"Input: {test!r:>10} -> pIC50: {result}")
+
+# Exercise 6B.2 -- SMILES Validator
+from rdkit import Chem
+
+def validate_smiles(smiles):
+    """Validate SMILES using RDKit. Returns (is_valid, message)."""
+    try:
+        if not smiles or not isinstance(smiles, str):
+            raise ValueError("SMILES must be a non-empty string")
+        mol = Chem.MolFromSmiles(smiles)
+        if mol is None:
+            raise ValueError(f"Invalid SMILES: {smiles}")
+        return True, "Valid SMILES"
+    except ValueError as e:
+        return False, str(e)
+
+for smiles in ["CCO", "CC(=O)OC1=CC=CC=C1C(=O)O", "invalid", ""]:
+    valid, msg = validate_smiles(smiles)
+    print(f"{smiles[:20]:20} -> {'VALID' if valid else 'INVALID'}")
+
+
+# ============================================
+# LAB 7: LISTS
+# ============================================
+
+# Exercise 7.1 -- Compound Library
+smiles_library = [
+    "CC(=O)OC1=CC=CC=C1C(=O)O",  # Aspirin
+    "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O",  # Ibuprofen
+    "CN1C=NC2=C1C(=O)N(C(=O)N2C)C",  # Caffeine
+    "CC(=O)NC1=CC=C(C=C1)O",  # Acetaminophen
+    "C1=CC=C(C=C1)CC(C(=O)O)N"  # Phenylalanine
+]
+
+smiles_library.append("CCO")  # Add ethanol
+smiles_library.remove("CCO")  # Remove it
+smiles_library.insert(1, "C1CCCCC1")  # Insert cyclohexane
+print(f"First: {smiles_library[0]}")
+print(f"Last: {smiles_library[-1]}")
+
+# Exercise 7.2 -- pIC50 Statistics
+pic50_values = [5.2, 6.8, 7.3, 4.9, 8.1, 5.9, 6.2, 7.8]
+print(f"Min: {min(pic50_values)}")
+print(f"Max: {max(pic50_values)}")
+print(f"Sorted: {sorted(pic50_values)}")
+print(f"Active count: {sum(1 for p in pic50_values if p >= 6)}")
+
+
+# ============================================
+# LAB 7B: TUPLES & SETS
+# ============================================
+
+# Exercise 7B.1 -- Compound Records
+aspirin = ("Aspirin", "CC(=O)OC1=CC=CC=C1C(=O)O", 5.2)
+ibuprofen = ("Ibuprofen", "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O", 6.1)
+for compound in [aspirin, ibuprofen]:
+    name, smiles, pic50 = compound  # Unpack
+    print(f"{name}: pIC50={pic50}")
+
+# Exercise 7B.2 -- Library Comparison
+library_A = {"CMP001", "CMP002", "CMP003", "CMP004"}
+library_B = {"CMP003", "CMP004", "CMP005", "CMP006"}
+print(f"Union: {library_A | library_B}")
+print(f"Intersection: {library_A & library_B}")
+print(f"Only in A: {library_A - library_B}")
+print(f"Only in B: {library_B - library_A}")
+
+
+# ============================================
+# LAB 8: LIST COMPREHENSIONS
+# ============================================
+
+# Exercise 8.1 -- Filter Active Compounds
+pic50_values = [5.2, 6.8, 7.3, 4.9, 8.1, 5.9]
+active = [p for p in pic50_values if p >= 6.0]
+print(f"Active: {active}")
+
+# Exercise 8.2 -- Batch Conversion
+import math
+ic50_list = [10, 100, 1000]
+pic50_comp = [9 - math.log10(ic50) for ic50 in ic50_list]
+pic50_map = list(map(lambda ic50: 9 - math.log10(ic50), ic50_list))
+print(f"List comprehension: {pic50_comp}")
+print(f"Map with lambda: {pic50_map}")
+
+# Exercise 8.3 -- Conditional Comprehension
+classified = [(p, "Active") if p >= 6 else (p, "Inactive") for p in pic50_values]
+print(f"Classified: {classified}")
+
+
+# ============================================
+# LAB 9: DICTIONARIES
+# ============================================
+
+# Exercise 9.1 -- Compound Database
+compound_db = {
+    "Aspirin": {"SMILES": "CC(=O)OC1=CC=CC=C1C(=O)O", "MW": 180.16, "pIC50": 5.2, "is_active": False},
+    "Ibuprofen": {"SMILES": "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O", "MW": 206.28, "pIC50": 6.1, "is_active": True},
+    "Caffeine": {"SMILES": "CN1C=NC2=C1C(=O)N(C(=O)N2C)C", "MW": 194.19, "pIC50": 4.8, "is_active": False}
+}
+
+for name, props in compound_db.items():
+    print(f"{name}: pIC50={props['pIC50']}, Active={props['is_active']}")
+
+# Exercise 9.2 -- Codon Table
+codon_table = {"ATG": "M", "TGG": "W", "TAA": "Stop", "TAG": "Stop", "TGA": "Stop"}
+dna_sequence = "ATGGCTTGA"
+protein = ""
+for i in range(0, len(dna_sequence), 3):
+    codon = dna_sequence[i:i+3]
+    aa = codon_table.get(codon, "?")
+    if aa == "Stop": break
+    protein += aa
+print(f"DNA: {dna_sequence} -> Protein: {protein}")
+
+# Exercise 9.3 -- Dict Comprehension
+active_compounds = {k: v for k, v in compound_db.items() if v["is_active"]}
+print(f"Active only: {list(active_compounds.keys())}")
+
+
+# ============================================
+# LAB 10: FILE HANDLING
+# ============================================
+
+# Exercise 10.1 -- Write Compound CSV
+compounds = [
+    ("Aspirin", "CC(=O)OC1=CC=CC=C1C(=O)O", 5.2),
+    ("Ibuprofen", "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O", 6.1),
+    ("Caffeine", "CN1C=NC2=C1C(=O)N(C(=O)N2C)C", 4.8)
+]
+with open("compounds.csv", "w") as f:
+    f.write("name,smiles,pIC50\n")
+    for name, smiles, pic50 in compounds:
+        f.write(f"{name},{smiles},{pic50}\n")
+
+# Exercise 10.2 -- Read FASTA
+def parse_fasta(filename):
+    """Parse FASTA file, return {header: sequence}."""
+    sequences = {}
+    current_header = None
+    current_seq = ""
+    with open(filename, "r") as f:
+        for line in f:
+            line = line.strip()
+            if line.startswith(">"):
+                if current_header:
+                    sequences[current_header] = current_seq
+                current_header = line[1:]
+                current_seq = ""
+            else:
+                current_seq += line
+        if current_header:
+            sequences[current_header] = current_seq
+    return sequences
+
+# Exercise 10.3 -- Filter and Export
+actives = []
+with open("compounds.csv", "r") as f:
+    header = f.readline()
+    for line in f:
+        parts = line.strip().split(",")
+        name, smiles, pic50 = parts[0], parts[1], float(parts[2])
+        if pic50 >= 6.0:
+            actives.append((name, smiles, pic50))
+
+with open("actives.csv", "w") as f:
+    f.write("name,smiles,pIC50\n")
+    for name, smiles, pic50 in actives:
+        f.write(f"{name},{smiles},{pic50}\n")
+
+
+# ============================================
+# LAB 11: NUMPY
+# ============================================
+import numpy as np
+
+# Exercise 11.1 -- Descriptor Matrix
+descriptors = np.array([
+    [180.16, 1.19, 1, 4],   # Aspirin
+    [206.28, 3.97, 1, 2],   # Ibuprofen
+    [194.19, -0.07, 0, 6],  # Caffeine
+])
+means = descriptors.mean(axis=0)
+stds = descriptors.std(axis=0)
+print(f"Means: {means}")
+print(f"Stds: {stds}")
+
+# Exercise 11.2 -- Normalization
+min_vals = descriptors.min(axis=0)
+max_vals = descriptors.max(axis=0)
+normalized = (descriptors - min_vals) / (max_vals - min_vals)
+print(f"Normalized:\n{normalized.round(3)}")
+
+# Exercise 11.3 -- Boolean Filtering
+mask = (descriptors[:, 0] < 500) & (descriptors[:, 1] < 5)
+filtered = descriptors[mask]
+print(f"Filtered compounds: {mask.sum()}")
+
+
+# ============================================
+# LAB 11B: PANDAS
+# ============================================
+import pandas as pd
+
+# Exercise 11B.1 -- Create Compound DataFrame
+df = pd.DataFrame({
+    'Name': ['Aspirin', 'Ibuprofen', 'Caffeine', 'Drug_X'],
+    'MW': [180.16, 206.28, 194.19, 350.5],
+    'LogP': [1.19, 3.97, -0.07, 4.5],
+    'pIC50': [5.2, 6.1, 4.8, 7.2]
+})
+df['Activity'] = df['pIC50'].apply(lambda x: 'Active' if x >= 6.0 else 'Inactive')
+print(df)
+
+# Exercise 11B.2 -- Data Analysis
+print(f"Mean pIC50: {df['pIC50'].mean():.2f}")
+print(f"Activity counts:\n{df['Activity'].value_counts()}")
+drug_like = df[(df['MW'] < 500) & (df['LogP'] < 5)]
+sorted_df = df.sort_values('pIC50', ascending=False)
+
+# Exercise 11B.3 -- GroupBy Analysis
+grouped = df.groupby('Activity').agg({'MW': 'mean', 'LogP': 'mean'})
+print(f"Grouped:\n{grouped}")
+grouped.to_csv('activity_analysis.csv')
+
+
+# ============================================
+# LAB 12: JSON & REGEX
+# ============================================
+import json
+import re
+
+# Exercise 12.1 -- Parse PubChem JSON
+json_data = '{"CID": 2244, "name": "Aspirin", "MW": 180.16}'
+compound = json.loads(json_data)
+print(f"CID: {compound['CID']}, Name: {compound['name']}")
+
+# Exercise 12.2 -- Find Restriction Sites
+sequence = "ATGAATTCGCGAATTCTA"
+pattern = r"GAATTC"
+matches = list(re.finditer(pattern, sequence))
+for match in matches:
+    print(f"EcoRI site at position {match.start()}")
+
+# Exercise 12.3 -- SMILES Validation
+def analyze_smiles(smiles):
+    return {
+        'aromatic': bool(re.search(r'[cnos]', smiles)),
+        'has_ring': bool(re.search(r'\d', smiles)),
+        'has_double_bond': bool(re.search(r'=', smiles))
+    }
+
+for smiles in ["CCO", "c1ccccc1", "CC(=O)OC1=CC=CC=C1C(=O)O"]:
+    result = analyze_smiles(smiles)
+    print(f"{smiles}: {result}")
+
+
+# ============================================
+# ROSALIND CHALLENGE SOLUTIONS
+# ============================================
+
+# DNA -- Counting DNA Nucleotides
+def count_nucleotides(dna):
+    return dna.count('A'), dna.count('C'), dna.count('G'), dna.count('T')
+
+# RNA -- Transcribing DNA into RNA
+def transcribe(dna):
+    return dna.replace('T', 'U')
+
+# REVC -- Complementing a Strand of DNA
+def reverse_complement(dna):
+    complement = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'}
+    return ''.join(complement[n] for n in reversed(dna))
+
+# GC -- Computing GC Content
+def gc_content(sequence):
+    gc = sequence.count('G') + sequence.count('C')
+    return (gc / len(sequence)) * 100
+
+# HAMM -- Counting Point Mutations
+def hamming_distance(s1, s2):
+    return sum(c1 != c2 for c1, c2 in zip(s1, s2))
+
+# Test Rosalind solutions
+print(f"DNA: {count_nucleotides('AGCTTTTCATTCTGACTGCAACGGGCAATA')}")
+print(f"RNA: {transcribe('GATGGAACTTGACTACGTAAATT')}")
+print(f"REVC: {reverse_complement('AAAACCCGGT')}")
+print(f"GC: {gc_content('AGCTATCG'):.2f}%")
+print(f"HAMM: {hamming_distance('GAGCCTACTAACGGGAT', 'CATCGTAATGACGGCCT')}")
