@@ -7,6 +7,7 @@
 
 # ============================================
 # SECTION 1: SMILES STRINGS (Chemical Structures)
+# Used in: Prerequisite Slides, Lesson 1, Lab 1.1
 # ============================================
 
 # Common Drugs
@@ -34,7 +35,61 @@ Benzene,c1ccccc1,Yes,No,Yes
 Propane,CCC,No,No,No
 
 # ============================================
+# SECTION 1B: SMARTS PATTERNS (Substructure Search)
+# Used in: Prerequisite Slides (SMARTS frames)
+# ============================================
+
+# Functional Group SMARTS Patterns
+# Format: Name,SMARTS,Description
+Hydroxyl,[OX2H],Alcohol OH
+Carboxylic_acid,[CX3](=O)[OX2H1],COOH group
+Primary_amine,[NX3;H2],NH2 group
+Carbonyl,[CX3]=[OX1],C=O group
+Aromatic_ring,[a],Any aromatic atom
+Halogen,[F,Cl,Br,I],Any halogen (F, Cl, Br, I)
+Any_atom,*,Any atom wildcard
+Not_carbon,[!C],Not carbon
+Nitrogen_by_number,[#7],Nitrogen by atomic number
+Carbon_or_nitrogen,[C,N],Carbon OR nitrogen
+Carbon_in_ring,[C;R],Carbon in a ring
+Recursive_carbonyl,[$([CX3]=O)],Recursive SMARTS for carbonyl
+
+# ============================================
+# SECTION 1C: SELFIES (ML-Friendly Representation)
+# Used in: Prerequisite Slides (SELFIES frames)
+# ============================================
+
+# SMILES to SELFIES Conversion Examples
+# Format: Name,SMILES,SELFIES
+Ethanol_SELFIES,CCO,[C][C][O]
+Benzene_SELFIES,c1ccccc1,[C][=C][C][=C][C][=C][Ring1][=Branch1]
+Acetic_acid_SELFIES,CC(=O)O,[C][C][=Branch1][C][=O][O]
+Aspirin_SELFIES,CC(=O)Oc1ccccc1C(=O)O,[C][C][=Branch1][C][=O][O][C][=C][C][=C][C][=C][Ring1][=Branch1][C][=Branch1][C][=O][O]
+
+# SELFIES Tokens (Common)
+SELFIES_tokens,[C],[N],[O],[S],[F],[Cl],[Br],[I],[=C],[#C],[Branch1],[Branch2],[Ring1],[Ring2],[=Branch1],[=Branch2]
+
+# ============================================
+# SECTION 1D: InChI (International Chemical Identifier)
+# Used in: Prerequisite Slides (InChI frames)
+# ============================================
+
+# InChI Examples
+# Format: Name,SMILES,InChI,InChIKey
+Aspirin_InChI,CC(=O)OC1=CC=CC=C1C(=O)O,InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12),BSYNRYMUTXBXSQ-UHFFFAOYSA-N
+Ethanol_InChI,CCO,InChI=1S/C2H6O/c1-2-3/h3H,2H2,1H3,LFQSCWFLJHTTHZ-UHFFFAOYSA-N
+Caffeine_InChI,CN1C=NC2=C1C(=O)N(C(=O)N2C)C,InChI=1S/C8H10N4O2/c1-10-4-9-6-5(10)7(13)12(3)8(14)11(6)2/h4H,1-3H3,RYYVLZVUVIJVGH-UHFFFAOYSA-N
+
+# InChI Structure Layers
+# Layer 1: Version (1S = standard)
+# Layer 2: Formula (molecular formula)
+# Layer 3: Connections (atom connectivity)
+# Layer 4: H-atoms (hydrogen positions)
+# Layer 5: Charge/Stereo (optional)
+
+# ============================================
 # SECTION 2: DNA SEQUENCES
+# Used in: Prerequisite Slides, Lesson 1, Lab 1.2, Lesson 3, Lab 3.2, Lesson 5, Lab 5.2
 # ============================================
 
 # Simple DNA Sequences
@@ -72,6 +127,7 @@ GC_high,GCGCGCGC
 
 # ============================================
 # SECTION 3: RNA SEQUENCES
+# Used in: Prerequisite Slides (DNA, RNA & Protein Sequences), Lesson 3
 # ============================================
 
 # Transcribed from DNA (T -> U)
@@ -81,6 +137,7 @@ RNA_seq_3,AUGCGCGCUA
 
 # ============================================
 # SECTION 4: PROTEIN SEQUENCES
+# Used in: Prerequisite Slides, Lesson 9 (Dictionaries - codon table)
 # ============================================
 
 # Sample Protein Sequences
@@ -92,6 +149,7 @@ AA_codes,A,R,N,D,C,Q,E,G,H,I,L,K,M,F,P,S,T,W,Y,V
 
 # ============================================
 # SECTION 5: BIOACTIVITY DATA (pIC50 & IC50)
+# Used in: Lesson 1, Lesson 2, Lab 2.1, Lab 2.4, Lesson 4, Lab 4, Lesson 5, Lab 5.4, Lab 5.6, Lab 8.1, Lab 8.2
 # ============================================
 
 # pIC50 Values for Exercises (higher = more active)
@@ -128,6 +186,7 @@ ic50_example_values,5.2,120.0,8.7,2.1,450.0
 
 # ============================================
 # SECTION 6: LIPINSKI RULE OF FIVE DATA
+# Used in: Lesson 2, Lab 2.2, Lesson 6 (Functions)
 # ============================================
 
 # Lipinski Rules:
@@ -153,6 +212,7 @@ Lipinski_borderline,520,4.8,3,8
 
 # ============================================
 # SECTION 7: COMPOUND DATABASES
+# Used in: Lesson 9 (Dictionaries), Lab 9, Lesson 7B (Sets - Library Comparison)
 # ============================================
 
 # Format: Name,SMILES,MW,LogP,pIC50,Is_Active
@@ -172,6 +232,7 @@ Library_B,CMP003,CMP004,CMP005,CMP006
 
 # ============================================
 # SECTION 8: CODON TABLE (PARTIAL)
+# Used in: Lesson 9 (Dictionaries), Lab 5.5 (While Loop - Stop Codons)
 # ============================================
 
 # Standard Genetic Code (DNA codons)
@@ -243,6 +304,7 @@ GGG,G,Glycine
 
 # ============================================
 # SECTION 9: SAMPLE FILES CONTENT
+# Used in: Lesson 10 (File Handling), Lab 10
 # ============================================
 
 # --- compounds.csv ---
@@ -262,6 +324,7 @@ GGG,G,Glycine
 
 # ============================================
 # SECTION 10: JSON DATA SAMPLES
+# Used in: Lesson 12 (JSON & Regex), Lab 12.1
 # ============================================
 
 # PubChem-style compound data
@@ -284,6 +347,7 @@ GGG,G,Glycine
 
 # ============================================
 # SECTION 11: MOLECULAR DESCRIPTOR MATRICES
+# Used in: Lesson 11 (NumPy), Lab 11
 # ============================================
 
 # NumPy Array Data (Rows: compounds, Columns: MW, LogP, HBD, HBA)
@@ -302,6 +366,7 @@ descriptor_matrix
 
 # ============================================
 # SECTION 12: RESTRICTION ENZYME SITES
+# Used in: Lesson 12 (Regex), Lab 12.2
 # ============================================
 
 # Enzyme,Recognition_Site,Cut_Pattern
@@ -316,29 +381,98 @@ SmaI,CCCGGG,CCC^GGG
 
 # ============================================
 # SECTION 13: EXERCISE TEST DATA
+# Used in: All Labs (specific references below)
 # ============================================
+
+# ------------------------------
+# LAB 1: Variables & Data Types
+# ------------------------------
+# Lab 1.1: Compound Data Storage
+Lab1_compound_name,Ibuprofen
+Lab1_compound_smiles,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O
+Lab1_compound_mw,206.28
+Lab1_compound_pic50,6.1
+Lab1_compound_is_active,True
+# Expected: is_active = True (pIC50 >= 6.0)
 
 # Lab 1.2: DNA Sequence Analysis
 Lab1_DNA,ATGCGATCGATCGATCGATCG
 # Expected: Length=21, A_count=4, T_count=4
 
+# Lab 1.3: Type Conversion (IC50 string to pIC50)
+Lab1_ic50_string,5.2
+# Expected: ic50_float = 5.2, pIC50 = 9 - log10(5.2) = 8.28
+
+# ------------------------------
+# LAB 2: Operators
+# ------------------------------
+# Lab 2.1: IC50 Conversion
+Lab2_IC50_values,10.0,100.0,1000.0
+# Expected pIC50: 8.0, 7.0, 6.0
+
+# Lab 2.2: Lipinski Check
+Lab2_Lipinski_MW,450
+Lab2_Lipinski_LogP,3.5
+Lab2_Lipinski_HBD,2
+Lab2_Lipinski_HBA,8
+# Expected: Passes Rule of Five (0 violations)
+
 # Lab 2.3: GC Content
 Lab2_GC_seq,AGCTATAG
 # Expected: G=2, C=1, Total=8, GC%=37.5%
 
-# Lab 3.2: Reverse Complement
+# Lab 2.4: Activity Classification
+Lab2_pIC50_test,7.2
+# Expected: "Potent" (7 <= pIC50 < 8)
+
+# ------------------------------
+# LAB 3: Strings
+# ------------------------------
+# Lab 3.1: DNA Transcription
+Lab3_DNA_input,ATGCGATCGATCG
+Lab3_RNA_expected,AUGCGAUCGAUCG
+# Replace T with U
+
+# Lab 3.2: Reverse Complement (Rosalind REVC)
 Lab3_REVC_input,AAAACCCGGT
 Lab3_REVC_output,ACCGGGTTTT
+
+# Lab 3.3: SMILES Analysis
+Lab3_SMILES,CC(=O)OC1=CC=CC=C1C(=O)O
+# Expected: Has ring (1), Carbon count=9, Oxygen count=4
+
+# Lab 3.4: Nucleotide Count
+Lab3_NucCount_seq,AGCTTTTCATTCTGACTGCAACGGGCAATA
+# Expected: A:10 T:9 G:7 C:4
+
+# ------------------------------
+# LAB 4: Conditionals
+# ------------------------------
+# Lab 4.1: Drug-Likeness Checker (Lipinski)
+# Uses data from Lab 2.2 section
+
+# Lab 4.2: Codon Identifier
+Lab4_codons,ATG,TAA,TAG,TGA,CGA,GGC
+# ATG=Start, TAA/TAG/TGA=Stop, CGA/GGC=Other
+
+# Lab 4.3: Activity Classifier
+Lab4_pIC50_values,8.5,7.2,6.5,5.3,4.1
+# Expected: Highly Active, Active, Moderately Active, Weakly Active, Inactive
+
+# ------------------------------
+# LAB 5: Loops
+# ------------------------------
+# Lab 5.1: Batch IC50 Conversion
+Lab5_IC50_list,1.0,10.0,100.0,1000.0,10000.0
+# Expected pIC50: 9.0, 8.0, 7.0, 6.0, 5.0
 
 # Lab 5.2: Nucleotide Counter (Rosalind DNA)
 Lab5_DNA,AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGT
 # Expected output: 20 12 17 21 (A C G T counts)
 
-# Lab 6.2: GC Content Function Test Sequences
-GC_test_1,AGCTATAG
-GC_test_2,GCGCGCGC
-GC_test_3,ATATAT
-# Expected: ~37.5%, 100%, 0%
+# Lab 5.3: Filter Active Compounds
+Lab5_filter_pIC50,5.2,6.8,7.3,4.9,8.1,5.9,6.2
+# Active (>=6): 6.8, 7.3, 8.1, 6.2
 
 # Lab 5.4: Find First Potent (While Loop)
 Lab5_potent_search,5.2,5.8,6.1,7.5,8.2,6.8
@@ -354,6 +488,68 @@ Lab5_screening,4.5,5.2,6.8,5.1,7.3,4.9,8.1,5.9
 # Find 3 actives (>=6): 6.8 at index 2, 7.3 at index 4, 8.1 at index 6
 # Screened 7 compounds to find 3 actives
 
+# ------------------------------
+# LAB 6: Functions
+# ------------------------------
+# Lab 6.1: pIC50 Converter Function
+Lab6_IC50_test,10,100,1000
+# Expected pIC50: 8, 7, 6
+
+# Lab 6.2: GC Content Function Test Sequences
+Lab6_GC_test_1,AGCTATAG
+Lab6_GC_test_2,GCGCGCGC
+Lab6_GC_test_3,ATATAT
+# Expected: 37.5%, 100%, 0%
+
+# Lab 6.3: Lipinski Calculator
+# Uses Lipinski data from Section 6
+
+# Lab 6.4: Reverse Complement Function
+Lab6_REVC_input,AAAACCCGGT
+Lab6_REVC_expected,ACCGGGTTTT
+
+# ------------------------------
+# LAB 6B: Error Handling
+# ------------------------------
+# Lab 6B.1: Safe IC50 Conversion
+Lab6B_invalid_IC50,-5.0,0,not_a_number
+# Expected: Handle ValueError for negative/zero, TypeError for non-numeric
+
+# Lab 6B.2: SMILES Validator
+Lab6B_valid_SMILES,CCO,c1ccccc1,CC(=O)O
+Lab6B_invalid_SMILES,invalid,XYZ123,[[[
+# Expected: Valid returns True, Invalid returns False
+
+# ------------------------------
+# LAB 7: Lists
+# ------------------------------
+# Lab 7.1: Compound Library
+Lab7_SMILES_list,CCO,c1ccccc1,CC(=O)O,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,CN1C=NC2=C1C(=O)N(C(=O)N2C)C
+# Ethanol, Benzene, Acetic acid, Ibuprofen, Caffeine
+
+# Lab 7.2: pIC50 Statistics
+Lab7_pIC50_list,5.2,6.8,7.3,4.9,8.1,5.9,6.2,7.8
+# Expected: min=4.9, max=8.1, count active (>=6)=5
+
+# ------------------------------
+# LAB 7B: Tuples & Sets
+# ------------------------------
+# Lab 7B.1: Compound Records (tuples)
+Lab7B_compound_1,Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,5.2
+Lab7B_compound_2,Ibuprofen,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,6.1
+Lab7B_compound_3,Caffeine,CN1C=NC2=C1C(=O)N(C(=O)N2C)C,4.8
+
+# Lab 7B.2: Library Comparison (sets)
+Lab7B_Library_A,CMP001,CMP002,CMP003,CMP004
+Lab7B_Library_B,CMP003,CMP004,CMP005,CMP006
+# Union: CMP001, CMP002, CMP003, CMP004, CMP005, CMP006
+# Intersection: CMP003, CMP004
+# A - B: CMP001, CMP002
+# B - A: CMP005, CMP006
+
+# ------------------------------
+# LAB 8: List Comprehensions
+# ------------------------------
 # Lab 8.1: Filter Active Compounds
 Lab8_pIC50,5.2,6.8,7.3,4.9,8.1,5.9
 # Active (>=6): 6.8, 7.3, 8.1
@@ -362,9 +558,78 @@ Lab8_pIC50,5.2,6.8,7.3,4.9,8.1,5.9
 Lab8_IC50,10,100,1000
 # pIC50: 8, 7, 6
 
-# Lab 12.2: EcoRI Sites
+# Lab 8.3: Conditional Comprehension
+Lab8_conditional,5.2,6.8,7.3,4.9,8.1
+# Expected: (5.2, "Inactive"), (6.8, "Active"), (7.3, "Active"), (4.9, "Inactive"), (8.1, "Active")
+
+# ------------------------------
+# LAB 9: Dictionaries
+# ------------------------------
+# Lab 9.1: Compound Database
+# Uses compound data from Section 7
+
+# Lab 9.2: Codon Table (see Section 8)
+# Uses codon data from Section 8
+
+# Lab 9.3: Dict Comprehension
+# Filter active compounds from database
+
+# ------------------------------
+# LAB 10: File Handling
+# ------------------------------
+# Lab 10.1: Write Compound CSV
+# Format: name,SMILES,pIC50
+Lab10_compounds,Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,5.2|Ibuprofen,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,6.1|Caffeine,CN1C=NC2=C1C(=O)N(C(=O)N2C)C,4.8|Acetaminophen,CC(=O)NC1=CC=C(O)C=C1,5.5|Naproxen,COC1=CC2=CC(C(C)C(=O)O)=CC=C2C=C1,6.8
+
+# Lab 10.2: Read FASTA
+# See Section 9 for FASTA format
+
+# Lab 10.3: Filter and Export
+# Filter actives (pIC50 >= 6) from lab 10.1 data
+
+# ------------------------------
+# LAB 11: NumPy
+# ------------------------------
+# Lab 11.1: Descriptor Matrix
+# See Section 11 for descriptor_matrix data
+# Columns: MW, LogP, HBD, HBA
+
+# Lab 11.2: Normalization
+# Normalize descriptor values to 0-1 range
+
+# Lab 11.3: Boolean Filtering
+# Filter: MW < 500 AND LogP < 5
+
+# ------------------------------
+# LAB 11B: Pandas
+# ------------------------------
+# Lab 11B.1: Create Compound DataFrame
+# Columns: Name, SMILES, MW, LogP, pIC50
+Lab11B_data,Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,180.16,1.19,5.2|Ibuprofen,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,206.28,3.97,6.1|Caffeine,CN1C=NC2=C1C(=O)N(C(=O)N2C)C,194.19,-0.07,4.8|Drug_X,CCN(CC)C(=O)C1=CC=CC=C1,177.24,2.1,7.5|Drug_Y,CC1=CC(=O)OC2=CC=CC=C12,160.17,2.5,8.2
+
+# Lab 11B.2: Data Analysis
+# Mean pIC50, count by activity, filter drug-like
+
+# Lab 11B.3: GroupBy Analysis
+# Group by activity class
+
+# ------------------------------
+# LAB 12: JSON & Regex
+# ------------------------------
+# Lab 12.1: Parse PubChem JSON
+Lab12_JSON,{"CID": 2244, "name": "Aspirin", "MW": 180.16}
+# Expected: CID=2244, name="Aspirin", MW=180.16
+
+# Lab 12.2: Find Restriction Sites (EcoRI)
 Lab12_DNA,ATGAATTCGCGAATTCTA
-# EcoRI sites at positions: 2, 10
+Lab12_pattern,GAATTC
+# EcoRI sites at positions: 3, 11 (0-indexed: 2, 10)
+
+# Lab 12.3: SMILES Validation
+Lab12_SMILES_aromatic,c1ccccc1
+Lab12_SMILES_ring,CC1CCCCC1
+Lab12_SMILES_double,CC=CC
+# Check for: aromatic (lowercase c,n), ring (digits), double bond (=)
 
 # ============================================
 # QUICK REFERENCE

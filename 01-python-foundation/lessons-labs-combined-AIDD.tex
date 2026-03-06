@@ -14,7 +14,7 @@
 \definecolor{keyword}{rgb}{0.0,0.0,0.6}
 \definecolor{comment}{rgb}{0.0,0.5,0.0}
 \definecolor{string}{rgb}{0.64,0.08,0.08}
-\definecolor{labcolor}{rgb}{0.1,0.4,0.1}
+\definecolor{labcolor}{rgb}{1,1,1}
 
 \lstdefinestyle{codeStyle}{
     language=Python,
@@ -156,6 +156,226 @@
         \texttt{c1ccccc1} & Benzene \\
         \texttt{CC(=O)Oc1ccccc1C(=O)O} & Aspirin \\
     \end{tabular}
+\end{frame}
+
+\begin{frame}{SMILES: Visual Examples}
+    \small
+    \begin{center}
+        \begin{tikzpicture}[scale=0.9]
+            % Ethanol
+            \node at (0, 2.5) {\textbf{Ethanol}};
+            \node at (0, 2) {\texttt{CCO}};
+            \node at (0, 1.2) {$\text{CH}_3-\text{CH}_2-\text{OH}$};
+            
+            % Benzene
+            \node at (4, 2.5) {\textbf{Benzene}};
+            \node at (4, 2) {\texttt{c1ccccc1}};
+            \draw (4, 0.8) -- (4.5, 1.1) -- (4.5, 1.5) -- (4, 1.8) -- (3.5, 1.5) -- (3.5, 1.1) -- cycle;
+            
+            % Acetic Acid
+            \node at (8, 2.5) {\textbf{Acetic Acid}};
+            \node at (8, 2) {\texttt{CC(=O)O}};
+            \node at (8, 1.2) {$\text{CH}_3\text{COOH}$};
+        \end{tikzpicture}
+    \end{center}
+    \vspace{0.5em}
+    
+    \textbf{Why SMILES?}
+    \begin{itemize}
+        \item Compact text representation (easy to store in databases)
+        \item Human and machine readable
+        \item Standard input for cheminformatics tools (RDKit, OpenBabel)
+        \item Enables molecular property calculations
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{SMARTS: SMILES Arbitrary Target Specification}
+    \small
+    \textbf{What is SMARTS?}\\
+    A pattern matching language for substructure searching in molecules.
+    \vspace{0.5em}
+    
+    \textbf{Key Features:}
+    \begin{itemize}
+        \item Extension of SMILES with wildcards and logic
+        \item Used to define functional groups and pharmacophores
+        \item Essential for filtering compound libraries
+    \end{itemize}
+    \vspace{0.3em}
+    
+    \textbf{SMARTS Operators:}
+    \begin{tabular}{ll}
+        \texttt{*} & Any atom \\
+        \texttt{[!C]} & Not carbon \\
+        \texttt{[\#7]} & Nitrogen (by atomic number) \\
+        \texttt{[C,N]} & Carbon OR nitrogen \\
+        \texttt{[C;R]} & Carbon in a ring \\
+        \texttt{[\$(C=O)]} & Recursive SMARTS \\
+    \end{tabular}
+\end{frame}
+
+\begin{frame}[fragile]{SMARTS: Common Patterns}
+    \small
+    \textbf{Functional Group SMARTS:}
+    \vspace{0.3em}
+    
+    \begin{tabular}{lll}
+        \textbf{Pattern} & \textbf{SMARTS} & \textbf{Description} \\
+        \hline
+        Hydroxyl & \texttt{[OX2H]} & Alcohol OH \\
+        Carboxylic acid & \texttt{[CX3](=O)[OX2H1]} & COOH \\
+        Primary amine & \texttt{[NX3;H2]} & NH$_2$ \\
+        Carbonyl & \texttt{[CX3]=[OX1]} & C=O \\
+        Aromatic ring & \texttt{[a]} & Any aromatic atom \\
+        Halogen & \texttt{[F,Cl,Br,I]} & Any halogen \\
+    \end{tabular}
+    \vspace{0.5em}
+    
+    \textbf{Python Example (RDKit):}
+    \begin{lstlisting}[style=codeStyle, basicstyle=\ttfamily\scriptsize]
+from rdkit import Chem
+mol = Chem.MolFromSmiles("CC(=O)O")  # Acetic acid
+pattern = Chem.MolFromSmarts("[CX3](=O)[OX2H1]")
+has_cooh = mol.HasSubstructMatch(pattern)  # True
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}{SELFIES: Self-Referencing Embedded Strings}
+    \small
+    \textbf{What is SELFIES?}\\
+    A 100\% robust molecular string representation for machine learning.\\
+    Uses bracket tokens (e.g., \texttt{[C]}, \texttt{[Branch1]}) with grammar rules that guarantee every string decodes to a valid molecule.
+    \vspace{0.5em}
+    
+    \textbf{Key Advantages over SMILES:}
+    \begin{itemize}
+        \item \textbf{Always valid}: Every SELFIES string is a valid molecule
+        \item \textbf{No syntax errors}: Perfect for generative models
+        \item \textbf{Bijective}: Each SELFIES maps to exactly one molecule (unlike SMILES, which can have multiple representations for the same molecule)
+        \item \textbf{ML-friendly}: Ideal for VAEs, GANs, transformers
+    \end{itemize}
+    \vspace{0.3em}
+    
+    \textbf{Example Comparison:}
+    \begin{tabular}{ll}
+        \textbf{SMILES} & \textbf{SELFIES} \\
+        \hline
+        \texttt{CCO} & \texttt{[C][C][O]} \\
+        \texttt{c1ccccc1} & \texttt{[C][=C][C][=C][C][=C][Ring1][=Branch1]} \\
+        \texttt{CC(=O)O} & \texttt{[C][C][=Branch1][C][=O][O]} \\
+    \end{tabular}
+\end{frame}
+
+\begin{frame}[fragile]{SELFIES: Python Usage}
+    \small
+    \textbf{Why SELFIES for Machine Learning?}
+    \begin{itemize}
+        \item Random mutations always produce valid molecules
+        \item No need to validate generated strings
+        \item Better for evolutionary algorithms and generative AI
+    \end{itemize}
+    \vspace{0.3em}
+    
+    \textbf{Python Example:}
+    \begin{lstlisting}[style=codeStyle, basicstyle=\ttfamily\scriptsize]
+import selfies
+
+# SMILES to SELFIES
+smiles = "CC(=O)Oc1ccccc1C(=O)O"  # Aspirin
+selfies_str = selfies.encoder(smiles)
+print(f"SELFIES: {selfies_str}")
+
+# SELFIES to SMILES
+recovered_smiles = selfies.decoder(selfies_str)
+print(f"Recovered: {recovered_smiles}")
+
+# Get alphabet (unique tokens) for tokenization
+alphabet = selfies.get_alphabet_from_selfies([selfies_str])
+print(f"Tokens: {list(alphabet)[:5]}...")
+    \end{lstlisting}
+    
+    \vspace{0.2em}
+    \textit{Install: \texttt{pip install selfies}}
+\end{frame}
+
+\begin{frame}{InChI: International Chemical Identifier}
+    \small
+    \textbf{What is InChI?}\\
+    A standardized, unique identifier for chemical substances by IUPAC.
+    \vspace{0.5em}
+    
+    \textbf{Structure:} \texttt{InChI=1S/formula/connections/h/...}
+    \vspace{0.3em}
+    
+    \textbf{Layers:}
+    \begin{itemize}
+        \item \textbf{Formula}: Molecular formula (e.g., C9H8O4)
+        \item \textbf{Connections}: Atom connectivity
+        \item \textbf{H-atoms}: Hydrogen atom positions
+        \item \textbf{Charge/Stereo}: Optional stereochemistry
+    \end{itemize}
+    \vspace{0.3em}
+    
+    \textbf{Example (Aspirin):}\\
+    \texttt{\footnotesize InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)}
+    \vspace{0.3em}
+    
+    \textbf{InChIKey}: 27-character hash for database lookup\\
+    \texttt{BSYNRYMUTXBXSQ-UHFFFAOYSA-N}
+\end{frame}
+
+\begin{frame}{InChI vs SMILES: When to Use Which?}
+    \small
+    \begin{tabular}{lll}
+        \textbf{Feature} & \textbf{SMILES} & \textbf{InChI} \\
+        \hline
+        Uniqueness & Not canonical* & Canonical \\
+        Human readable & Yes & Partially \\
+        Database key & No & Yes (InChIKey) \\
+        Substructure search & Yes & No \\
+        Round-trip conversion & Yes & Lossy \\
+        ML/AI input & Common & Rare \\
+        Web search & Difficult & Easy (InChIKey) \\
+    \end{tabular}
+    \vspace{0.5em}
+    
+    \textit{*Canonical SMILES exist but vary by toolkit}
+    \vspace{0.3em}
+    
+    \textbf{Best Practices:}
+    \begin{itemize}
+        \item Use \textbf{SMILES} for cheminformatics workflows
+        \item Use \textbf{InChIKey} for database lookups and deduplication
+        \item Use \textbf{SELFIES} for generative machine learning
+        \item Use \textbf{SMARTS} for substructure filtering
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Other Molecular Representations}
+    \small
+    \textbf{Molecular Fingerprints (for similarity):}
+    \begin{itemize}
+        \item \textbf{ECFP/Morgan}: Circular fingerprints (most common)
+        \item \textbf{MACCS}: 166 predefined structural keys
+        \item \textbf{RDKit FP}: Topological fingerprints
+        \item \textbf{Atom-pair}: Pairs of atoms with distance
+    \end{itemize}
+    \vspace{0.3em}
+    
+    \textbf{3D Representations:}
+    \begin{itemize}
+        \item \textbf{SDF/MOL}: 3D coordinates + connectivity
+        \item \textbf{PDB}: Protein Data Bank format
+        \item \textbf{XYZ}: Simple coordinate format
+    \end{itemize}
+    \vspace{0.3em}
+    
+    \textbf{Graph Representations (for GNNs):}
+    \begin{itemize}
+        \item \textbf{Adjacency matrix}: Atom connectivity
+        \item \textbf{Node features}: Atom types, charges
+        \item \textbf{Edge features}: Bond types, orders
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Molecular Descriptors \& Activity Data}
