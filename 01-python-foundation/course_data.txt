@@ -449,7 +449,17 @@ Lab3_NucCount_seq,AGCTTTTCATTCTGACTGCAACGGGCAATA
 # LAB 4: Conditionals
 # ------------------------------
 # Lab 4.1: Drug-Likeness Checker (Lipinski)
-# Uses data from Lab 2.2 section
+# Test multiple compounds with varying Lipinski properties
+Lab4_1_compound_A,320,2.5,1,4
+# Expected: 0 violations, Drug-like
+Lab4_1_compound_B,450,3.5,2,8
+# Expected: 0 violations, Drug-like
+Lab4_1_compound_C,550,6.2,3,9
+# Expected: 2 violations (MW>500, LogP>5), Non-drug-like
+Lab4_1_compound_D,480,4.8,6,11
+# Expected: 2 violations (HBD>5, HBA>10), Non-drug-like
+Lab4_1_compound_E,520,5.5,7,12
+# Expected: 4 violations, Non-drug-like
 
 # Lab 4.2: Codon Identifier
 Lab4_codons,ATG,TAA,TAG,TGA,CGA,GGC
@@ -502,7 +512,18 @@ Lab6_GC_test_3,ATATAT
 # Expected: 37.5%, 100%, 0%
 
 # Lab 6.3: Lipinski Calculator
-# Uses Lipinski data from Section 6
+# Test function with multiple compound property sets
+# Format: MW, LogP, HBD, HBA
+Lab6_3_test_1,180.16,1.19,1,4
+# Expected: passes=True, violations=0 (Aspirin)
+Lab6_3_test_2,450,3.5,2,6
+# Expected: passes=True, violations=0
+Lab6_3_test_3,520,4.8,3,8
+# Expected: passes=True, violations=1 (MW>500)
+Lab6_3_test_4,480,5.5,2,7
+# Expected: passes=True, violations=1 (LogP>5)
+Lab6_3_test_5,550,6.2,6,11
+# Expected: passes=False, violations=4
 
 # Lab 6.4: Reverse Complement Function
 Lab6_REVC_input,AAAACCCGGT
@@ -566,13 +587,22 @@ Lab8_conditional,5.2,6.8,7.3,4.9,8.1
 # LAB 9: Dictionaries
 # ------------------------------
 # Lab 9.1: Compound Database
-# Uses compound data from Section 7
+# Create dict with nested properties: {name: {SMILES, MW, pIC50, is_active}}
+Lab9_1_Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,180.16,5.2,False
+Lab9_1_Ibuprofen,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,206.28,6.1,True
+Lab9_1_Caffeine,CN1C=NC2=C1C(=O)N(C(=O)N2C)C,194.19,4.8,False
+Lab9_1_DrugX,CCN(CC)C(=O)C1=CC=CC=C1,177.24,7.5,True
+Lab9_1_DrugY,CC1=CC(=O)OC2=CC=CC=C12,160.17,8.2,True
 
-# Lab 9.2: Codon Table (see Section 8)
-# Uses codon data from Section 8
+# Lab 9.2: Codon Table Translation
+# Translate this DNA sequence using codon table
+Lab9_2_sequence,ATGTGGTTTTAA
+# Codons: ATG(M), TGG(W), TTT(F), TAA(Stop)
+# Expected protein: MWF
 
 # Lab 9.3: Dict Comprehension
-# Filter active compounds from database
+# From Lab9_1 data, filter active compounds (pIC50 >= 6)
+# Expected: {Ibuprofen: {...}, DrugX: {...}, DrugY: {...}}
 
 # ------------------------------
 # LAB 10: File Handling
@@ -582,23 +612,49 @@ Lab8_conditional,5.2,6.8,7.3,4.9,8.1
 Lab10_compounds,Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,5.2|Ibuprofen,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,6.1|Caffeine,CN1C=NC2=C1C(=O)N(C(=O)N2C)C,4.8|Acetaminophen,CC(=O)NC1=CC=C(O)C=C1,5.5|Naproxen,COC1=CC2=CC(C(C)C(=O)O)=CC=C2C=C1,6.8
 
 # Lab 10.2: Read FASTA
-# See Section 9 for FASTA format
+# Sample multi-sequence FASTA file content:
+Lab10_2_fasta_content
+>Seq1 | Human hemoglobin alpha
+MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSH
+>Seq2 | Sample protein
+MKTAYIAKQRQISFVKSHFSRQLE
+>Seq3 | Test sequence
+ACDEFGHIKLMN
+# Expected dict output:
+# {"Seq1 | Human hemoglobin alpha": "MVLSPAD...", ...}
 
 # Lab 10.3: Filter and Export
-# Filter actives (pIC50 >= 6) from lab 10.1 data
+# Input: Lab10_compounds data
+# Filter: pIC50 >= 6.0
+# Expected actives.csv content:
+Lab10_3_expected_output
+name,smiles,pic50
+Ibuprofen,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,6.1
+Naproxen,COC1=CC2=CC(C(C)C(=O)O)=CC=C2C=C1,6.8
 
 # ------------------------------
 # LAB 11: NumPy
 # ------------------------------
 # Lab 11.1: Descriptor Matrix
-# See Section 11 for descriptor_matrix data
-# Columns: MW, LogP, HBD, HBA
+# Explicit data: Rows=compounds, Columns=[MW, LogP, HBD, HBA]
+Lab11_1_row1,180.16,1.19,1,4
+Lab11_1_row2,206.28,3.97,1,2
+Lab11_1_row3,194.19,-0.07,0,6
+Lab11_1_row4,320.50,3.20,2,5
+Lab11_1_row5,450.25,4.50,3,8
+# Expected mean per column: [270.28, 2.56, 1.4, 5.0]
+# Expected std per column: [107.95, 1.68, 1.02, 2.10]
 
 # Lab 11.2: Normalization
-# Normalize descriptor values to 0-1 range
+# Formula: (x - min) / (max - min)
+# Using MW column [180.16, 206.28, 194.19, 320.50, 450.25]
+# min=180.16, max=450.25, range=270.09
+# Expected normalized: [0.0, 0.097, 0.052, 0.520, 1.0]
 
 # Lab 11.3: Boolean Filtering
 # Filter: MW < 500 AND LogP < 5
+# From Lab11_1 data:
+# Expected: All 5 rows pass (all MW < 500 and all LogP < 5)
 
 # ------------------------------
 # LAB 11B: Pandas
@@ -608,10 +664,27 @@ Lab10_compounds,Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,5.2|Ibuprofen,CC(C)CC1=CC=C(C=C
 Lab11B_data,Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,180.16,1.19,5.2|Ibuprofen,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,206.28,3.97,6.1|Caffeine,CN1C=NC2=C1C(=O)N(C(=O)N2C)C,194.19,-0.07,4.8|Drug_X,CCN(CC)C(=O)C1=CC=CC=C1,177.24,2.1,7.5|Drug_Y,CC1=CC(=O)OC2=CC=CC=C12,160.17,2.5,8.2
 
 # Lab 11B.2: Data Analysis
-# Mean pIC50, count by activity, filter drug-like
+# Using Lab11B_data (5 compounds)
+# Expected results:
+Lab11B_2_mean_pic50,6.36
+Lab11B_2_count_active,3
+# (Ibuprofen 6.1, Drug_X 7.5, Drug_Y 8.2)
+Lab11B_2_count_inactive,2
+# (Aspirin 5.2, Caffeine 4.8)
+Lab11B_2_druglike_filter,All 5 pass
+# (All MW < 500 and LogP < 5)
 
 # Lab 11B.3: GroupBy Analysis
-# Group by activity class
+# Group by activity class (Active: pIC50>=6, Inactive: pIC50<6)
+# Expected grouped results:
+Lab11B_3_active_mean_mw,181.23
+# (Ibuprofen 206.28, Drug_X 177.24, Drug_Y 160.17) / 3
+Lab11B_3_active_mean_logp,2.86
+# (3.97 + 2.1 + 2.5) / 3
+Lab11B_3_inactive_mean_mw,187.18
+# (Aspirin 180.16, Caffeine 194.19) / 2
+Lab11B_3_inactive_mean_logp,0.56
+# (1.19 + -0.07) / 2
 
 # ------------------------------
 # LAB 12: JSON & Regex
