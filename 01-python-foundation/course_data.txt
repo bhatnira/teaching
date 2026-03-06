@@ -632,6 +632,222 @@ Lab12_SMILES_double,CC=CC
 # Check for: aromatic (lowercase c,n), ring (digits), double bond (=)
 
 # ============================================
+# SECTION 14: LESSON CODE EXAMPLES DATA
+# ============================================
+# Data used in lesson slide code examples (distinct from lab exercises)
+
+# ------------------------------
+# LESSON 1: Variables & Data Types (Code Example)
+# ------------------------------
+L1_compound_name,Aspirin
+L1_molecular_weight,180.16
+L1_is_active,True
+L1_dna_sequence,ATGCGATCGATCG
+L1_ic50_value,5.2
+
+# ------------------------------
+# LESSON 2: Operators (Code Example)
+# ------------------------------
+L2_ic50,10.0
+# pIC50 = 9 - log10(10.0) = 8.0
+
+# Lipinski Example Values
+L2_lipinski_mw,450
+L2_lipinski_logp,3.5
+L2_lipinski_hbd,2
+L2_lipinski_hba,6
+
+# GC Content Sequence
+L2_gc_sequence,ATGCGCGCTA
+# G=3, C=3, Length=10, GC%=60%
+
+# ------------------------------
+# LESSON 3: Strings (Code Example)
+# ------------------------------
+L3_dna,ATGCGATCGATCG
+# Transcription: T -> U yields AUGCGAUCGAUCG
+
+L3_aspirin_smiles,CC(=O)OC1=CC=CC=C1C(=O)O
+# Carbon count: 9
+
+# Slicing example
+L3_start_codon,ATG
+# dna[:3] = "ATG" (start codon)
+
+# ------------------------------
+# LESSON 4: Conditionals (Code Example)
+# ------------------------------
+L4_pic50_test,7.5
+# Classification: Active (7 <= pIC50 < 8)
+
+L4_codon_test,ATG
+# Result: Start Codon
+
+# Activity Classification Logic:
+# if pIC50 >= 8: "Highly Active"
+# elif pIC50 >= 7: "Active"
+# elif pIC50 >= 6: "Moderately Active"
+# else: "Inactive"
+
+# ------------------------------
+# LESSON 5: Loops (Code Example)
+# ------------------------------
+L5_ic50_values,5.2,120.0,8.7,2.1,450.0
+# Batch conversion to pIC50
+
+L5_dna_sequence,ATGCGATCGATCG
+# For counting nucleotides
+
+L5_compounds_with_pic50,Asp,5.2,Ibup,6.8,Caff,4.9,DrugX,7.5,DrugY,8.1
+# Format: name1,pic50_1,name2,pic50_2,...
+
+L5_codons_example,ATG,CGA,TCG,TAA,GGC
+# Stop codons: TAA, TAG, TGA
+
+# ------------------------------
+# LESSON 6: Functions (Code Example)
+# ------------------------------
+L6_ic50_test_values,10.0,100.0,1000.0
+# Expected pIC50: 8.0, 7.0, 6.0
+
+L6_convert_ic50_function,pIC50 = 9 - log10(IC50_nM)
+
+# Example function call:
+# convert_to_pic50(10.0) returns 8.0
+
+# GC Content Function Test
+L6_gc_test_seq,ATGCGCGCTA
+# Expected: 60%
+
+# ------------------------------
+# LESSON 6B: Error Handling (Code Example)
+# ------------------------------
+L6B_valid_ic50,10.0
+L6B_invalid_ic50,-5.0
+L6B_invalid_type,not_a_number
+
+# try/except pattern:
+# try: result = convert(ic50)
+# except ValueError: handle negative/zero
+# except TypeError: handle non-numeric
+
+# ------------------------------
+# LESSON 7: Lists (Code Example)
+# ------------------------------
+L7_smiles_list,CCO,CC(=O)O,c1ccccc1
+# Ethanol, Acetic acid, Benzene
+
+L7_pic50_values,5.2,6.8,7.3,4.9,8.1
+# List operations: len(), append(), slicing
+
+# ------------------------------
+# LESSON 7B: Tuples & Sets (Code Example)
+# ------------------------------
+L7B_compound_tuple,Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,5.2
+# Format: (name, smiles, pic50)
+# Tuples are immutable
+
+L7B_library_A,CMP001,CMP002,CMP003,CMP004
+L7B_library_B,CMP003,CMP004,CMP005,CMP006
+# Set operations: union |, intersection &, difference -
+
+# ------------------------------
+# LESSON 8: List Comprehensions (Code Example)
+# ------------------------------
+L8_pic50_values,5.2,6.8,7.3,4.9,8.1
+# Filter active: [p for p in values if p >= 6]
+# Expected: [6.8, 7.3, 8.1]
+
+L8_ic50_values,10.0,100.0,1000.0
+# Convert: [9 - log10(ic) for ic in ic50_values]
+# Expected: [8.0, 7.0, 6.0]
+
+# ------------------------------
+# LESSON 9: Dictionaries (Code Example)
+# ------------------------------
+# compound_db structure:
+# compound_db = {
+#   "Aspirin": {"smiles": "CC(=O)OC1=CC=CC=C1C(=O)O", "pic50": 5.2},
+#   "Ibuprofen": {"smiles": "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O", "pic50": 6.1},
+#   "Caffeine": {"smiles": "CN1C=NC2=C1C(=O)N(C(=O)N2C)C", "pic50": 4.8}
+# }
+
+L9_compound_db_aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,5.2
+L9_compound_db_ibuprofen,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,6.1
+L9_compound_db_caffeine,CN1C=NC2=C1C(=O)N(C(=O)N2C)C,4.8
+
+# Codon table partial:
+L9_codon_table,ATG:M,TGG:W,TAA:Stop,TAG:Stop,TGA:Stop
+
+# ------------------------------
+# LESSON 10: File Handling (Code Example)
+# ------------------------------
+# CSV content example:
+# name,smiles,pic50
+# Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,5.2
+# Ibuprofen,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,6.1
+
+L10_csv_header,name,smiles,pic50
+L10_csv_data_1,Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,5.2
+L10_csv_data_2,Ibuprofen,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,6.1
+L10_csv_data_3,Caffeine,CN1C=NC2=C1C(=O)N(C(=O)N2C)C,4.8
+
+# FASTA format example:
+# >Sequence_1 | Sample
+# MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSH
+
+L10_fasta_header,>Sequence_1 | Sample
+L10_fasta_sequence,MVLSPADKTNVKAAWGKVGAHAGEYGAEALERMFLSFPTTKTYFPHFDLSH
+
+# ------------------------------
+# LESSON 11: NumPy (Code Example)
+# ------------------------------
+# NumPy array creation:
+# import numpy as np
+# data = np.array([1.0, 2.5, 3.7, 4.2])
+
+L11_numpy_1d,1.0,2.5,3.7,4.2
+
+# 2D array (compounds x descriptors):
+# MW, LogP, HBD, HBA
+L11_numpy_2d_row1,180.16,1.19,1,4
+L11_numpy_2d_row2,206.28,3.97,1,2
+L11_numpy_2d_row3,194.19,-0.07,0,6
+
+# Array operations: mean(), std(), max(), min()
+
+# ------------------------------
+# LESSON 11B: Pandas (Code Example)
+# ------------------------------
+# DataFrame creation:
+# df = pd.DataFrame(data)
+
+L11B_df_columns,Name,SMILES,MW,LogP,pIC50
+L11B_df_row1,Aspirin,CC(=O)OC1=CC=CC=C1C(=O)O,180.16,1.19,5.2
+L11B_df_row2,Ibuprofen,CC(C)CC1=CC=C(C=C1)C(C)C(=O)O,206.28,3.97,6.1
+L11B_df_row3,Caffeine,CN1C=NC2=C1C(=O)N(C(=O)N2C)C,194.19,-0.07,4.8
+L11B_df_row4,Drug_X,CCN(CC)C(=O)C1=CC=CC=C1,177.24,2.1,7.5
+
+# DataFrame operations: describe(), mean(), filter
+
+# ------------------------------
+# LESSON 12: JSON & Regex (Code Example)
+# ------------------------------
+# JSON data:
+L12_json_compound,{"CID": 2244, "name": "Aspirin", "MW": 180.16}
+# Access: data["name"] returns "Aspirin"
+
+# Regex patterns:
+L12_regex_EcoRI,GAATTC
+L12_regex_test_dna,ATGAATTCGCGAATTCTA
+# EcoRI cuts at GAATTC, found at positions 2 and 10 (0-indexed)
+
+# SMILES pattern matching:
+L12_smiles_aromatic_pattern,[a-z]
+L12_smiles_ring_pattern,[0-9]
+L12_smiles_double_pattern,=
+
+# ============================================
 # QUICK REFERENCE
 # ============================================
 
